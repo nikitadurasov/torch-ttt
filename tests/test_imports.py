@@ -7,6 +7,12 @@ class TestImports(unittest.TestCase):
         except ImportError as e:
             self.fail(f"Failed to import LossRegistry: {e}")
 
+    def test_import_engine_registry(self):
+        try:
+            from torch_ttt.core.engine_registry import EngineRegistry
+        except ImportError as e:
+            self.fail(f"Failed to import EngineRegistry: {e}")
+
     def test_import_ttt_runner(self):
         try:
             from torch_ttt.core.ttt_runner import run_ttt
@@ -18,6 +24,12 @@ class TestImports(unittest.TestCase):
             from torch_ttt.core.losses.base_loss import BaseLoss
         except ImportError as e:
             self.fail(f"Failed to import BaseLoss: {e}")
+
+    def test_import_base_engine(self):
+        try:
+            from torch_ttt.core.engine.base_engine import BaseEngine
+        except ImportError as e:
+            self.fail(f"Failed to import BaseEngine: {e}")
 
 if __name__ == "__main__":
     unittest.main()
