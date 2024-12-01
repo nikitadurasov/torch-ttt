@@ -1,24 +1,26 @@
 import torch
+from copy import deepcopy
 from torch_ttt.core.loss_registry import LossRegistry
 
-def run_ttt(model, inputs, loss_name, optimizer_name="adam", num_steps=10, lr=1e-4, loss_kwargs=None):
+def run_ttt(engine, inputs, optimizer_name="adam", num_steps=10, lr=1e-4, copy=False, engine_kwargs=None):
 
-    loss_kwargs = loss_kwargs or {}
+    running_engine = deepcopy(engine) if copy else engine
 
-    model.train()
-    loss_fn = LossRegistry.get_loss(loss_name)(**loss_kwargs) 
+    engine_kwargs = engine_kwargs or {}
+
+    running_engine.model.train()
 
     if optimizer_name == "adam":
-        optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+        optimizer = torch.optim.Adam(running_engine.model.parameters(), lr=lr)
 
     for _ in range(num_steps):
         optimizer.zero_grad()
-        loss = loss_fn(model, inputs)
+        _, loss = running_engine(inputs)
         loss.backward()
         optimizer.step()
 
-    model.eval()
+    running_engine.model.eval()
     with torch.no_grad():
-        final_outputs = model(inputs)
+        final_outputs = running_engine.model(inputs)
 
     return final_outputs

@@ -21,7 +21,7 @@ class EngineRegistry:
         return decorator
     
     @classmethod
-    def get_loss(cls, name):
+    def get_engine(cls, name):
         if name not in cls._registry:
             raise ValueError(f"Engine '{name}' is not registered.")
         return cls._registry[name]
