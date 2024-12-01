@@ -1,6 +1,5 @@
 import torch
 from copy import deepcopy
-from torch_ttt.core.loss_registry import LossRegistry
 
 def run_ttt(engine, inputs, optimizer_name="adam", num_steps=10, lr=1e-4, copy=False, engine_kwargs=None):
 

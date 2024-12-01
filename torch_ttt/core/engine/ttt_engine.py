@@ -1,5 +1,4 @@
 import torch 
-import torch.nn.functional as F
 from torchvision.transforms import functional as F
 from torch_ttt.core.engine.base_engine import BaseEngine
 from torch_ttt.core.engine_registry import EngineRegistry

@@ -1,4 +1,3 @@
-import torch.nn.functional as F
 from torch_ttt.core.losses.base_loss import BaseLoss
 from torch_ttt.core.loss_registry import LossRegistry
 
