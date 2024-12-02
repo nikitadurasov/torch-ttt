@@ -1,0 +1,10 @@
+.header-logo {
+    background-image: url("../images/torch-ttt.png");
+    background-size: 220px 40px;
+    height: 40px;
+    width: 220px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
