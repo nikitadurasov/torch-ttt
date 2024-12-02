@@ -1,4 +1,4 @@
-![TorchTTT](https://github.com/nikitadurasov/torch-ttt/blob/main/docs/source/_static/images/torch-ttt.png)
+![TorchTTT](docs/source/_static/images/torch-ttt.png)
 
 # torch-ttt
 
@@ -20,10 +20,15 @@ pip install git+https://github.com/nikitadurasov/torch-ttt.git
 ## Baselines
 
 
-| TTT-Method                                     | Image | Text | Graph |  |
+| TTT-Method                                     | Image | Text | Graph | Audio |
 |-----------------------------------------------|:----------:|:--------------:|:------------:|:---------------------:|
-| TTT                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
-| TTT++                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+| [TTT](https://arxiv.org/abs/1909.13231)                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+| [MaskedTTT](https://arxiv.org/abs/2209.07522)                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+| [TTT++](https://proceedings.neurips.cc/paper/2021/hash/b618c3210e934362ac261db280128c22-Abstract.html)                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+| [ActMAD](https://arxiv.org/abs/2211.12870)                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+| [SHOT](https://arxiv.org/abs/2002.08546)                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+| [TENT](https://arxiv.org/abs/2006.10726)                      |     ⏳     |       ⏳       |      ⏳      |          ⏳           |
+
 
 # Documentation
 
