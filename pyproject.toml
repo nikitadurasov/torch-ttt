@@ -1,3 +1,9 @@
+[project.optional-dependencies]
+
+docs = [
+    sphinxawesome-theme==6.0.0b1
+]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
@@ -8,3 +14,6 @@ exclude = [
     "__pycache__",   # Ignore Python's cache directories
     "notebooks"
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

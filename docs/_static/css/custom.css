@@ -1,4 +1,4 @@
-.header-logo {
+/* .header-logo {
     background-image: url("../images/torch-ttt.png");
     background-size: 220px 40px;
     height: 40px;
@@ -7,4 +7,9 @@
     top: 0;
     bottom: 0;
     margin: auto 0;
+} */
+
+img[alt="Logo"] {
+    width: 40px;  /* or whatever size you want */
+    height: auto;  /* to maintain aspect ratio */
 }

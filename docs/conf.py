@@ -12,6 +12,12 @@ from dataclasses import asdict
 project = 'torch-ttt'
 copyright = '2024, Nikita Durasov'
 author = 'Nikita Durasov'
+# html_title = "torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , #8c52ff, #ff914d); -moz-linear-gradient(45deg , #8c52ff, #ff914d); -webkit-linear-gradient(45deg , #8c52ff, #ff914d);'>-ttt</span>"
+
+html_title = "torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));'>-ttt</span>"
+
+html_favicon = "_static/images/torch-ttt.svg"
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -19,8 +25,17 @@ author = 'Nikita Durasov'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    'sphinx.ext.autosummary',
+    'autoapi.extension'
+    # "extend_parent",
+    # "sphinx_design",
+    # "myst_nb",
 ]
+
+autoapi_dirs = ['../torch_ttt']
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
@@ -38,10 +53,19 @@ html_css_files = [
     'css/custom.css'
 ]
 
+html_js_files = [
+    'js/theme.js'
+]
+
+autosummary_generate = True  # Automatically generate stub `.rst` files
+
+pygments_style_dark = "github-dark"
+
 html_logo = "_static/images/torch-ttt.svg"
 # html_logo = "_static/images/auto_awesome.svg"
 
 theme_options = ThemeOptions(
+    # mode="dark",  # Enforce dark mode here
     extra_header_link_icons={
         "repository on GitHub": {
             "link": "https://github.com/nikitadurasov/torch-ttt",

@@ -163,3 +163,4 @@ cython_debug/
 
 # MacOS speicial files
 .DS_Store
+notebooks/
