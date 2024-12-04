@@ -1,6 +1,6 @@
 import pytest
 import torch
-from torch_ttt.core.engine_registry import EngineRegistry
+from torch_ttt.engine_registry import EngineRegistry
 
 class MLP(torch.nn.Module):
     def __init__(self):

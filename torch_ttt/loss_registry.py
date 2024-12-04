@@ -1,6 +1,6 @@
 import importlib
 import os
-from torch_ttt.core.losses.base_loss import BaseLoss
+from torch_ttt.loss.base_loss import BaseLoss
 
 class LossRegistry:
 
@@ -28,10 +28,10 @@ class LossRegistry:
     
 # Dynamically import all losses in the losses directory
 def register_all_losses():
-    losses_dir = os.path.dirname(__file__) + "/losses"
+    losses_dir = os.path.dirname(__file__) + "/loss"
     for file in os.listdir(losses_dir):
         if file.endswith("_loss.py") and not file.startswith("__"):
-            module_name = f"torch_ttt.core.losses.{file[:-3]}"
+            module_name = f"torch_ttt.loss.{file[:-3]}"
             importlib.import_module(module_name)
 
 register_all_losses()

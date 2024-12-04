@@ -1,6 +1,6 @@
 import importlib
 import os
-from torch_ttt.core.engine.base_engine import BaseEngine
+from torch_ttt.engine.base_engine import BaseEngine
 
 class EngineRegistry:
 
@@ -31,7 +31,7 @@ def register_all_engines():
     losses_dir = os.path.dirname(__file__) + "/engine"
     for file in os.listdir(losses_dir):
         if file.endswith("_engine.py") and not file.startswith("__"):
-            module_name = f"torch_ttt.core.engine.{file[:-3]}"
+            module_name = f"torch_ttt.engine.{file[:-3]}"
             importlib.import_module(module_name)
 
 register_all_engines()
