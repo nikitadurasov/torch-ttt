@@ -1,4 +1,7 @@
-![TorchTTT](docs/source/_static/images/torch-ttt.png)
+<div align="center">
+  <img src="docs/source/_static/images/torch-ttt.png" alt="TorchTTT" width="500">
+</div>
+
 
 # torch-ttt
 
