@@ -3,6 +3,8 @@ from torchvision.transforms import functional as F
 from torch_ttt.engine.base_engine import BaseEngine
 from torch_ttt.engine_registry import EngineRegistry
 
+__all__ = ["TTTEngine"]
+
 # TODO: add cuda support
 @EngineRegistry.register("ttt")
 class TTTEngine(BaseEngine):

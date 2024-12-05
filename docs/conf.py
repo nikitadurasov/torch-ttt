@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-from sphinxawesome_theme import ThemeOptions, __version__
+from sphinxawesome_theme import ThemeOptions
 from dataclasses import asdict
 
 project = 'torch-ttt'

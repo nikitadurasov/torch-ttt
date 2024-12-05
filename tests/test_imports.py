@@ -1,3 +1,4 @@
+# ruff: noqa: F401
 import unittest
 
 class TestImports(unittest.TestCase):
