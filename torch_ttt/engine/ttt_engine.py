@@ -6,10 +6,9 @@ from torch_ttt.engine_registry import EngineRegistry
 
 __all__ = ["TTTEngine"]
 
-# TODO: add cuda support
 @EngineRegistry.register("ttt")
 class TTTEngine(BaseEngine):
-    r"""Original image rotation-based TTT approach.
+    r"""Original image rotation-based **test-time training** approach.
 
     Args:
         model (torch.nn.Module): Model to be trained with TTT.
@@ -60,7 +59,6 @@ class TTTEngine(BaseEngine):
         # Original forward pass, intact
         outputs = self.model(inputs)
 
-        # FIXME: Add angles rotations for inputs
         # See original code: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/main.py#L69
         rotated_inputs, rotation_labels = self.__rotate_inputs(inputs)
         _ = self.model(rotated_inputs)
@@ -70,13 +68,15 @@ class TTTEngine(BaseEngine):
         # Build angle head if not already built
         if self.angle_head is None:
             self.angle_head = self.__build_angle_head(features)
+        
+        # move angle head to the same device as the features
+        self.angle_head.to(features.device)
         angles = self.angle_head(features)
 
         # Compute rotation loss
         rotation_loss = self.angle_criterion(angles, rotation_labels)
         return outputs, rotation_loss
     
-    # TODO [P0]: implement rotations function
     # Follow this code (expand case): https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27
     def __rotate_inputs(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
         """Rotate the input images by 0, 90, 180, and 270 degrees."""
@@ -90,7 +90,6 @@ class TTTEngine(BaseEngine):
     
     def __build_angle_head(self, features) -> torch.nn.Module:
         """Build the angle head."""
-        # FIXME: align with the original architechture
         # See original implementation: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/test_helpers.py#L33C10-L33C39
         if len(features.shape) == 2:
             return torch.nn.Sequential(
@@ -101,7 +100,6 @@ class TTTEngine(BaseEngine):
                 torch.nn.Linear(8, 4)
             )
         
-        # FIXME: align with the original architechture
         # See original implementation: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/models/SSHead.py#L29
         elif len(features.shape) == 4:
             return torch.nn.Sequential(
@@ -112,11 +110,15 @@ class TTTEngine(BaseEngine):
                 torch.nn.Flatten() 
             )
         
-        # If the input is a 3D tensor
-        # TODO: Optimize this function for larger datasets
-        elif len(features.shape) == 5:
-            raise NotImplementedError("3D tensor case will be implemented later.")
-        
+        elif len(features.shape) == 5:  # For 3D inputs (batch, channels, depth, height, width)
+            return torch.nn.Sequential(
+                torch.nn.Conv3d(features.shape[1], 16, kernel_size=3),
+                torch.nn.ReLU(),
+                torch.nn.Conv3d(16, 4, kernel_size=3),
+                torch.nn.AdaptiveAvgPool3d((1, 1, 1)),  # Global Average Pooling
+                torch.nn.Flatten()
+            )
+           
         raise ValueError("Invalid input tensor shape.")
 
 class OutputHook:
