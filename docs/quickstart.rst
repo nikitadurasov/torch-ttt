@@ -1,3 +1,51 @@
 Quick Start
 ============
 
+**torch-ttt** enables the seamless integration of *Test-Time Training* (TTT) methods into your models, offering a flexible and user-friendly approach to enhance model generalization and improve performance on *out-of-distribution* data. 
+
+The core idea behind this library is that different TTT methods, at a high level, primarily differ in how they compute their self-supervised losses. Conceptually, any TTT method can be abstracted as a black box that takes a model and input, returns a self-supervised loss, and enables further optimization to enhance the model's performance. We call such an abstraction an *"Engine"* and most of the library's functionality is centered around them.
+
+Training with Engines
+-----------
+
+With an easy-to-use API (centered around *Engines*), you can effortlessly implement, experiment with, and incorporate *Test-Time Training* methods into your training and inference pipelines. An Engine encapsulates the logic of a specific TTT method, seamlessly managing both its training and inference processes.
+
+Getting started is straightforward: during training, simply wrap your model with the chosen Engine class and use it for inference. The Engine will return the model's outputs along with the TTT loss, which should be added to your main loss function.
+
+.. code-block:: diff
+
+   +from torch_ttt.engine.ttt_engine import TTTEngine
+
+   model = MyModel()
+   +engine = TTTEngine(model, features_layer_name='layer2') 
+
+   ...
+
+   # Training loop
+   for batch in train_loader:
+         inputs, targets = batch
+         optimizer.zero_grad()
+
+   -      outputs = model(inputs)
+   +      outputs, loss_ttt = engine(inputs)
+
+   -     loss = loss_fn(outputs, targets)
+   +     loss = loss_fn(outputs, targets) + alpha * loss_ttt
+
+        loss.backward()
+        optimizer.step()
+
+During inference, use the Engine with the `run_ttt` function to adapt the model. This function applies TTT-based gradient optimization to adjust the model to the provided inputs, thereby enhancing its performance.
+
+.. code-block:: diff
+
+   +from torch_ttt.ttt_runner import run_ttt
+
+   # Testing loop
+   for batch in test_loader:
+         inputs, targets = batch
+         optimizer.zero_grad()
+
+   -      outputs = model(inputs)
+   +      outputs = run_ttt(engine, inputs, optimizer_name="adam", num_steps=10, lr=1e-4)
+         metric = compute_metric(outputs, targets)

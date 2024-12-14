@@ -3,13 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to torch-ttt!
+Welcome to torch-ttt's documentation!
 ==============================================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+Welcome to the documentation of **torch-ttt** library.
 
 .. toctree::
    :maxdepth: 2
@@ -17,10 +14,12 @@ documentation for details.
 
    installation
    quickstart
-   tutorials
+   auto_examples/index
    api
-   torch_ttt.core.engine
 
+.. raw:: html
+
+   <br><br>
 
 Indices and tables
 =======================

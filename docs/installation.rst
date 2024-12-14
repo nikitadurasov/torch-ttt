@@ -4,17 +4,12 @@ Installation
 .. role:: bash(code)
     :language: bash
 
-
-You can install the package either from PyPI or from source. Choose the latter if you
-want to access the files included the `experiments <https://github.com/ENSTA-U2IS-AI/torch-uncertainty/tree/main/experiments>`_
-folder or if you want to contribute to the project.
+Now, you can install the project from source; PyPI support will be added soon.
 
 From source
 -----------
 
-To install the project from source, you can use pip directly.
-
-Again, with PyTorch already installed, clone the repository with:
+Assuming PyTorch is already installed, clone the repository:
 
 .. parsed-literal::
 
@@ -32,4 +27,4 @@ Install the package using pip in editable mode:
 
 .. parsed-literal::
 
-    pip install -e .
+    pip install .

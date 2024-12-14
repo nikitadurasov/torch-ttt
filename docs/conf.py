@@ -9,6 +9,10 @@
 from sphinxawesome_theme import ThemeOptions
 from dataclasses import asdict
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath('../'))
+
 project = 'torch-ttt'
 copyright = '2024, Nikita Durasov'
 author = 'Nikita Durasov'
@@ -29,13 +33,22 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     'sphinx.ext.autosummary',
-    'autoapi.extension'
+    'sphinx_gallery.gen_gallery'
+    # 'autoapi.extension'
     # "extend_parent",
     # "sphinx_design",
     # "myst_nb",
 ]
 
-autoapi_dirs = ['../torch_ttt']
+autosummary_generate = True
+# autoapi_dirs = ['../torch_ttt']
+
+sphinx_gallery_conf = {
+     'examples_dirs': '../examples',   # path to your example scripts
+     'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
+     'download_all_examples': False,
+     "show_signature": False
+}
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
@@ -98,3 +111,5 @@ theme_options = ThemeOptions(
 )
 
 html_theme_options = asdict(theme_options)
+
+pygments_style = 'zenburn'
