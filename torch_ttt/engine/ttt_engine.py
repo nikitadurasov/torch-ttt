@@ -1,4 +1,5 @@
 import torch 
+from contextlib import contextmanager
 from typing import Tuple
 from torchvision.transforms import functional as F
 from torch_ttt.engine.base_engine import BaseEngine
@@ -53,17 +54,15 @@ class TTTEngine(BaseEngine):
 
         # has to dynamically register a hook to get the features and then remove it
         # need this for deepcopying the engine, see https://github.com/pytorch/pytorch/pull/103001
-        features_hook = OutputHook()
-        hook_handle = self.target_module.register_forward_hook(features_hook.hook)
+        with self.__capture_hook() as features_hook:
 
-        # Original forward pass, intact
-        outputs = self.model(inputs)
+            # Original forward pass, intact
+            outputs = self.model(inputs)
 
-        # See original code: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/main.py#L69
-        rotated_inputs, rotation_labels = self.__rotate_inputs(inputs)
-        _ = self.model(rotated_inputs)
-        features = features_hook.output
-        hook_handle.remove()
+            # See original code: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/main.py#L69
+            rotated_inputs, rotation_labels = self.__rotate_inputs(inputs)
+            _ = self.model(rotated_inputs)
+            features = features_hook.output
 
         # Build angle head if not already built
         if self.angle_head is None:
@@ -121,10 +120,23 @@ class TTTEngine(BaseEngine):
            
         raise ValueError("Invalid input tensor shape.")
 
-class OutputHook:
-    def __init__(self):
-        self.output = None
+    @contextmanager
+    def __capture_hook(self):
+        """Context manager to capture features via a forward hook."""
 
-    def hook(self, module, input, output):
-        self.output = output
+        class OutputHook:
     
+            def __init__(self):
+                self.output = None
+
+            def hook(self, module, input, output):
+                self.output = output
+
+        features_hook = OutputHook()
+        hook_handle = self.target_module.register_forward_hook(features_hook.hook)  
+
+        try:
+            yield features_hook
+        finally:
+            hook_handle.remove()
+            
