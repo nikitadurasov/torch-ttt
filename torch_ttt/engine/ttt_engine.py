@@ -17,6 +17,15 @@ class TTTEngine(BaseEngine):
         angle_head (torch.nn.Module, optional): The head that predicts the rotation angles.
         angle_criterion (torch.nn.Module, optional): The loss function for the rotation angles. 
 
+    Warning:
+        The module with the name :attr:`features_layer_name` should be present in the model.
+
+    Note:  
+        :attr:`angle_head` and :attr:`angle_criterion` are optional arguments and can be user-defined. If not provided, the default shallow head and the :meth:`torch.nn.CrossEntropyLoss()` loss function are used.
+
+    Note: 
+        The original `TTT <https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27>`_ implementation uses a four-class classification task, corresponding to image rotations of 0°, 90°, 180°, and 270°.
+
     Reference:
         "Test-Time Training with Self-Supervision for Generalization under Distribution Shifts", Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt
 
@@ -24,10 +33,10 @@ class TTTEngine(BaseEngine):
     """
     def __init__(
         self, 
-        model, 
-        features_layer_name, 
-        angle_head=None, 
-        angle_criterion=None
+        model: torch.nn.Module, 
+        features_layer_name: str, 
+        angle_head: torch.nn.Module = None,
+        angle_criterion: torch.nn.Module = None
     ) -> None:
         super().__init__()
         self.model = model
@@ -46,10 +55,13 @@ class TTTEngine(BaseEngine):
             raise ValueError(f"Module '{features_layer_name}' not found in the model.")
         
     def forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Forward pass of the model.
-
+        """Forward pass of the model. 
+    
         Args:
             inputs (torch.Tensor): Input tensor.
+
+        Returns:
+            Returns the current model prediction and rotation loss value.
         """
 
         # has to dynamically register a hook to get the features and then remove it
