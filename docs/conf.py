@@ -63,7 +63,8 @@ html_theme = 'sphinxawesome_theme'
 html_static_path = ['_static']
 
 html_css_files = [
-    'css/custom.css'
+    'css/custom.css',
+    'css/docstring_custom.css'
 ]
 
 html_js_files = [

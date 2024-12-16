@@ -1,0 +1,16 @@
+/* Override the .sig class with higher specificity */
+html body .sig {
+    background-color: #4d488e12 !important; /* Light purple transparent background */
+    border-top: 2px solid; /* Top border width (required for gradient) */
+    border-image: linear-gradient(to right, rgba(140, 82, 255, 0.6), rgba(255, 145, 77, 0.6)) 1; /* Gradient border from left to right */
+    padding: 8px 12px; /* Add spacing for better appearance */
+    border-radius: 2px
+}
+
+html body dt.field-odd {
+    background-color: #4d488e12 !important; /* Light purple transparent background */
+    border-top: 1px solid; /* Top border width (required for gradient) */
+    border-image: linear-gradient(to right, rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)) 1; /* Gradient border from left to right */
+    padding: 4px 6px; /* Add spacing for better appearance */
+    border-radius: 2px
+}
