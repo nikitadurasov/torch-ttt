@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
+import torch.nn as nn
 
-class BaseLoss(ABC):
+class BaseLoss(nn.Module, ABC):
 
     @abstractmethod
-    def __call__(self, model, inputs):
+    def forward(self, model, inputs):
         pass
 
