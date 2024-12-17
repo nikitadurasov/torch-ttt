@@ -12,6 +12,13 @@ Quick Start
 
 The core idea behind this library is that different TTT methods, at a high level, primarily differ in how they compute their self-supervised losses. Conceptually, any TTT method can be abstracted as a black box that takes a model and input, returns a self-supervised loss, and enables further optimization to enhance the model's performance. We call such an abstraction an *"Engine"* and most of the library's functionality is centered around them.
 
+.. figure:: _static/images/teaser_ssl_code.svg
+   :alt: Description of the SVG image
+   :align: center
+   :width: 100%
+
+   **Figure 2.** Any TTT method can be abstracted as a black box that computes a self-supervised loss and a model prediction. The self-supervised loss is then used for further optimization to improve model performance.
+
 Training with Engines
 -----------
 
