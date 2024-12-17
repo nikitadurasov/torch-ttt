@@ -42,6 +42,11 @@ Getting started is straightforward: during training, simply wrap your model with
         loss.backward()
         optimizer.step()
 
+.. important::
+
+    Some TTT methods require an additional step to be performed between training and testing, such as feature statistics calculation for :obj:`TTTPPEngine <torch_ttt.engine.ttt_pp_engine.TTTPPEngine>` and :obj:`ActMADEngine <torch_ttt.engine.actmad_engine.ActMADEngine>`.
+
+
 During inference, use the Engine with the `run_ttt` function to adapt the model. This function applies TTT-based gradient optimization to adjust the model to the provided inputs, thereby enhancing its performance.
 
 .. code-block:: diff
