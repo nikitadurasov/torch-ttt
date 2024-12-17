@@ -3,6 +3,13 @@ Quick Start
 
 **torch-ttt** enables the seamless integration of *Test-Time Training* (TTT) methods into your models, offering a flexible and user-friendly approach to enhance model generalization and improve performance on *out-of-distribution* data. 
 
+.. figure:: _static/images/teaser.svg
+   :alt: Description of the SVG image
+   :align: center
+   :width: 100%
+
+   **Figure 1.** *Test-Time Training* (TTT) improves model predictions during inference by optimizing them on the input. **torch-ttt** enables TTT through lightweight *Engine* wrappers that implement specific methods.
+
 The core idea behind this library is that different TTT methods, at a high level, primarily differ in how they compute their self-supervised losses. Conceptually, any TTT method can be abstracted as a black box that takes a model and input, returns a self-supervised loss, and enables further optimization to enhance the model's performance. We call such an abstraction an *"Engine"* and most of the library's functionality is centered around them.
 
 Training with Engines
