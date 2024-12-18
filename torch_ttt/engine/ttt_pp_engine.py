@@ -31,7 +31,7 @@ class TTTPPEngine(BaseEngine):
 
     :Example:
 
-    ::
+    .. code-block:: python
 
         from torch_ttt.engine.ttt_pp_engine import TTTPPEngine
 

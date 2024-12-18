@@ -19,17 +19,19 @@ class TTTEngine(BaseEngine):
 
     :Example:
 
-    ::
+    .. code-block:: python
 
-        from torch_ttt.engine.ttt_engine import TTTEngine
+        from torch_ttt.engine.ttt_pp_engine import TTTPPEngine
 
         model = MyModel()
-        engine = TTTEngine(model, "fc1")
+        engine = TTTPPEngine(model, "fc1")
 
         # Training 
         engine.train()
         for inputs, labels in train_loader:
             ...
+
+        engine.compute_statistics(train_loader)
 
         # Inference 
         engine.eval()
@@ -45,7 +47,8 @@ class TTTEngine(BaseEngine):
     Note: 
         The original `TTT <https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27>`_ implementation uses a four-class classification task, corresponding to image rotations of 0°, 90°, 180°, and 270°.
 
-    Reference:
+    References:
+
         "Test-Time Training with Self-Supervision for Generalization under Distribution Shifts", Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt
 
         Paper link: http://proceedings.mlr.press/v119/sun20b/sun20b.pdf
