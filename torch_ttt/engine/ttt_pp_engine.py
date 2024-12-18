@@ -16,7 +16,7 @@ __all__ = ["TTTPPEngine"]
 # TODO: finish this class
 @EngineRegistry.register("ttt_pp")
 class TTTPPEngine(BaseEngine):
-    """ **TTT++** approach: feature alignment-based + SimCLR loss.
+    """ **TTT++** approach: feature alignment-based + SimCLR loss. 
 
     Args:
         model (torch.nn.Module): Model to be trained with TTT.
@@ -28,6 +28,27 @@ class TTTPPEngine(BaseEngine):
         scale_mu (float): The scale factor for the mean loss.
         scale_c_cov (float): The scale factor for the contrastive covariance loss.
         scale_c_mu (float): The scale factor for the contrastive mean loss.
+
+    :Example:
+
+    ::
+
+        from torch_ttt.engine.ttt_pp_engine import TTTPPEngine
+
+        model = MyModel()
+        engine = TTTPPEngine(model, "fc1")
+
+        # Training 
+        engine.train()
+        for inputs, labels in train_loader:
+            ...
+
+        engine.compute_statistics(train_loader)
+
+        # Inference 
+        engine.eval()
+        for inputs, labels in test_loader:
+            ...
 
     Reference:
         "TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?", Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi

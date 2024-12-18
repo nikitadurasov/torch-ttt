@@ -17,6 +17,25 @@ class TTTEngine(BaseEngine):
         angle_head (torch.nn.Module, optional): The head that predicts the rotation angles.
         angle_criterion (torch.nn.Module, optional): The loss function for the rotation angles. 
 
+    :Example:
+
+    ::
+
+        from torch_ttt.engine.ttt_engine import TTTEngine
+
+        model = MyModel()
+        engine = TTTEngine(model, "fc1")
+
+        # Training 
+        engine.train()
+        for inputs, labels in train_loader:
+            ...
+
+        # Inference 
+        engine.eval()
+        for inputs, labels in test_loader:
+            ...
+
     Warning:
         The module with the name :attr:`features_layer_name` should be present in the model.
 
@@ -29,7 +48,7 @@ class TTTEngine(BaseEngine):
     Reference:
         "Test-Time Training with Self-Supervision for Generalization under Distribution Shifts", Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt
 
-        Paper link: https://arxiv.org/abs/1909.13231
+        Paper link: http://proceedings.mlr.press/v119/sun20b/sun20b.pdf
     """
     def __init__(
         self, 
