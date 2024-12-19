@@ -29,6 +29,9 @@ class TTTPPEngine(BaseEngine):
         scale_c_cov (float): The scale factor for the contrastive covariance loss.
         scale_c_mu (float): The scale factor for the contrastive mean loss.
 
+    Warning:
+        The module with the name :attr:`features_layer_name` should be present in the model.
+
     :Example:
 
     .. code-block:: python
@@ -37,20 +40,27 @@ class TTTPPEngine(BaseEngine):
 
         model = MyModel()
         engine = TTTPPEngine(model, "fc1")
+        optimizer = torch.optim.Adam(engine.parameters(), lr=1e-4)
 
         # Training 
         engine.train()
         for inputs, labels in train_loader:
-            ...
+            optimizer.zero_grad()
+            outputs, loss_ttt = engine(inputs)
+            loss = criterion(outputs, labels) + alpha * loss_ttt
+            loss.backward()
+            optimizer.step()
 
+        # Compute statistics for features alignment
         engine.compute_statistics(train_loader)
 
         # Inference 
         engine.eval()
         for inputs, labels in test_loader:
-            ...
+            output, loss_ttt = engine(inputs)
 
     Reference:
+
         "TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?", Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi
 
         Paper link: https://proceedings.neurips.cc/paper/2021/hash/b618c3210e934362ac261db280128c22-Abstract.html
@@ -118,7 +128,7 @@ class TTTPPEngine(BaseEngine):
         
         raise ValueError("Features should be 2D tensor.")
         
-    def forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
+    def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
         """Forward pass of the model. 
     
         Args:

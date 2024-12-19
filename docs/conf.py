@@ -115,4 +115,4 @@ theme_options = ThemeOptions(
 
 html_theme_options = asdict(theme_options)
 
-pygments_style = 'zenburn'
+pygments_style = 'vs'

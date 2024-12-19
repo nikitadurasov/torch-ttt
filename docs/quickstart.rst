@@ -33,9 +33,11 @@ Getting started is straightforward: during training, simply wrap your model with
    model = MyModel()
    +engine = TTTEngine(model, features_layer_name='layer2') 
 
-   ...
+   ...Setting up data, optimizers, etc...
 
    # Training loop
+   - model.train()
+   + engine.train() # Don't forget it, it's important!
    for batch in train_loader:
          inputs, targets = batch
          optimizer.zero_grad()
@@ -45,7 +47,7 @@ Getting started is straightforward: during training, simply wrap your model with
 
    -     loss = loss_fn(outputs, targets)
    +     loss = loss_fn(outputs, targets) + alpha * loss_ttt
-
+   
         loss.backward()
         optimizer.step()
 
@@ -58,13 +60,13 @@ During inference, use the Engine with the `run_ttt` function to adapt the model.
 
 .. code-block:: diff
 
-   +from torch_ttt.ttt_runner import run_ttt
-
    # Testing loop
+   - model.eval()
+   + engine.eval() # Also, don't forget it!
    for batch in test_loader:
          inputs, targets = batch
          optimizer.zero_grad()
 
    -      outputs = model(inputs)
-   +      outputs = run_ttt(engine, inputs, optimizer_name="adam", num_steps=10, lr=1e-4)
+   +      outputs = engine(inputs)
          metric = compute_metric(outputs, targets)

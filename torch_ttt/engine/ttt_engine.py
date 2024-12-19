@@ -17,27 +17,6 @@ class TTTEngine(BaseEngine):
         angle_head (torch.nn.Module, optional): The head that predicts the rotation angles.
         angle_criterion (torch.nn.Module, optional): The loss function for the rotation angles. 
 
-    :Example:
-
-    .. code-block:: python
-
-        from torch_ttt.engine.ttt_pp_engine import TTTPPEngine
-
-        model = MyModel()
-        engine = TTTPPEngine(model, "fc1")
-
-        # Training 
-        engine.train()
-        for inputs, labels in train_loader:
-            ...
-
-        engine.compute_statistics(train_loader)
-
-        # Inference 
-        engine.eval()
-        for inputs, labels in test_loader:
-            ...
-
     Warning:
         The module with the name :attr:`features_layer_name` should be present in the model.
 
@@ -47,7 +26,31 @@ class TTTEngine(BaseEngine):
     Note: 
         The original `TTT <https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27>`_ implementation uses a four-class classification task, corresponding to image rotations of 0°, 90°, 180°, and 270°.
 
-    References:
+    :Example:
+
+    .. code-block:: python
+
+        from torch_ttt.engine.ttt_engine import TTTEngine
+
+        model = MyModel()
+        engine = TTTEngine(model, "fc1")
+        optimizer = torch.optim.Adam(engine.parameters(), lr=1e-4)
+
+        # Training 
+        engine.train()
+        for inputs, labels in train_loader:
+            optimizer.zero_grad()
+            outputs, loss_ttt = engine(inputs)
+            loss = criterion(outputs, labels) + alpha * loss_ttt
+            loss.backward()
+            optimizer.step()
+
+        # Inference 
+        engine.eval()
+        for inputs, labels in test_loader:
+            output, loss_ttt = engine(inputs)
+
+    Reference:
 
         "Test-Time Training with Self-Supervision for Generalization under Distribution Shifts", Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt
 
@@ -76,7 +79,7 @@ class TTTEngine(BaseEngine):
         if self.target_module is None:
             raise ValueError(f"Module '{features_layer_name}' not found in the model.")
         
-    def forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
+    def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
         """Forward pass of the model. 
     
         Args:
@@ -109,7 +112,7 @@ class TTTEngine(BaseEngine):
         # Compute rotation loss
         rotation_loss = self.angle_criterion(angles, rotation_labels)
         return outputs, rotation_loss
-    
+            
     # Follow this code (expand case): https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27
     def __rotate_inputs(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
         """Rotate the input images by 0, 90, 180, and 270 degrees."""
