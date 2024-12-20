@@ -22,26 +22,26 @@ class MLP(torch.nn.Module):
 def feat_input() -> torch.Tensor:
     return torch.ones((10, 1, 10, 10))
 
-class TestTTTPPEngine:
+class TestTTTPPEngin1D:
     
-    def test_simple_ttt_engine_inference(self, feat_input):
+    def test_inference_train(self, feat_input):
         model = MLP()
         ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "fc1")
         ttt_engine.train()
         ttt_engine(feat_input)
 
-    def test_simple_ttt_engine_inference_test(self, feat_input):
+    def test_inference_eval_without_statistics(self, feat_input):
         model = MLP()
         ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "fc1")
         ttt_engine.eval()
 
-            # Expect an exception when calling ttt_engine with feat_input
+        # Expect an exception when calling ttt_engine with feat_input
         with pytest.raises(ValueError) as excinfo:
             ttt_engine(feat_input)
         
         assert "Reference statistics are not computed. Please call `compute_statistics` method." in str(excinfo.value)
 
-    def test_simple_ttt_engine_inference_test_with_statistics(self, feat_input):
+    def test_inference_eval_with_statistics(self, feat_input):
         model = MLP()
         ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "fc1")
 
@@ -51,3 +51,34 @@ class TestTTTPPEngine:
         ttt_engine.compute_statistics(dataloader)
         ttt_engine.eval()
         ttt_engine(feat_input)
+
+class TestTTTPPEngin2D:
+    
+    def test_inference_2d_exception(self, feat_input):
+        model = MLP()
+
+        # Expect an exception when calling ttt_engine with feat_input
+        with pytest.raises(TypeError) as excinfo:
+            ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "cv1")
+
+    # def test_inference_eval_without_statistics(self, feat_input):
+    #     model = MLP()
+    #     ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "cv1")
+    #     ttt_engine.eval()
+
+    #     # Expect an exception when calling ttt_engine with feat_input
+    #     with pytest.raises(ValueError) as excinfo:
+    #         ttt_engine(feat_input)
+        
+    #     assert "Reference statistics are not computed. Please call `compute_statistics` method." in str(excinfo.value)
+
+    # def test_inference_eval_with_statistics(self, feat_input):
+    #     model = MLP()
+    #     ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "fc1")
+
+    #     dataset = TensorDataset(feat_input)
+    #     dataloader = DataLoader(dataset, batch_size=2)
+
+    #     ttt_engine.compute_statistics(dataloader)
+    #     ttt_engine.eval()
+    #     ttt_engine(feat_input)

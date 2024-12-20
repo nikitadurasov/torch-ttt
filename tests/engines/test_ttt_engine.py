@@ -19,11 +19,52 @@ class MLP(torch.nn.Module):
 
 @pytest.fixture()
 def feat_input() -> torch.Tensor:
-    return torch.ones((2, 1, 10, 10))
+    return torch.ones((10, 1, 10, 10))
 
-class TestTTTEngine:
-    
-    def test_simple_ttt_engine_inference(self, feat_input):
+class TestTTTEngine1D:
+    """Test cases for the TTT engine with 1D features."""
+
+
+    def test_inference_train(self, feat_input):
         model = MLP()
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "fc1")
+        ttt_engine.train()
         ttt_engine(feat_input)
+
+    def test_inference_eval(self, feat_input):
+        model = MLP()
+        ttt_engine = EngineRegistry.get_engine("ttt")(model, "fc1")
+        ttt_engine.eval()
+        ttt_engine(feat_input)
+
+    def test_backward(self, feat_input):
+        model = MLP()
+        ttt_engine = EngineRegistry.get_engine("ttt")(model, "fc1")
+        optimizer = torch.optim.Adam(ttt_engine.parameters(), lr=1e-4)
+        ttt_engine.train()
+        _, loss_ttt = ttt_engine(feat_input)
+        loss_ttt.backward()
+        optimizer.step()
+
+class TestTTTEngine2D:
+    """Test cases for the TTT engine with 1D features."""
+    def test_inference_train(self, feat_input):
+        model = MLP()
+        ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")
+        ttt_engine.train()
+        ttt_engine(feat_input)
+
+    def test_inference_eval(self, feat_input):
+        model = MLP()
+        ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")
+        ttt_engine.eval()
+        ttt_engine(feat_input)
+
+    def test_backward(self, feat_input):
+        model = MLP()
+        ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")
+        optimizer = torch.optim.Adam(ttt_engine.parameters(), lr=1e-4)
+        ttt_engine.train()
+        _, loss_ttt = ttt_engine(feat_input)
+        loss_ttt.backward()
+        optimizer.step()
