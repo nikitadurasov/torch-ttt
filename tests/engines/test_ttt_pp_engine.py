@@ -57,28 +57,6 @@ class TestTTTPPEngin2D:
     def test_inference_2d_exception(self, feat_input):
         model = MLP()
 
-        # Expect an exception when calling ttt_engine with feat_input
+        # Expect an exception when calling ttt_engine with 2d features
         with pytest.raises(TypeError) as excinfo:
             ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "cv1")
-
-    # def test_inference_eval_without_statistics(self, feat_input):
-    #     model = MLP()
-    #     ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "cv1")
-    #     ttt_engine.eval()
-
-    #     # Expect an exception when calling ttt_engine with feat_input
-    #     with pytest.raises(ValueError) as excinfo:
-    #         ttt_engine(feat_input)
-        
-    #     assert "Reference statistics are not computed. Please call `compute_statistics` method." in str(excinfo.value)
-
-    # def test_inference_eval_with_statistics(self, feat_input):
-    #     model = MLP()
-    #     ttt_engine = EngineRegistry.get_engine("ttt_pp")(model, "fc1")
-
-    #     dataset = TensorDataset(feat_input)
-    #     dataloader = DataLoader(dataset, batch_size=2)
-
-    #     ttt_engine.compute_statistics(dataloader)
-    #     ttt_engine.eval()
-    #     ttt_engine(feat_input)

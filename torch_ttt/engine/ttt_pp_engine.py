@@ -105,6 +105,14 @@ class TTTPPEngine(BaseEngine):
         if self.target_module is None:
             raise ValueError(f"Module '{features_layer_name}' not found in the model.")
 
+        # Validate that the target module is a Linear layer
+        if not isinstance(self.target_module, torch.nn.Linear):
+            print("Here")
+            raise TypeError(
+                f"Module '{features_layer_name}' is expected to be of type 'torch.nn.Linear', "
+                f"but found type '{type(self.target_module).__name__}'."
+            )
+
         if contrastive_transform is None:
 
             # default SimCLR augmentation
