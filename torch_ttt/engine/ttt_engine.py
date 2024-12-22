@@ -1,6 +1,6 @@
 import torch 
 from contextlib import contextmanager
-from typing import Tuple
+from typing import Tuple, Dict, Any
 from torchvision.transforms import functional as F
 from torch_ttt.engine.base_engine import BaseEngine
 from torch_ttt.engine_registry import EngineRegistry
@@ -16,6 +16,7 @@ class TTTEngine(BaseEngine):
         features_layer_name (str): The name of the layer from which the features are extracted.
         angle_head (torch.nn.Module, optional): The head that predicts the rotation angles.
         angle_criterion (torch.nn.Module, optional): The loss function for the rotation angles. 
+        optimization_parameters (dict): The optimization parameters for the engine.
 
     Warning:
         The module with the name :attr:`features_layer_name` should be present in the model.
@@ -61,13 +62,15 @@ class TTTEngine(BaseEngine):
         model: torch.nn.Module, 
         features_layer_name: str, 
         angle_head: torch.nn.Module = None,
-        angle_criterion: torch.nn.Module = None
+        angle_criterion: torch.nn.Module = None,
+        optimization_parameters: Dict[str, Any] = {}
     ) -> None:
         super().__init__()
         self.model = model
         self.angle_head = angle_head
         self.angle_criterion = angle_criterion if angle_criterion else torch.nn.CrossEntropyLoss()
         self.features_layer_name = features_layer_name
+        self.optimization_parameters = optimization_parameters
         
        # Locate and store the reference to the target module
         self.target_module = None

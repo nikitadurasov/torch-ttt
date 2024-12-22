@@ -8,6 +8,7 @@ class BaseEngine(nn.Module, ABC):
 
     def __init__(self):
         nn.Module.__init__(self)
+        self.optimization_parameters = {}
 
     @abstractmethod
     def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -20,16 +21,19 @@ class BaseEngine(nn.Module, ABC):
 
         # TODO: optimization pipeline should be more flexible and 
         # user-defined, need some special structure for that
-        optimizer_name="adam"
-        num_steps=3
-        lr=1e-4
-        copy=False
+        optimization_parameters = self.optimization_parameters or {} 
 
-        running_engine = deepcopy(self) if copy else self
+        optimizer_name = optimization_parameters.get("optimizer_name", "adam")
+        num_steps = optimization_parameters.get("num_steps", 3)
+        lr = optimization_parameters.get("lr", 1e-2)
+        copy_model = optimization_parameters.get("copy_model", "True")
+
+        running_engine = deepcopy(self) if copy_model else self
 
         if optimizer_name == "adam":
             optimizer = torch.optim.Adam(running_engine.model.parameters(), lr=lr)
 
+        loss = 0 # default value
         for _ in range(num_steps):
             optimizer.zero_grad()
             _, loss = running_engine.ttt_forward(inputs)

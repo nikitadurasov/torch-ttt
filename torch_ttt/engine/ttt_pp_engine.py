@@ -1,6 +1,6 @@
 import torch
 import random
-from typing import Tuple, Optional, Callable
+from typing import Tuple, Optional, Callable, Dict, Any
 from contextlib import contextmanager
 import statistics
 
@@ -77,7 +77,8 @@ class TTTPPEngine(BaseEngine):
             scale_cov: float = 0.1,
             scale_mu: float = 0.1,
             scale_c_cov: float = 0.1,
-            scale_c_mu: float = 0.1
+            scale_c_mu: float = 0.1,
+            optimization_parameters: Dict[str, Any] = {}
     ) -> None:
         super().__init__()
         self.model = model
@@ -94,6 +95,8 @@ class TTTPPEngine(BaseEngine):
         self.reference_mean = None
         self.reference_c_cov = None
         self.reference_c_mean = None
+
+        self.optimization_parameters = optimization_parameters
 
         # Locate and store the reference to the target module
         self.target_module = None
