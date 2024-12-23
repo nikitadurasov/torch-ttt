@@ -1,135 +1,247 @@
 """
 TTT for Corrupted MNIST
-========================
+=====================
 
-In this tutorial, we will consider how the original image rotation-based Test-Time Training (TTT) method 
-can improve model performance during inference when the data is corrupted by Gaussian noise.
+In this tutorial, we will explore how the original image rotation-based `Test-Time Training (TTT) <http://proceedings.mlr.press/v119/sun20b/sun20b.pdf>`_ approach can improve model performance during inference when the data is corrupted by Gaussian noise, using the `torch-ttt <https://github.com/nikitadurasov/torch-ttt>`_ *Engine* functionality.
 
-We will use a simple neural network trained on MNIST and add noise to the test set during evaluation.
+This notebook is designed to demonstrate how seamlessly test-time training approaches can be integrated through `torch-ttt <https://github.com/nikitadurasov/torch-ttt>`_ into existing training and testing pipelines, while also showcasing the significant performance improvements achievable when applying TTT on corrupted or out-of-distribution data.
 """
 
-# %%
-# Import necessary libraries
+
+# %%%
+# Regular Model (without TTT)
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# Below, we will start by training regular networks on MNIST data and demonstrate how susceptible it is to noise introduced during testing, resulting in significantly lower accuracy when the noise is present.
+# 
+# Data and Model
+# ^^^^^^^^^^^^^^^^^^^^
+#
+# Let's start with some global parameters that we will use later.
 import torch
+import torchvision
+import numpy as np
+import random
+import tqdm
+import matplotlib.pyplot as plt
+
 import torch.nn as nn
+import torch.nn.functional as F
 import torch.optim as optim
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
-from datetime import datetime
 
+n_epochs = 1 # number of training epochs
+batch_size_train = 64 # batch size during training
+batch_size_test = 32 # batch size during training
+learning_rate = 0.01 # training learning rate
+
+random_seed = 7
+torch.backends.cudnn.enabled = False
+torch.manual_seed(random_seed)
+random.seed(random_seed)
+np.random.seed(random_seed)
 # %%
-# Define a simple neural network for MNIST
-activation = nn.ReLU
-
-class SimpleNet(nn.Module):
+# We will employ a fairly shallow and simple model, consisting only of several convolutional and linear layers with LeakyReLU activations.
+#
+class Net(nn.Module):
     def __init__(self):
-        super(SimpleNet, self).__init__()
-        self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(28 * 28, 128)
-        self.relu1 = activation()
-        self.fc2 = nn.Linear(128, 64)
-        self.relu2 = activation()
-        self.fc3 = nn.Linear(64, 64)
-        self.relu3 = activation()
-        self.fc4 = nn.Linear(64, 10)
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+        self.fc1 = nn.Linear(320, 50)
+        self.fc2 = nn.Linear(50, 50)
+        self.fc3 = nn.Linear(50, 10)
+        self.activation = nn.LeakyReLU()
 
     def forward(self, x):
-        x = self.flatten(x)
-        x = self.fc1(x)
-        x = self.relu1(x)
-        x = self.fc2(x)
-        x = self.relu2(x)
+        x = self.activation(F.max_pool2d(self.conv1(x), 2))
+        x = self.activation(F.max_pool2d(self.conv2(x), 2))
+        x = x.view(-1, 320)
+        x = self.activation(self.fc1(x))
+        x = self.activation(self.fc2(x))
         x = self.fc3(x)
-        x = self.relu3(x)
-        x = self.fc4(x)
-        return x
-
+        return F.log_softmax(x, dim=-1)
 # %%
-# Prepare the MNIST dataset
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.1307,), (0.3081,))
-])
+# For training and testing data, we will use the standard train/test MNIST split, which consists of roughly 60,000 samples for training and 10,000 for testing, and we will normalize the data.
+# 
+train_loader = torch.utils.data.DataLoader(
+  torchvision.datasets.MNIST('./MNIST/', train=True, download=True,
+                             transform=torchvision.transforms.Compose([
+                               torchvision.transforms.ToTensor(),
+                               torchvision.transforms.Normalize(
+                                 (0.1307,), (0.3081,))
+                             ])),
+  batch_size=batch_size_train, shuffle=False)
 
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
-
+test_loader = torch.utils.data.DataLoader(
+  torchvision.datasets.MNIST('./MNIST/', train=False, download=True,
+                             transform=torchvision.transforms.Compose([
+                               torchvision.transforms.ToTensor(),
+                               torchvision.transforms.Normalize(
+                                 (0.1307,), (0.3081,))
+                             ])),
+  batch_size=batch_size_test, shuffle=False)
 # %%
-# Instantiate the model, loss function, and optimizer
-model = SimpleNet()
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=1e-3)
-
+# First, let's visualize 10 random images from the clean MNIST test set. As we can see, the digits are clearly visible and distinctive.
+#
+images, _ = next(iter(test_loader))
+fig, axes = plt.subplots(1, 10, figsize=(15, 2))
+for ax, img in zip(axes, images[:10, 0]):
+    ax.imshow(img, cmap='viridis')
+    ax.axis('off')
+plt.tight_layout()
+plt.show()
 # %%
-# Train the model
-def train_model(model, train_loader, criterion, optimizer, epochs=5):
-    model.train()  # Set the model to training mode
-    for epoch in range(epochs):
-        running_loss = 0.0
-        correct = 0
-        total = 0
+# Training and Testing
+# ^^^^^^^^^^^^^^^^^^^^
+#
+# Following a rather simple training pipeline, we train our model for one epoch and then evaluate it on the test set.
+#
+network = Net()
+optimizer = optim.Adam(network.parameters(), lr=learning_rate)
 
-        for images, labels in train_loader:
-            optimizer.zero_grad()  # Zero the gradients
-            outputs = model(images)  # Forward pass
-            loss = criterion(outputs, labels)
-            loss.backward()  # Backward pass
-            optimizer.step()  # Update parameters
-
-            running_loss += loss.item()
-            _, predicted = torch.max(outputs, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-
-        # Print training stats
-        print(f"Epoch [{epoch+1}/{epochs}], Loss: {running_loss / len(train_loader):.4f}, Accuracy: {100 * correct / total:.2f}%")
-
-    print("Training complete.")
-
-# Train the model
-train_model(model, train_loader, criterion, optimizer, epochs=5)
-
-# %%
-# Evaluate the model on noisy test data
-def evaluate_model(model, test_loader, sigma):
-    """
-    Evaluate the model on the test set with added Gaussian noise.
-
-    Args:
-        model (torch.nn.Module): The trained model.
-        test_loader (DataLoader): The DataLoader for the test set.
-        sigma (float): The standard deviation of the Gaussian noise.
-    """
-    model.eval()
+def train():
+    network.train()
     correct = 0
-    total = 0
-    running_loss = 0.0
-    criterion = nn.CrossEntropyLoss()
+    with tqdm.tqdm(total=len(train_loader), desc=f"Train") as pbar:
+        for batch_idx, (data, target) in enumerate(train_loader):
+            optimizer.zero_grad()
+            output = network(data)
+            pred = output.data.max(1, keepdim=True)[1]
+            correct += pred.eq(target.data.view_as(pred)).sum().item()
+            loss = F.nll_loss(output, target)
+            loss.backward()
+            optimizer.step()
 
-    noise = torch.randn([1, 1, 28, 28])  # Fixed Gaussian noise
+            if (batch_idx + 1) % 150 == 0:
+                pbar.update(150)
 
-    for images, labels in test_loader:
-        noisy_images = images + noise * sigma
-        outputs = model(noisy_images)
-        loss = criterion(outputs, labels)
-        running_loss += loss.item()
+        pbar.set_postfix(acc=correct/len(train_loader.dataset))
 
-        _, predicted = torch.max(outputs, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
+def test():
+    network.eval()
+    correct = 0
+    with torch.no_grad():
+        with tqdm.tqdm(total=len(test_loader), desc="Test") as pbar:
+            for batch_idx, (data, target) in enumerate(test_loader):
+                output = network(data)
+                pred = output.data.max(1, keepdim=True)[1]
+                correct += pred.eq(target.data.view_as(pred)).sum().item()
+                if (batch_idx + 1) % 100 == 0:
+                    pbar.update(100)
 
-    avg_loss = running_loss / len(test_loader)
-    accuracy = 100 * correct / total
-    print(f"Test Loss: {avg_loss:.4f}, Test Accuracy: {accuracy:.2f}% (with noise sigma={sigma})")
+            accuracy = 100. * correct / len(test_loader.dataset)
+            pbar.set_postfix(acc=accuracy)
+# %%
+# As we can see below, our model achieves roughly 95% accuracy on both the train and test sets.
+# 
+for _ in range(n_epochs):
+    train()
+test()
+# %%
+# Evaluating on noisy test
+# ^^^^^^^^^^^^^^^^^^^^
+# 
+# Now, let's add a significant amount of Gaussian noise to our input images, which will make the classification task significantly more challenging. Let's plot how they look.
+#
+images, _ = next(iter(test_loader))
+fig, axes = plt.subplots(1, 10, figsize=(15, 2))
+for ax, img in zip(axes, images[:10, 0]):
+    noisy_img = img +  2 * torch.randn(img.shape)
+    ax.imshow(noisy_img, cmap='viridis')
+    ax.axis('off')
+plt.tight_layout()
+plt.show()
+# %%
+# Since the model was not exposed to this type of corruption during training, these new corrupted inputs can be considered out-of-distribution. As a result, the model shows significantly lower accuracy on these inputs. As we can see below, the accuracy drops from roughly 95% to below 60%.
+#
+network.eval()
+correct = 0
+with torch.no_grad():
+    with tqdm.tqdm(total=len(test_loader), desc="Test") as pbar:
+        for batch_idx, (data, target) in enumerate(test_loader):
+            data += 2 * torch.randn(data.shape)
+            output = network(data)
+            pred = output.data.max(1, keepdim=True)[1]
+            correct += pred.eq(target.data.view_as(pred)).sum().item()
+            if (batch_idx + 1) % 100 == 0:
+                pbar.update(100)
+
+        accuracy = 100. * correct / len(test_loader.dataset)
+        pbar.set_postfix(acc=accuracy)
+# %%
+# Optimized Model (with TTT)
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+# 
+# Now, let's employ the original `TTT <http://proceedings.mlr.press/v119/sun20b/sun20b.pdf>`_ approach to improve the performance on these noisy inputs. We will use the **TTTEngine** class, which encapsulates the mechanism of TTT's image rotation-based self-supervised loss and gradient optimization during inference. 
+from torch_ttt.engine.ttt_engine import TTTEngine
+# %%
+# Training and Testing
+# ^^^^^^^^^^^^^^^^^^^^
+#
+# We need to add only a couple of new lines to our original training and testing functions to introduce TTT into the existing pipelines. Below, we add a comment for each line that was either newly added or modified.
+network = Net()
+engine = TTTEngine(network, "fc2") # create an engine object
+optimizer = optim.Adam(engine.parameters(), lr=learning_rate) # optimize the engine, not model
+
+def train():
+    engine.train() # switch engine to .train() mode
+    correct = 0
+    with tqdm.tqdm(total=len(train_loader), desc=f"Train") as pbar:
+        for batch_idx, (data, target) in enumerate(train_loader):
+            optimizer.zero_grad()
+            output, loss_ttt = engine(data) # run inferece with engine
+            pred = output.data.max(1, keepdim=True)[1]
+            correct += pred.eq(target.data.view_as(pred)).sum().item()
+            loss = F.nll_loss(output, target) + 0.35 * loss_ttt # add self-supervised loss to the total loss
+            loss.backward()
+            optimizer.step()
+
+            if (batch_idx + 1) % 150 == 0:
+                pbar.update(150)
+
+        pbar.set_postfix(acc=correct/len(train_loader.dataset))
+# %%
+# As shown below, the accuracy of the underlying model remains the same for both the original training and the TTT-based training.
+for _ in range(n_epochs):
+    train()
+test() # evaluation of the underlying model, without TTT
+# %%
+# Evaluating on noisy test
+# ^^^^^^^^^^^^^^^^^^^^
+# 
+# Now, let's return to the evaluation of the model on inputs when a significant amount of noise is introduced. As we saw before, the original model demonstrated a significant drop in accuracy when the noise was introduced. Below, we will enable test-time training optimization during inference (which happens in the engine's `.forward()` function) to improve the model's performance on noisy images. As with the training, we will mark the changed/modified lines with a comment.
+def ttt_test():
+    engine.eval() # switch engine to .eval() mode
+    correct = 0
+    with tqdm.tqdm(total=len(test_loader), desc="Test") as pbar:
+        for batch_idx, (data, target) in enumerate(test_loader):
+            data += 2 * torch.randn(data.shape)
+            output, _ = engine(data) # run inferece with engine
+            pred = output.data.max(1, keepdim=True)[1]  
+            correct += pred.eq(target.data.view_as(pred)).sum().item()
+            if (batch_idx + 1) % 100 == 0:
+                pbar.update(100)
+    
+        accuracy = 100. * correct / len(test_loader.dataset)
+        pbar.set_postfix(acc=accuracy)
+# %%
+# The engine's *optimization_parameters* dictionary stores the parameters used for optimization. Below, we modify the number of optimization steps to demonstrate how accuracy improves as the number of steps increases. As shown, the TTT engine with 3 optimization iterations improves the accuracy from ~54% for the original model by almost 15%, and further improvements can be achieved with more optimization steps.
+# %%
+print("### No optimization ###")
+engine.optimization_parameters["num_steps"] = 0
+ttt_test()
 
 # %%
-# Prepare the MNIST test dataset
-test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
-test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False)
+print("### Number of optimization steps: 1 ###")
+engine.optimization_parameters["num_steps"] = 1
+ttt_test()
 
 # %%
-# Evaluate the model
-torch.manual_seed(42)
-start_time = datetime.now()
-evaluate_model(model, test_loader, sigma=10)
-print(f"Time taken: {datetime.now() - start_time}")
+print("### Number of optimization steps: 2 ###")
+engine.optimization_parameters["num_steps"] = 2
+ttt_test()
+
+# %%
+print("### Number of optimization steps: 3 ###")
+engine.optimization_parameters["num_steps"] = 3
+ttt_test()

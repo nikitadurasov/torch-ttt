@@ -27,7 +27,7 @@ html_favicon = "_static/images/torch-ttt.svg"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.autodoc',
+    # 'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     "sphinx.ext.intersphinx",
@@ -41,15 +41,19 @@ extensions = [
 ]
 
 autosummary_generate = True
-# autoapi_dirs = ['../torch_ttt']
+autosummary_generate_overwrite = True 
 
 from sphinx_gallery.sorting import FileNameSortKey
 sphinx_gallery_conf = {
-     'examples_dirs': '../examples',   # path to your example scripts
-     'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
-     'download_all_examples': False,
-     "show_signature": False,
-     'within_subsection_order': FileNameSortKey,
+    'examples_dirs': '../examples',
+    'gallery_dirs': 'auto_examples',
+    'download_all_examples': False,
+    # 'show_signature': False,
+    'plot_gallery': True,
+    'within_subsection_order': FileNameSortKey,
+    'image_scrapers': ('matplotlib',),
+    'run_stale_examples': True,   
+    'filename_pattern': '.*'
 }
 
 templates_path = ['_templates']

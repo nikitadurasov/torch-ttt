@@ -11,7 +11,7 @@ Engines
    :toctree: _autosummary
    :template: class.rst
 
-   torch_ttt.engine.ttt_engine.TTTEngine
-   torch_ttt.engine.ttt_pp_engine.TTTPPEngine
-   torch_ttt.engine.masked_ttt_engine.MaskedTTTEngine
-   torch_ttt.engine.actmad_engine.ActMADEngine
+   ttt_engine.TTTEngine
+   ttt_pp_engine.TTTPPEngine
+   masked_ttt_engine.MaskedTTTEngine
+   actmad_engine.ActMADEngine
