@@ -20,6 +20,12 @@ author = 'Nikita Durasov'
 
 html_title = "torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));'>-ttt</span>"
 
+rst_prolog = f"""
+.. |torch-ttt| raw:: html
+
+    {html_title}
+"""
+
 html_favicon = "_static/images/torch-ttt.svg"
 
 
@@ -33,7 +39,8 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     'sphinx.ext.autosummary',
-    'sphinx_gallery.gen_gallery'
+    'sphinx_gallery.gen_gallery',
+    'sphinxcontrib.bibtex'
     # 'autoapi.extension'
     # "extend_parent",
     # "sphinx_design",
@@ -120,3 +127,5 @@ theme_options = ThemeOptions(
 html_theme_options = asdict(theme_options)
 
 pygments_style = 'vs'
+
+bibtex_bibfiles = ['references.bib']

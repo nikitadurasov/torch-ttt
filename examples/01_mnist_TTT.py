@@ -2,11 +2,12 @@
 TTT for Corrupted MNIST
 =====================
 
+Explore how test-time training can enhance model performance on corrupted MNIST data.
+
 In this tutorial, we will explore how the original image rotation-based `Test-Time Training (TTT) <http://proceedings.mlr.press/v119/sun20b/sun20b.pdf>`_ approach can improve model performance during inference when the data is corrupted by Gaussian noise, using the `torch-ttt <https://github.com/nikitadurasov/torch-ttt>`_ *Engine* functionality.
 
 This notebook is designed to demonstrate how seamlessly test-time training approaches can be integrated through `torch-ttt <https://github.com/nikitadurasov/torch-ttt>`_ into existing training and testing pipelines, while also showcasing the significant performance improvements achievable when applying TTT on corrupted or out-of-distribution data.
 """
-
 
 # %%%
 # Regular Model (without TTT)
@@ -39,6 +40,9 @@ torch.backends.cudnn.enabled = False
 torch.manual_seed(random_seed)
 random.seed(random_seed)
 np.random.seed(random_seed)
+
+# sphinx_gallery_thumbnail_path = '_static/images/examples/mnist_noisy.png'
+
 # %%
 # We will employ a fairly shallow and simple model, consisting only of several convolutional and linear layers with LeakyReLU activations.
 #
@@ -226,7 +230,6 @@ def ttt_test():
         pbar.set_postfix(acc=accuracy)
 # %%
 # The engine's *optimization_parameters* dictionary stores the parameters used for optimization. Below, we modify the number of optimization steps to demonstrate how accuracy improves as the number of steps increases. As shown, the TTT engine with 3 optimization iterations improves the accuracy from ~54% for the original model by almost 15%, and further improvements can be achieved with more optimization steps.
-# %%
 print("### No optimization ###")
 engine.optimization_parameters["num_steps"] = 0
 ttt_test()

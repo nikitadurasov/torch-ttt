@@ -69,3 +69,25 @@ a.sphx-glr-backref-module-sphinx_gallery {
   display: none;
 }
 
+
+/* Make the citation label inline */
+.citation .label {
+    display: inline; /* Force label to stay inline */
+}
+
+/* Remove margin or padding around the <p> inside citation */
+.citation > p {
+    display: inline; /* Make paragraph inline to stay with the label */
+    margin: 0; /* Remove unnecessary margins */
+    padding: 0;
+}
+
+/* Ensure spacing between label and text */
+.citation .label::after {
+    content: " "; /* Add space after the label */
+}
+
+/* Add space between bibliography entries */
+.citation {
+    margin-top: 1em; /* Adjust the spacing as needed */
+}

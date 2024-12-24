@@ -6,6 +6,8 @@ API Reference
 Engines
 ^^^^^^^
 
+The following classes are part of the `torch_ttt.engine` module:
+
 .. autosummary::
    :nosignatures:
    :toctree: _autosummary
