@@ -8,14 +8,16 @@
 
 from sphinxawesome_theme import ThemeOptions
 from dataclasses import asdict
+from sphinx_gallery.sorting import FileNameSortKey
 
 import sys
 import os
-sys.path.insert(0, os.path.abspath('../'))
 
-project = 'torch-ttt'
-copyright = '2024, Nikita Durasov'
-author = 'Nikita Durasov'
+sys.path.insert(0, os.path.abspath("../"))
+
+project = "torch-ttt"
+copyright = "2024, Nikita Durasov"
+author = "Nikita Durasov"
 # html_title = "torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , #8c52ff, #ff914d); -moz-linear-gradient(45deg , #8c52ff, #ff914d); -webkit-linear-gradient(45deg , #8c52ff, #ff914d);'>-ttt</span>"
 
 html_title = "torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));'>-ttt</span>"
@@ -34,13 +36,13 @@ html_favicon = "_static/images/torch-ttt.svg"
 
 extensions = [
     # 'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
+    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
-    'sphinx.ext.autosummary',
-    'sphinx_gallery.gen_gallery',
-    'sphinxcontrib.bibtex'
+    "sphinx.ext.autosummary",
+    "sphinx_gallery.gen_gallery",
+    "sphinxcontrib.bibtex",
     # 'autoapi.extension'
     # "extend_parent",
     # "sphinx_design",
@@ -48,41 +50,34 @@ extensions = [
 ]
 
 autosummary_generate = True
-autosummary_generate_overwrite = True 
+autosummary_generate_overwrite = True
 
-from sphinx_gallery.sorting import FileNameSortKey
 sphinx_gallery_conf = {
-    'examples_dirs': '../examples',
-    'gallery_dirs': 'auto_examples',
-    'download_all_examples': False,
+    "examples_dirs": "../examples",
+    "gallery_dirs": "auto_examples",
+    "download_all_examples": False,
     # 'show_signature': False,
-    'plot_gallery': True,
-    'within_subsection_order': FileNameSortKey,
-    'image_scrapers': ('matplotlib',),
-    'run_stale_examples': True,   
-    'filename_pattern': '.*'
+    "plot_gallery": True,
+    "within_subsection_order": FileNameSortKey,
+    "image_scrapers": ("matplotlib",),
+    "run_stale_examples": True,
+    "filename_pattern": ".*",
 }
 
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
+templates_path = ["_templates"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_permalinks_icon = '<span>#</span>'
-html_theme = 'sphinxawesome_theme'
-html_static_path = ['_static']
+html_permalinks_icon = "<span>#</span>"
+html_theme = "sphinxawesome_theme"
+html_static_path = ["_static"]
 
-html_css_files = [
-    'css/custom.css',
-    'css/docstring_custom.css'
-]
+html_css_files = ["css/custom.css", "css/docstring_custom.css"]
 
-html_js_files = [
-    'js/theme.js'
-]
+html_js_files = ["js/theme.js"]
 
 autosummary_generate = True  # Automatically generate stub `.rst` files
 
@@ -126,6 +121,6 @@ theme_options = ThemeOptions(
 
 html_theme_options = asdict(theme_options)
 
-pygments_style = 'vs'
+pygments_style = "vs"
 
-bibtex_bibfiles = ['references.bib']
+bibtex_bibfiles = ["references.bib"]

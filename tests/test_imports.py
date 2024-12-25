@@ -1,6 +1,7 @@
 # ruff: noqa: F401
 import unittest
 
+
 class TestImports(unittest.TestCase):
     def test_import_loss_registry(self):
         try:
@@ -31,6 +32,7 @@ class TestImports(unittest.TestCase):
             from torch_ttt.engine.base_engine import BaseEngine
         except ImportError as e:
             self.fail(f"Failed to import BaseEngine: {e}")
+
 
 if __name__ == "__main__":
     unittest.main()

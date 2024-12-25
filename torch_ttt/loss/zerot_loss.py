@@ -1,18 +1,17 @@
-import torch 
+import torch
 from torch_ttt.loss.base_loss import BaseLoss
 from torch_ttt.loss_registry import LossRegistry
 
+
 @LossRegistry.register("zerot")
 class ZeroTrainLoss(BaseLoss):
-
     def __init__(self):
         super().__init__()
         self.quantile = 0.95
 
     def __call__(self, model, inputs):
-
         N = len(list(model.named_parameters()))
-        
+
         importance_dict = compute_weight_importance(model, inputs, N)
 
         # Calculate the top s% mean importance as the loss
@@ -20,7 +19,8 @@ class ZeroTrainLoss(BaseLoss):
 
         # Return the combined loss
         return loss
-    
+
+
 def top_s_percent_mean(importance_dict, s):
     """
     Compute the mean of the top s% of the importance values.
@@ -36,7 +36,9 @@ def top_s_percent_mean(importance_dict, s):
     all_importances = torch.cat([importance.view(-1) for importance in importance_dict.values()])
 
     # Determine the number of top elements to keep
-    k = max(1, int(s / 100.0 * all_importances.numel()))  # Ensure at least one element is considered
+    k = max(
+        1, int(s / 100.0 * all_importances.numel())
+    )  # Ensure at least one element is considered
 
     # Sort the importance values in descending order
     top_importances, _ = torch.topk(all_importances, k)
@@ -66,8 +68,8 @@ def optimize_last_n_layers(m, x, N, s, M, lr=1e-3, optimizer=None, verbose=False
     m.train()
 
     # Collect parameters of the last N layers to optimize
-    layers = list(m.named_parameters())[-2 * N:]
-    params_to_optimize = [param for name, param in layers if 'weight' in name]
+    layers = list(m.named_parameters())[-2 * N :]
+    params_to_optimize = [param for name, param in layers if "weight" in name]
 
     # Ensure that the parameters of the last N layers have requires_grad=True
     for param in params_to_optimize:
@@ -75,7 +77,7 @@ def optimize_last_n_layers(m, x, N, s, M, lr=1e-3, optimizer=None, verbose=False
 
     # Set up the optimizer for the last N layers' parameters
     if optimizer is None:
-      optimizer = torch.optim.Adam(params_to_optimize, lr=lr)
+        optimizer = torch.optim.Adam(params_to_optimize, lr=lr)
 
     # Optimization loop for M steps
     for step in range(M):
@@ -96,7 +98,7 @@ def optimize_last_n_layers(m, x, N, s, M, lr=1e-3, optimizer=None, verbose=False
 
         # Optionally, print loss for monitoring
         if verbose:
-          print(f"Step {step+1}/{M}, Loss: {loss.item()}")
+            print(f"Step {step+1}/{M}, Loss: {loss.item()}")
 
     # After optimization, run the model on the input x to get predictions
     m.eval()  # Set the model to evaluation mode
@@ -104,6 +106,7 @@ def optimize_last_n_layers(m, x, N, s, M, lr=1e-3, optimizer=None, verbose=False
         predictions = m(x)
 
     return predictions, optimizer
+
 
 def compute_weight_importance(m, x, N):
     """
@@ -125,9 +128,9 @@ def compute_weight_importance(m, x, N):
         param.requires_grad = False
 
     # Enable gradients only for the last N layers
-    layers = list(m.named_parameters())[-2 * N:]  # Get the last N layers (both weights and biases)
+    layers = list(m.named_parameters())[-2 * N :]  # Get the last N layers (both weights and biases)
     for name, param in layers:
-        if 'weight' in name:
+        if "weight" in name:
             param.requires_grad = True
 
     # Forward pass to compute the output
@@ -137,14 +140,16 @@ def compute_weight_importance(m, x, N):
     loss = output.mean()
 
     # Compute gradients with respect to the last N layers' parameters
-    gradients = torch.autograd.grad(loss, [param for name, param in layers if 'weight' in name], create_graph=True)
+    gradients = torch.autograd.grad(
+        loss, [param for name, param in layers if "weight" in name], create_graph=True
+    )
 
     # Calculate importance: w * \nabla{w} for the last N layers
     importance_dict = {}
     grad_idx = 0
     for name, param in layers:
-        if 'weight' in name:
-            importance = (param * gradients[grad_idx]).abs() # w * \nabla{w}
+        if "weight" in name:
+            importance = (param * gradients[grad_idx]).abs()  # w * \nabla{w}
             # importance = (param).abs()  # w * \nabla{w}
             # importance = gradients[grad_idx].abs()  #  # w * \nabla{w}
             importance_dict[name] = importance  # Don't detach the importance

@@ -2,6 +2,7 @@ import pytest
 import torch
 from torch_ttt.engine_registry import EngineRegistry
 
+
 class MLP(torch.nn.Module):
     def __init__(self):
         super(MLP, self).__init__()
@@ -17,13 +18,14 @@ class MLP(torch.nn.Module):
         x = self.fc2(x)
         return x
 
+
 @pytest.fixture()
 def feat_input() -> torch.Tensor:
     return torch.ones((10, 1, 10, 10))
 
+
 class TestTTTEngine1D:
     """Test cases for the TTT engine with 1D features."""
-
 
     def test_inference_train(self, feat_input):
         model = MLP()
@@ -46,8 +48,10 @@ class TestTTTEngine1D:
         loss_ttt.backward()
         optimizer.step()
 
+
 class TestTTTEngine2D:
     """Test cases for the TTT engine with 1D features."""
+
     def test_inference_train(self, feat_input):
         model = MLP()
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")

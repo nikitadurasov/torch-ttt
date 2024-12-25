@@ -1,8 +1,10 @@
 import torch
 from copy import deepcopy
 
-def run_ttt(engine, inputs, optimizer_name="adam", num_steps=10, lr=1e-4, copy=False, engine_kwargs=None):
 
+def run_ttt(
+    engine, inputs, optimizer_name="adam", num_steps=10, lr=1e-4, copy=False, engine_kwargs=None
+):
     running_engine = deepcopy(engine) if copy else engine
 
     engine_kwargs = engine_kwargs or {}

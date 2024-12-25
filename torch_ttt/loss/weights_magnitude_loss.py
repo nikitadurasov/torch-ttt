@@ -1,22 +1,21 @@
-import torch 
+import torch
 from torch_ttt.loss.base_loss import BaseLoss
 from torch_ttt.loss_registry import LossRegistry
 
+
 @LossRegistry.register("weights_magnitude")
 class WeightsMagnitudeLoss(BaseLoss):
-
     def __init__(self):
         super().__init__()
         self.quantile = 0.95
 
     def __call__(self, model, inputs):
-        
         # Step 2: Collect all model weights
         all_weights = []
         for param in model.parameters():
             if param.requires_grad:  # Focus only on trainable parameters
                 all_weights.append(param.view(-1))  # Flatten weights into a 1D tensor
-        
+
         # Concatenate all weights into a single tensor
         all_weights = torch.cat(all_weights)
 

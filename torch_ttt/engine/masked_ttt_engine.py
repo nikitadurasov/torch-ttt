@@ -1,13 +1,13 @@
 from torch_ttt.engine.base_engine import BaseEngine
 from torch_ttt.engine_registry import EngineRegistry
 
-__all__ = ["ActMADEngine"]
+__all__ = ["MaskedTTTEngine"]
 
 
 # TODO: add cuda support
-@EngineRegistry.register("actmad")
-class ActMADEngine(BaseEngine):
-    """**ActMAD** approach: multi-level pixel-wise feature alignment."""
+@EngineRegistry.register("masked_ttt")
+class MaskedTTTEngine(BaseEngine):
+    """Masked autoencoders-based **test-time training** approach."""
 
     def __init__(self):
         super().__init__()
