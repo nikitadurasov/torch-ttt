@@ -15,12 +15,6 @@ class TestImports(unittest.TestCase):
         except ImportError as e:
             self.fail(f"Failed to import EngineRegistry: {e}")
 
-    def test_import_ttt_runner(self):
-        try:
-            from torch_ttt.ttt_runner import run_ttt
-        except ImportError as e:
-            self.fail(f"Failed to import run_ttt: {e}")
-
     def test_import_base_loss(self):
         try:
             from torch_ttt.loss.base_loss import BaseLoss

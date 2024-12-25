@@ -1,5 +1,9 @@
 [project.optional-dependencies]
 
+def = [
+    "pytest-cov",
+]
+
 docs = [
     "sphinxawesome-theme==6.0.0b1",
     "sphinx-gallery==0.18.0",
@@ -19,3 +23,8 @@ exclude = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.coverage.run]
+branch = true
+source = ["torch_ttt"]
+omit = ["*/tests/*"]
