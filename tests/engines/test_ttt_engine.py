@@ -23,52 +23,52 @@ class MLP(torch.nn.Module):
 def feat_input() -> torch.Tensor:
     return torch.ones((10, 1, 10, 10))
 
-
+@pytest.mark.parametrize("device", ["cpu", "cuda"] if torch.cuda.is_available() else ["cpu"])
 class TestTTTEngine1D:
     """Test cases for the TTT engine with 1D features."""
 
-    def test_inference_train(self, feat_input):
-        model = MLP()
+    def test_inference_train(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "fc1")
         ttt_engine.train()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
-    def test_inference_eval(self, feat_input):
-        model = MLP()
+    def test_inference_eval(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "fc1")
         ttt_engine.eval()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
-    def test_backward(self, feat_input):
-        model = MLP()
+    def test_backward(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "fc1")
         optimizer = torch.optim.Adam(ttt_engine.parameters(), lr=1e-4)
         ttt_engine.train()
-        _, loss_ttt = ttt_engine(feat_input)
+        _, loss_ttt = ttt_engine(feat_input.to(device))
         loss_ttt.backward()
         optimizer.step()
 
-
+@pytest.mark.parametrize("device", ["cpu", "cuda"] if torch.cuda.is_available() else ["cpu"])
 class TestTTTEngine2D:
     """Test cases for the TTT engine with 1D features."""
 
-    def test_inference_train(self, feat_input):
-        model = MLP()
+    def test_inference_train(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")
         ttt_engine.train()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
-    def test_inference_eval(self, feat_input):
-        model = MLP()
+    def test_inference_eval(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")
         ttt_engine.eval()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
-    def test_backward(self, feat_input):
-        model = MLP()
+    def test_backward(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("ttt")(model, "cv1")
         optimizer = torch.optim.Adam(ttt_engine.parameters(), lr=1e-4)
         ttt_engine.train()
-        _, loss_ttt = ttt_engine(feat_input)
+        _, loss_ttt = ttt_engine(feat_input.to(device))
         loss_ttt.backward()
         optimizer.step()

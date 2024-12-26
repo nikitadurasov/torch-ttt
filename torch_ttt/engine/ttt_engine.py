@@ -120,16 +120,19 @@ class TTTEngine(BaseEngine):
     # Follow this code (expand case): https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27
     def __rotate_inputs(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
         """Rotate the input images by 0, 90, 180, and 270 degrees."""
+        device = next(self.model.parameters()).device
         rotated_image_90 = F.rotate(inputs, 90)
         rotated_image_180 = F.rotate(inputs, 180)
         rotated_image_270 = F.rotate(inputs, 270)
         batch_size = inputs.shape[0]
         inputs = torch.cat([inputs, rotated_image_90, rotated_image_180, rotated_image_270], dim=0)
         labels = [0] * batch_size + [1] * batch_size + [2] * batch_size + [3] * batch_size
-        return inputs, torch.tensor(labels, dtype=torch.long)
+        return inputs.to(device), torch.tensor(labels, dtype=torch.long).to(device)
 
     def __build_angle_head(self, features) -> torch.nn.Module:
         """Build the angle head."""
+        device = next(self.model.parameters()).device
+
         # See original implementation: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/test_helpers.py#L33C10-L33C39
         if len(features.shape) == 2:
             return torch.nn.Sequential(
@@ -138,7 +141,7 @@ class TTTEngine(BaseEngine):
                 torch.nn.Linear(16, 8),
                 torch.nn.ReLU(),
                 torch.nn.Linear(8, 4),
-            )
+            ).to(device)
 
         # See original implementation: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/models/SSHead.py#L29
         elif len(features.shape) == 4:
@@ -148,7 +151,7 @@ class TTTEngine(BaseEngine):
                 torch.nn.Conv2d(16, 4, 3),
                 torch.nn.AdaptiveAvgPool2d((1, 1)),  # Global Average Pooling
                 torch.nn.Flatten(),
-            )
+            ).to(device)
 
         elif len(features.shape) == 5:  # For 3D inputs (batch, channels, depth, height, width)
             return torch.nn.Sequential(
@@ -157,7 +160,7 @@ class TTTEngine(BaseEngine):
                 torch.nn.Conv3d(16, 4, kernel_size=3),
                 torch.nn.AdaptiveAvgPool3d((1, 1, 1)),  # Global Average Pooling
                 torch.nn.Flatten(),
-            )
+            ).to(device)
 
         raise ValueError("Invalid input tensor shape.")
 
