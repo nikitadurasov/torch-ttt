@@ -111,7 +111,6 @@ class TTTPPEngine(BaseEngine):
 
         # Validate that the target module is a Linear layer
         if not isinstance(self.target_module, torch.nn.Linear):
-            print("Here")
             raise TypeError(
                 f"Module '{features_layer_name}' is expected to be of type 'torch.nn.Linear', "
                 f"but found type '{type(self.target_module).__name__}'."
@@ -130,6 +129,7 @@ class TTTPPEngine(BaseEngine):
 
     def __build_contrastive_head(self, features) -> torch.nn.Module:
         """Build the angle head."""
+        device = next(self.model.parameters()).device
         if len(features.shape) == 2:
             return torch.nn.Sequential(
                 torch.nn.Linear(features.shape[1], 16),
@@ -137,7 +137,7 @@ class TTTPPEngine(BaseEngine):
                 torch.nn.Linear(16, 16),
                 torch.nn.ReLU(),
                 torch.nn.Linear(16, 16),
-            )
+            ).to(device)
 
         raise ValueError("Features should be 2D tensor.")
 
@@ -224,7 +224,7 @@ class TTTPPEngine(BaseEngine):
         """Extract and compute reference statistics for features and contrastive features.
 
         Args:
-            dataloader (DataLoader): The dataloader for extracting features.
+            dataloader (DataLoader): The dataloader used for extracting features. It can return tuples of tensors, with the first element expected to be the input tensor.
 
         Raises:
             ValueError: If the dataloader is empty or features have mismatched dimensions.
@@ -236,11 +236,12 @@ class TTTPPEngine(BaseEngine):
         c_feat_stack = []
 
         with torch.no_grad():
+            device = next(self.model.parameters()).device
             for sample in dataloader:
                 if len(sample) < 1:
                     raise ValueError("Dataloader returned an empty batch.")
 
-                inputs = sample[0]
+                inputs = sample[0].to(device)
                 with self.__capture_hook() as features_hook:
                     _ = self.model(inputs)
                     feat = features_hook.output
@@ -260,16 +261,16 @@ class TTTPPEngine(BaseEngine):
         feat_cov = self.__covariance(feat_all)
         feat_mean = feat_all.mean(dim=0)
 
-        self.reference_cov = feat_cov
-        self.reference_mean = feat_mean
+        self.reference_cov = feat_cov.to(device)
+        self.reference_mean = feat_mean.to(device)
 
         # compute contrastive features statistics
         feat_all = torch.cat(c_feat_stack)
         feat_cov = self.__covariance(feat_all)
         feat_mean = feat_all.mean(dim=0)
 
-        self.reference_c_cov = feat_cov
-        self.reference_c_mean = feat_mean
+        self.reference_c_cov = feat_cov.to(device)
+        self.reference_c_mean = feat_mean.to(device)
 
     @contextmanager
     def __capture_hook(self):
