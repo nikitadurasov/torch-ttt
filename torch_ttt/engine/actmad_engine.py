@@ -16,7 +16,7 @@ class ActMADEngine(BaseEngine):
     
     Args:
         model (torch.nn.Module): Model to be trained with TTT.
-        features_layer_names (List[str]): The names of the layers from which the features are extracted.
+        features_layer_names (List[str] | str): List of layer names to be used for feature alignment.
         optimization_parameters (dict): The optimization parameters for the engine.
 
     :Example:
@@ -57,13 +57,16 @@ class ActMADEngine(BaseEngine):
     def __init__(
             self,
             model: torch.nn.Module,
-            features_layer_names: List[str],
+            features_layer_names: List[str] | str,
             optimization_parameters: Dict[str, Any] = {},
     ):
         super().__init__()
         self.model = model
         self.features_layer_names = features_layer_names
         self.optimization_parameters = optimization_parameters
+
+        if isinstance(features_layer_names, str):
+            self.features_layer_names = [features_layer_names]
 
         # TODO: rewrite this
         self.target_modules = []
@@ -76,6 +79,9 @@ class ActMADEngine(BaseEngine):
                     break
             if not layer_exists:
                 raise ValueError(f"Layer {layer_name} does not exist in the model.")
+            
+        self.reference_mean = None
+        self.reference_var = None
 
     def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
         """Forward pass of the model.
@@ -86,7 +92,29 @@ class ActMADEngine(BaseEngine):
         Returns:
             Returns the current model prediction and rotation loss value.
         """
-        raise NotImplementedError
+        with self.__capture_hook() as features_hooks:
+            outputs = self.model(inputs)
+            features = [hook.output.cpu() for hook in features_hooks]
+
+        # don't compute loss during training
+        if self.training:
+            return outputs, 0
+        
+        if self.reference_var is None or self.reference_mean is None:
+            raise ValueError(
+                "Reference statistics are not computed. Please call `compute_statistics` method."
+            )
+
+        l1_loss = torch.nn.L1Loss(reduction='mean')
+        features_means = [torch.mean(feature, dim=0) for feature in features]
+        features_vars = [torch.var(feature, dim=0) for feature in features]
+
+        loss = 0
+        for i in range(len(self.target_modules)):
+            loss += l1_loss(features_means[i], self.reference_mean[i])
+            loss += l1_loss(features_vars[i], self.reference_var[i])
+
+        return outputs, loss
     
     def compute_statistics(self, dataloader: DataLoader) -> None:
         """Extract and compute reference statistics for features.
@@ -97,7 +125,28 @@ class ActMADEngine(BaseEngine):
         Raises:
             ValueError: If the dataloader is empty or features have mismatched dimensions.
         """
-        raise NotImplementedError
+        
+        self.model.eval()
+        feat_stack = [[] for _ in self.target_modules]
+
+        # TODO: compute variance in more memory efficient way
+        with torch.no_grad():
+            device = next(self.model.parameters()).device
+            for sample in dataloader:
+                if len(sample) < 1:
+                    raise ValueError("Dataloader returned an empty batch.")
+                
+                inputs = sample[0].to(device)
+                with self.__capture_hook() as features_hooks:
+                    _ = self.model(inputs)
+                    features = [hook.output.cpu() for hook in features_hooks]
+
+                for i, feature in enumerate(features):
+                    feat_stack[i].append(feature)
+
+        # Compute mean and variance 
+        self.reference_mean = [torch.mean(torch.cat(feat), dim=0).to(device) for feat in feat_stack]
+        self.reference_var = [torch.var(torch.cat(feat), dim=0).to(device) for feat in feat_stack]
 
     @contextmanager
     def __capture_hook(self):
@@ -110,14 +159,16 @@ class ActMADEngine(BaseEngine):
             def hook(self, module, input, output):
                 self.output = output
 
+        hook_handels = []
         features_hooks = []
         for module in self.target_modules:
             hook = OutputHook()
             features_hooks.append(hook)
-            module.register_forward_hook(hook.hook)
+            hook_handle = module.register_forward_hook(hook.hook)
+            hook_handels.append(hook_handle)
 
         try:
             yield features_hooks
         finally:
-            for hook in features_hooks:
+            for hook in hook_handels:
                 hook.remove()
