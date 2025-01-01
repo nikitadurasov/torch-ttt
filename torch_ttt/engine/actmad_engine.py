@@ -94,7 +94,7 @@ class ActMADEngine(BaseEngine):
         """
         with self.__capture_hook() as features_hooks:
             outputs = self.model(inputs)
-            features = [hook.output.cpu() for hook in features_hooks]
+            features = [hook.output for hook in features_hooks]
 
         # don't compute loss during training
         if self.training:
@@ -111,6 +111,7 @@ class ActMADEngine(BaseEngine):
 
         loss = 0
         for i in range(len(self.target_modules)):
+            print(features_means[i].device, self.reference_mean[i].device)
             loss += l1_loss(features_means[i], self.reference_mean[i])
             loss += l1_loss(features_vars[i], self.reference_var[i])
 
