@@ -24,36 +24,37 @@ class MLP(torch.nn.Module):
 def feat_input() -> torch.Tensor:
     return torch.ones((10, 1, 10, 10))
 
+@pytest.mark.parametrize("device", ["cpu", "cuda"] if torch.cuda.is_available() else ["cpu"])
 class TestTTTPPEngin1D:
 
-    def test_inference_train_one_layer(self, feat_input):
-        model = MLP()
+    def test_inference_train_one_layer(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("actmad")(model, "fc1")
         ttt_engine.train()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
-    def test_inference_train_two_layer(self, feat_input):
-        model = MLP()
+    def test_inference_train_two_layer(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("actmad")(model, ["fc1", "fc2"])
         ttt_engine.train()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
-    def test_inference_eval_without_statistics(self, feat_input):
-        model = MLP()
+    def test_inference_eval_without_statistics(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("actmad")(model, "fc1")
         ttt_engine.eval()
 
         # Expect an exception when calling ttt_engine with feat_input
         with pytest.raises(ValueError) as excinfo:
-            ttt_engine(feat_input)
+            ttt_engine(feat_input.to(device))
 
         assert (
             "Reference statistics are not computed. Please call `compute_statistics` method."
             in str(excinfo.value)
         )
 
-    def test_inference_eval_with_statistics(self, feat_input):
-        model = MLP()
+    def test_inference_eval_with_statistics(self, feat_input, device):
+        model = MLP().to(device)
         ttt_engine = EngineRegistry.get_engine("actmad")(model, "fc1")
 
         dataset = TensorDataset(feat_input)
@@ -61,7 +62,7 @@ class TestTTTPPEngin1D:
 
         ttt_engine.compute_statistics(dataloader)
         ttt_engine.eval()
-        ttt_engine(feat_input)
+        ttt_engine(feat_input.to(device))
 
 class TestTTTPPEngin2D:
 

@@ -1,5 +1,5 @@
 import torch
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Union
 from contextlib import contextmanager
 
 from torch.utils.data import DataLoader
@@ -57,7 +57,7 @@ class ActMADEngine(BaseEngine):
     def __init__(
             self,
             model: torch.nn.Module,
-            features_layer_names: List[str] | str,
+            features_layer_names: Union[List[str], str],
             optimization_parameters: Dict[str, Any] = {},
     ):
         super().__init__()
