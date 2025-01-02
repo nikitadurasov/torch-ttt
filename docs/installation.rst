@@ -20,11 +20,11 @@ Create a new conda environment and activate it:
 
 .. parsed-literal::
 
-    conda create -n ttt python=3.10
-    conda activate ttt
+    conda create -n torch_ttt python=3.10
+    conda activate torch_ttt
 
 Install the package using pip in editable mode:
 
 .. parsed-literal::
 
-    pip install .
+    pip install .e

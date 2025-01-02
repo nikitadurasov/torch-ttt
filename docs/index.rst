@@ -55,13 +55,26 @@ Welcome to |torch-ttt|, a comprehensive and easy-to-use Python library for apply
 
 |torch-ttt| includes implementations of various TTT methods, from classical TTT :cite:`sun19ttt`, to more recent methods like TTT++ :cite:`liu2021ttt++` and ActMAD :cite:`mirza2023actmad`. The full list of the implemented methods can be found in a table below.
 
-+-----------+-------------+------+---------------------+
-| Method    | Class       | Year | Reference           |
-+===========+=============+======+=====================+
-| TTT       | Class Name  | 2018 | :cite:`sun19ttt`    |
-+-----------+-------------+------+---------------------+
-| TTT++     | Class Name  | 2021 | :cite:`liu2021ttt++`|
-+-----------+-------------+------+---------------------+
++-----------+--------------------------+------+------------------------+
+| Method    | Engine Class             | Year | Reference              |
++===========+==========================+======+========================+
+| TTT       | :class:`TTTEngine`       | 2018 | :cite:`sun19ttt`       |
++-----------+--------------------------+------+------------------------+
+| TTT++     | :class:`TTTPPEngine`     | 2021 | :cite:`liu2021ttt++`   |
++-----------+--------------------------+------+------------------------+
+| ActMAD    | :class:`ActMADEngine`    | 2023 | :cite:`mirza2023actmad`|
++-----------+--------------------------+------+------------------------+
+
+.. +-----------+-----------------------------------------------------+------+------------------------+
+.. | Method    | Engine Class                                        | Year | Reference              |
+.. +===========+=====================================================+======+========================+
+.. | TTT       | :class:`torch_ttt.engine.ttt_engine.TTTEngine`      | 2018 | :cite:`sun19ttt`       |
+.. +-----------+-----------------------------------------------------+------+------------------------+
+.. | TTT++     | :class:`torch_ttt.engine.ttt_pp_engine.TTTPPEngine` | 2021 | :cite:`liu2021ttt++`   |
+.. +-----------+-----------------------------------------------------+------+------------------------+
+.. | ActMAD    | :class:`torch_ttt.engine.actmad_engine.ActMADEngine`| 2023 | :cite:`mirza2023actmad`|
+.. +-----------+-----------------------------------------------------+------+------------------------+
+
 
 |torch-ttt| stands out for:
 
