@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to |torch-ttt|'s documentation!
-=====================================
+=================================================
 
 **Deployment & Documentation & Stats & License**
 
@@ -49,7 +49,7 @@ Welcome to |torch-ttt|'s documentation!
 ----
 
 About |torch-ttt|
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Welcome to |torch-ttt|, a comprehensive and easy-to-use Python library for applying *test-time training* methods to your PyTorch models. Whether you're tackling small projects or managing large datasets, |torch-ttt| provides a diverse set of algorithms to accommodate different needs. Our intuitive API seamlessly integrates into existing training / inference pipelines, ensuring smooth and efficient deployment without disrupting your workflow.
 

@@ -20,7 +20,7 @@ The core idea behind this library is that different TTT methods, at a high level
    **Figure 2.** Any TTT method can be abstracted as a black box that computes a self-supervised loss and a model prediction. The self-supervised loss is then used for further optimization to improve model performance.
 
 Training with Engines
------------
+-----------------------
 
 With an easy-to-use API (centered around *Engines*), you can effortlessly implement, experiment with, and incorporate *Test-Time Training* methods into your training and inference pipelines. An Engine encapsulates the logic of a specific TTT method, seamlessly managing both its training and inference processes.
 

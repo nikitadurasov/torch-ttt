@@ -1,17 +1,18 @@
 """
 TTT for Corrupted MNIST
-=====================
+========================
 
 Explore how test-time training can enhance model performance on corrupted MNIST data.
 
 In this tutorial, we will explore how the original image rotation-based `Test-Time Training (TTT) <http://proceedings.mlr.press/v119/sun20b/sun20b.pdf>`_ approach can improve model performance during inference when the data is corrupted by Gaussian noise, using the `torch-ttt <https://github.com/nikitadurasov/torch-ttt>`_ *Engine* functionality.
 
 This notebook is designed to demonstrate how seamlessly test-time training approaches can be integrated through `torch-ttt <https://github.com/nikitadurasov/torch-ttt>`_ into existing training and testing pipelines, while also showcasing the significant performance improvements achievable when applying TTT on corrupted or out-of-distribution data.
+
 """
 
 # %%%
 # Regular Model (without TTT)
-# ~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 # Below, we will start by training regular networks on MNIST data and demonstrate how susceptible it is to noise introduced during testing, resulting in significantly lower accuracy when the noise is present.
 #
@@ -164,7 +165,7 @@ for _ in range(n_epochs):
 test()
 # %%
 # Evaluating on noisy test
-# ^^^^^^^^^^^^^^^^^^^^
+# ^^^^^^^^^^^^^^^^^^^^^^^^^
 #
 # Now, let's add a significant amount of Gaussian noise to our input images, which will make the classification task significantly more challenging. Let's plot how they look.
 #
@@ -195,12 +196,22 @@ with torch.no_grad():
         pbar.set_postfix(acc=accuracy)
 # %%
 # Optimized Model (with TTT)
-# ~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 # Now, let's employ the original `TTT <http://proceedings.mlr.press/v119/sun20b/sun20b.pdf>`_ approach to improve the performance on these noisy inputs. We will use the **TTTEngine** class, which encapsulates the mechanism of TTT's image rotation-based self-supervised loss and gradient optimization during inference.
 from torch_ttt.engine.ttt_engine import TTTEngine  # noqa: E402
 
 # %%
+# 
+# Test-Time Training (TTT) leverages a self-supervised auxiliary task to adapt the model to unseen data distributions during inference. In the training phase, the model is optimized jointly for the primary task and the auxiliary self-supervised task—here, image rotation prediction. This involves learning shared features through the encoder :math:`\theta_{e}` while the supervised task head :math:`\theta_{m}` (e.g. classification) and self-supervised task head :math:`\theta_{s}` (rotation angle prediction) specialize in their respective objectives.
+#
+# During testing, the model adapts to out-of-distribution or noisy inputs by optimizing the self-supervised loss associated with the auxiliary task, enhancing the robustness of primary task predictions. Our **TTTEngine** class seamlessly implements both the training and testing behaviors of the TTT framework, as demonstrated in the example below. For a more detailed overview of the TTT framework, please refer to the original `webpage <https://yueatsprograms.github.io/ttt/home.html>`_ and `slides <https://yueatsprograms.github.io/ttt/slides.pdf>`_.
+#
+# .. figure:: ../../_static/images/examples/ttt_schema.png
+#   :alt: map to buried treasure
+#
+#   *Figure 1.* **Overview of the TTT framework.** It incorporates joint training with supervised and self-supervised tasks (image rotation prediction) and adapts during inference by optimizing the self-supervised loss for improved predictions.
+#
 # Training and Testing
 # ^^^^^^^^^^^^^^^^^^^^
 #
@@ -240,7 +251,7 @@ test()  # evaluation of the underlying model, without TTT
 
 # %%
 # Evaluating on noisy test
-# ^^^^^^^^^^^^^^^^^^^^
+# ^^^^^^^^^^^^^^^^^^^^^^^^^
 #
 # Now, let's return to the evaluation of the model on inputs when a significant amount of noise is introduced. As we saw before, the original model demonstrated a significant drop in accuracy when the noise was introduced. Below, we will enable test-time training optimization during inference (which happens in the engine's `.forward()` function) to improve the model's performance on noisy images. As with the training, we will mark the changed/modified lines with a comment.
 def ttt_test():
