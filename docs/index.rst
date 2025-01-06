@@ -11,39 +11,12 @@ Welcome to |torch-ttt|'s documentation!
 .. raw:: html
 
    <div style="display: flex; gap: 0px; flex-wrap: wrap; align-items: center;">
-       <a href="https://pypi.org/project/pyod/" style="margin: 2px;">
-           <img src="https://img.shields.io/pypi/v/pyod.svg?color=brightgreen" alt="PyPI version" style="display: inline-block; margin: 0;">
+       <a href="https://github.com/nikitadurasov/torch-ttt/stargazers" style="margin: 2px;">
+           <img src="https://img.shields.io/github/stars/nikitadurasov/torch-ttt.svg?style=social" alt="GitHub stars" style="display: inline-block; margin: 0;">
        </a>
-       <a href="https://anaconda.org/conda-forge/pyod" style="margin: 2px;">
-           <img src="https://anaconda.org/conda-forge/pyod/badges/version.svg" alt="Anaconda version" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://pyod.readthedocs.io/en/latest/?badge=latest" style="margin: 2px;">
-           <img src="https://readthedocs.org/projects/pyod/badge/?version=latest" alt="Documentation status" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://github.com/yzhao062/pyod/stargazers" style="margin: 2px;">
-           <img src="https://img.shields.io/github/stars/yzhao062/pyod.svg" alt="GitHub stars" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://github.com/yzhao062/pyod/network" style="margin: 2px;">
-           <img src="https://img.shields.io/github/forks/yzhao062/pyod.svg?color=blue" alt="GitHub forks" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://pepy.tech/project/pyod" style="margin: 2px;">
-           <img src="https://pepy.tech/badge/pyod" alt="Downloads" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://github.com/yzhao062/pyod/actions/workflows/testing.yml" style="margin: 2px;">
-           <img src="https://github.com/yzhao062/pyod/actions/workflows/testing.yml/badge.svg" alt="Testing" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://coveralls.io/github/yzhao062/pyod" style="margin: 2px;">
-           <img src="https://coveralls.io/repos/github/yzhao062/pyod/badge.svg" alt="Coverage Status" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://codeclimate.com/github/yzhao062/Pyod/maintainability" style="margin: 2px;">
-           <img src="https://api.codeclimate.com/v1/badges/bdc3d8d0454274c753c4/maintainability" alt="Maintainability" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://github.com/yzhao062/pyod/blob/master/LICENSE" style="margin: 2px;">
-           <img src="https://img.shields.io/github/license/yzhao062/pyod.svg" alt="License" style="display: inline-block; margin: 0;">
-       </a>
-       <a href="https://github.com/Minqi824/ADBench" style="margin: 2px;">
-           <img src="https://img.shields.io/badge/ADBench-benchmark_results-pink" alt="Benchmark" style="display: inline-block; margin: 0;">
-       </a>
+        <a href="https://github.com/nikitadurasov/torch-ttt/network" style="margin: 2px;">
+            <img src="https://img.shields.io/github/forks/nikitadurasov/torch-ttt.svg?color=blue" alt="GitHub forks" style="display: inline-block; margin: 0;">
+        </a>
    </div>
 
 ----
@@ -119,16 +92,16 @@ Welcome to |torch-ttt|, a comprehensive and easy-to-use Python library for apply
 
    api
 
-.. raw:: html
+.. .. raw:: html
 
-   <br><br>
+..    <br><br>
 
-Indices and tables
-=======================
+.. Indices and tables
+.. =======================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
 
 .. rubric:: References
 
