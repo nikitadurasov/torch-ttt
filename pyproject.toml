@@ -18,6 +18,10 @@ docs = [
     "sphinxcontrib-bibtex"
 ]
 
+all = [
+    "torch_ttt[dev, docs]"
+]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
@@ -28,6 +32,10 @@ exclude = [
     "__pycache__",   # Ignore Python's cache directories
     "notebooks"
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["torch_ttt*"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
