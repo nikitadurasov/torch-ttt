@@ -27,8 +27,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          cd docs
-          make html SPHINXOPTS="-D sphinx_gallery_conf.plot_gallery=False"
+          cd docs && make clean && make html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
