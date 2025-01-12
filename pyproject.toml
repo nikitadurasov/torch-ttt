@@ -15,7 +15,8 @@ dev = [
 docs = [
     "sphinxawesome-theme==6.0.0b1",
     "sphinx-gallery==0.18.0",
-    "sphinxcontrib-bibtex"
+    "sphinxcontrib-bibtex",
+    "matplotlib"
 ]
 
 all = [
