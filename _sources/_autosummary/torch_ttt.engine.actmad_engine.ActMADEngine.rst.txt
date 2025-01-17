@@ -1,0 +1,6 @@
+﻿torch\_ttt.engine.actmad\_engine.ActMADEngine
+=============================================
+
+.. currentmodule:: torch_ttt.engine.actmad_engine
+
+.. autoclass:: ActMADEngine

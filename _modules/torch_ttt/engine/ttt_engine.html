@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" data-content_root="../../../" x-data="{activeSection: ''}">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#030711" />
+  
+  <title>torch_ttt.engine.ttt_engine | torch&lt;span style=&#39;border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));&#39;&gt;-ttt&lt;/span&gt;</title>
+  <meta property="og:title" content="torch_ttt.engine.ttt_engine | torch&lt;span style=&#39;border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));&#39;&gt;-ttt&lt;/span&gt;" />
+  <meta name="twitter:title" content="torch_ttt.engine.ttt_engine | torch&lt;span style=&#39;border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));&#39;&gt;-ttt&lt;/span&gt;" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=82fa1eaf" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/theme.css?v=c0d22bf5" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=e94e7b49" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/docstring_custom.css?v=c7bea3a5" />
+  <link rel="icon" href="../../../_static/torch-ttt.svg" />
+  <link rel="search" title="Search" href="../../../search.html" />
+  <link rel="index" title="Index" href="../../../genindex.html" />
+</head>
+
+<body x-data="{ showSidebar: false, showScrollTop: false }"
+  class="min-h-screen font-sans antialiased bg-background text-foreground" :class="{ 'overflow-hidden': showSidebar }">
+  <div x-cloak x-show="showSidebar"
+    class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden"
+    @click.self="showSidebar = false"></div><div id="page" class="relative flex flex-col min-h-screen"><a href="#content"
+      class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100">
+      Skip to content
+    </a><header class="sticky top-0 z-40 w-full border-b shadow-sm border-border bg-background/90 backdrop-blur"><div class="container flex items-center h-14">
+    <div class="hidden mr-4 md:flex">
+      <a href="../../../index.html" class="flex items-center mr-6">
+        <img height="24" width="24" class="mr-2 dark:invert" src="../../../_static/torch-ttt.svg" alt="Logo" /><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));'>-ttt</span></span>
+      </a></div><button
+      class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden"
+      type="button" @click="showSidebar = true">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" aria-hidden="true"
+        fill="currentColor">
+        <path
+          d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z" />
+      </svg>
+      <span class="sr-only">Toggle navigation menu</span>
+    </button>
+    <div class="flex items-center justify-between flex-1 gap-2 sm:gap-4 md:justify-end">
+      <div class="flex-1 w-full md:w-auto md:flex-none"><form id="searchbox"
+      action="../../../search.html"
+      method="get"
+      class="relative flex items-center group"
+      @keydown.k.window.meta="$refs.search.focus()">
+  <input x-ref="search"
+          name="q"
+          id="search-input"
+          type="search"
+          aria-label="Search the docs"
+          placeholder="Search ..."
+          class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" />
+  <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+    <span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
+      </div>
+      <nav class="flex items-center gap-1">
+        <a href="https://github.com/nikitadurasov/torch-ttt" title="Visit repository on GitHub" rel="noopener nofollow">
+          <div
+            class="inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9">
+            <svg height="26px" style="margin-top:-2px;display:inline" viewBox="0 0 45 44" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M22.477.927C10.485.927.76 10.65.76 22.647c0 9.596 6.223 17.736 14.853 20.608 1.087.2 1.483-.47 1.483-1.047 0-.516-.019-1.881-.03-3.693-6.04 1.312-7.315-2.912-7.315-2.912-.988-2.51-2.412-3.178-2.412-3.178-1.972-1.346.149-1.32.149-1.32 2.18.154 3.327 2.24 3.327 2.24 1.937 3.318 5.084 2.36 6.321 1.803.197-1.403.759-2.36 1.379-2.903-4.823-.548-9.894-2.412-9.894-10.734 0-2.37.847-4.31 2.236-5.828-.224-.55-.969-2.759.214-5.748 0 0 1.822-.584 5.972 2.226 1.732-.482 3.59-.722 5.437-.732 1.845.01 3.703.25 5.437.732 4.147-2.81 5.967-2.226 5.967-2.226 1.185 2.99.44 5.198.217 5.748 1.392 1.517 2.232 3.457 2.232 5.828 0 8.344-5.078 10.18-9.916 10.717.779.67 1.474 1.996 1.474 4.021 0 2.904-.027 5.247-.027 5.96 0 .58.392 1.256 1.493 1.044C37.981 40.375 44.2 32.24 44.2 22.647c0-11.996-9.726-21.72-21.722-21.72" fill="currentColor"/></svg>
+          </div>
+        </a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+    <div class="flex-1"><div
+        class="container md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside id="left-sidebar"
+  class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full overflow-y-auto border-r border-border md:sticky"
+  :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }">
+
+    <a href="../../../index.html" class="justify-start text-sm md:!hidden bg-background">
+      <img height="16" width="16" class="mr-2 dark:invert" src="../../../_static/torch-ttt.svg" alt="Logo" /><span class="font-bold text-clip whitespace-nowrap">torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));'>-ttt</span></span>
+    </a>
+
+    <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0">
+      <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/01_mnist_TTT.html">TTT for Corrupted MNIST</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/torch_ttt.engine.ttt_engine.TTTEngine.html">torch_ttt.engine.ttt_engine.TTTEngine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/torch_ttt.engine.ttt_pp_engine.TTTPPEngine.html">torch_ttt.engine.ttt_pp_engine.TTTPPEngine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/torch_ttt.engine.masked_ttt_engine.MaskedTTTEngine.html">torch_ttt.engine.masked_ttt_engine.MaskedTTTEngine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../_autosummary/torch_ttt.engine.actmad_engine.ActMADEngine.html">torch_ttt.engine.actmad_engine.ActMADEngine</a></li>
+</ul>
+</li>
+</ul>
+
+</nav>
+      </div>
+    </div>
+    <button type="button" @click="showSidebar = false"
+      class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 96 960 960" fill="currentColor"
+        stroke="none" class="h-4 w-4">
+        <path
+          d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z" />
+      </svg>
+    </button>
+  </aside>
+          <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs"
+     class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+  <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground"
+     href="../../../index.html">
+    <span class="hidden md:inline">torch<span style='border-radius: 4px; color: white; text-justify: none; padding: 0px 2px 0px 2px; background: linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -moz-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3)); -webkit-linear-gradient(45deg , rgba(140, 82, 255, 0.3), rgba(255, 145, 77, 0.3));'>-ttt</span></span>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         height="18"
+         width="18"
+         viewBox="0 96 960 960"
+         aria-label="Home"
+         fill="currentColor"
+         stroke="none"
+         class="md:hidden">
+      <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z" />
+    </svg>
+  </a>
+  
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap"
+       href="../../index.html">Module code</a>
+    
+<div class="mr-1">/</div><span aria-current="page"
+        class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">torch_ttt.engine.ttt_engine</span>
+</nav>
+
+    <div id="content" role="main">
+      <h1>Source code for torch_ttt.engine.ttt_engine</h1><div class="highlight"><pre>
+<span></span><code><span id="line-1"><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+</span><span id="line-2"><span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+</span><span id="line-3"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+</span><span id="line-4"><span class="kn">from</span><span class="w"> </span><span class="nn">torchvision.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+</span><span id="line-5"><span class="kn">from</span><span class="w"> </span><span class="nn">torch_ttt.engine.base_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseEngine</span>
+</span><span id="line-6"><span class="kn">from</span><span class="w"> </span><span class="nn">torch_ttt.engine_registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">EngineRegistry</span>
+</span><span id="line-7">
+</span><span id="line-8"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TTTEngine&quot;</span><span class="p">]</span>
+</span><span id="line-9">
+</span><span id="line-10">
+<div class="viewcode-block" id="TTTEngine">
+<a class="viewcode-back" href="../../../_autosummary/torch_ttt.engine.ttt_engine.TTTEngine.html#torch_ttt.engine.ttt_engine.TTTEngine">[docs]</a>
+</span><span id="line-11"><span class="nd">@EngineRegistry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;ttt&quot;</span><span class="p">)</span>
+</span><span id="line-12"><span class="k">class</span><span class="w"> </span><span class="nc">TTTEngine</span><span class="p">(</span><span class="n">BaseEngine</span><span class="p">):</span>
+</span><span id="line-13"><span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Original image rotation-based **test-time training** approach.</span>
+</span><span id="line-14">
+</span><span id="line-15"><span class="sd">    Args:</span>
+</span><span id="line-16"><span class="sd">        model (torch.nn.Module): Model to be trained with TTT.</span>
+</span><span id="line-17"><span class="sd">        features_layer_name (str): The name of the layer from which the features are extracted.</span>
+</span><span id="line-18"><span class="sd">        angle_head (torch.nn.Module, optional): The head that predicts the rotation angles.</span>
+</span><span id="line-19"><span class="sd">        angle_criterion (torch.nn.Module, optional): The loss function for the rotation angles.</span>
+</span><span id="line-20"><span class="sd">        optimization_parameters (dict): The optimization parameters for the engine.</span>
+</span><span id="line-21">
+</span><span id="line-22"><span class="sd">    Warning:</span>
+</span><span id="line-23"><span class="sd">        The module with the name :attr:`features_layer_name` should be present in the model.</span>
+</span><span id="line-24">
+</span><span id="line-25"><span class="sd">    Note:</span>
+</span><span id="line-26"><span class="sd">        :attr:`angle_head` and :attr:`angle_criterion` are optional arguments and can be user-defined. If not provided, the default shallow head and the :meth:`torch.nn.CrossEntropyLoss()` loss function are used.</span>
+</span><span id="line-27">
+</span><span id="line-28"><span class="sd">    Note:</span>
+</span><span id="line-29"><span class="sd">        The original `TTT &lt;https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27&gt;`_ implementation uses a four-class classification task, corresponding to image rotations of 0°, 90°, 180°, and 270°.</span>
+</span><span id="line-30">
+</span><span id="line-31"><span class="sd">    :Example:</span>
+</span><span id="line-32">
+</span><span id="line-33"><span class="sd">    .. code-block:: python</span>
+</span><span id="line-34">
+</span><span id="line-35"><span class="sd">        from torch_ttt.engine.ttt_engine import TTTEngine</span>
+</span><span id="line-36">
+</span><span id="line-37"><span class="sd">        model = MyModel()</span>
+</span><span id="line-38"><span class="sd">        engine = TTTEngine(model, &quot;fc1&quot;)</span>
+</span><span id="line-39"><span class="sd">        optimizer = torch.optim.Adam(engine.parameters(), lr=1e-4)</span>
+</span><span id="line-40">
+</span><span id="line-41"><span class="sd">        # Training</span>
+</span><span id="line-42"><span class="sd">        engine.train()</span>
+</span><span id="line-43"><span class="sd">        for inputs, labels in train_loader:</span>
+</span><span id="line-44"><span class="sd">            optimizer.zero_grad()</span>
+</span><span id="line-45"><span class="sd">            outputs, loss_ttt = engine(inputs)</span>
+</span><span id="line-46"><span class="sd">            loss = criterion(outputs, labels) + alpha * loss_ttt</span>
+</span><span id="line-47"><span class="sd">            loss.backward()</span>
+</span><span id="line-48"><span class="sd">            optimizer.step()</span>
+</span><span id="line-49">
+</span><span id="line-50"><span class="sd">        # Inference</span>
+</span><span id="line-51"><span class="sd">        engine.eval()</span>
+</span><span id="line-52"><span class="sd">        for inputs, labels in test_loader:</span>
+</span><span id="line-53"><span class="sd">            output, loss_ttt = engine(inputs)</span>
+</span><span id="line-54">
+</span><span id="line-55"><span class="sd">    Reference:</span>
+</span><span id="line-56">
+</span><span id="line-57"><span class="sd">        &quot;Test-Time Training with Self-Supervision for Generalization under Distribution Shifts&quot;, Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt</span>
+</span><span id="line-58">
+</span><span id="line-59"><span class="sd">        Paper link: http://proceedings.mlr.press/v119/sun20b/sun20b.pdf</span>
+</span><span id="line-60"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="line-61">
+</span><span id="line-62">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span id="line-63">        <span class="bp">self</span><span class="p">,</span>
+</span><span id="line-64">        <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+</span><span id="line-65">        <span class="n">features_layer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="line-66">        <span class="n">angle_head</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="line-67">        <span class="n">angle_criterion</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="line-68">        <span class="n">optimization_parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+</span><span id="line-69">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="line-70">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="line-71">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+</span><span id="line-72">        <span class="bp">self</span><span class="o">.</span><span class="n">angle_head</span> <span class="o">=</span> <span class="n">angle_head</span>
+</span><span id="line-73">        <span class="bp">self</span><span class="o">.</span><span class="n">angle_criterion</span> <span class="o">=</span> <span class="n">angle_criterion</span> <span class="k">if</span> <span class="n">angle_criterion</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+</span><span id="line-74">        <span class="bp">self</span><span class="o">.</span><span class="n">features_layer_name</span> <span class="o">=</span> <span class="n">features_layer_name</span>
+</span><span id="line-75">        <span class="bp">self</span><span class="o">.</span><span class="n">optimization_parameters</span> <span class="o">=</span> <span class="n">optimization_parameters</span>
+</span><span id="line-76">
+</span><span id="line-77">        <span class="c1"># Locate and store the reference to the target module</span>
+</span><span id="line-78">        <span class="bp">self</span><span class="o">.</span><span class="n">target_module</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="line-79">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">named_modules</span><span class="p">():</span>
+</span><span id="line-80">            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">features_layer_name</span><span class="p">:</span>
+</span><span id="line-81">                <span class="bp">self</span><span class="o">.</span><span class="n">target_module</span> <span class="o">=</span> <span class="n">module</span>
+</span><span id="line-82">                <span class="k">break</span>
+</span><span id="line-83">
+</span><span id="line-84">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_module</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="line-85">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Module &#39;</span><span class="si">{</span><span class="n">features_layer_name</span><span class="si">}</span><span class="s2">&#39; not found in the model.&quot;</span><span class="p">)</span>
+</span><span id="line-86">
+</span><span id="line-87">    <span class="k">def</span><span class="w"> </span><span class="nf">ttt_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+</span><span id="line-88"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward pass of the model.</span>
+</span><span id="line-89">
+</span><span id="line-90"><span class="sd">        Args:</span>
+</span><span id="line-91"><span class="sd">            inputs (torch.Tensor): Input tensor.</span>
+</span><span id="line-92">
+</span><span id="line-93"><span class="sd">        Returns:</span>
+</span><span id="line-94"><span class="sd">            Returns the current model prediction and rotation loss value.</span>
+</span><span id="line-95"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="line-96">
+</span><span id="line-97">        <span class="c1"># has to dynamically register a hook to get the features and then remove it</span>
+</span><span id="line-98">        <span class="c1"># need this for deepcopying the engine, see https://github.com/pytorch/pytorch/pull/103001</span>
+</span><span id="line-99">        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capture_hook</span><span class="p">()</span> <span class="k">as</span> <span class="n">features_hook</span><span class="p">:</span>
+</span><span id="line-100">            <span class="c1"># Original forward pass, intact</span>
+</span><span id="line-101">            <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</span><span id="line-102">
+</span><span id="line-103">            <span class="c1"># See original code: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/main.py#L69</span>
+</span><span id="line-104">            <span class="n">rotated_inputs</span><span class="p">,</span> <span class="n">rotation_labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__rotate_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</span><span id="line-105">            <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">rotated_inputs</span><span class="p">)</span>
+</span><span id="line-106">            <span class="n">features</span> <span class="o">=</span> <span class="n">features_hook</span><span class="o">.</span><span class="n">output</span>
+</span><span id="line-107">
+</span><span id="line-108">        <span class="c1"># Build angle head if not already built</span>
+</span><span id="line-109">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_head</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="line-110">            <span class="bp">self</span><span class="o">.</span><span class="n">angle_head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__build_angle_head</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+</span><span id="line-111">
+</span><span id="line-112">        <span class="c1"># move angle head to the same device as the features</span>
+</span><span id="line-113">        <span class="bp">self</span><span class="o">.</span><span class="n">angle_head</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+</span><span id="line-114">        <span class="n">angles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_head</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+</span><span id="line-115">
+</span><span id="line-116">        <span class="c1"># Compute rotation loss</span>
+</span><span id="line-117">        <span class="n">rotation_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_criterion</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">rotation_labels</span><span class="p">)</span>
+</span><span id="line-118">        <span class="k">return</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">rotation_loss</span>
+</span><span id="line-119">
+</span><span id="line-120">    <span class="c1"># Follow this code (expand case): https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/rotation.py#L27</span>
+</span><span id="line-121">    <span class="k">def</span><span class="w"> </span><span class="nf">__rotate_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+</span><span id="line-122"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotate the input images by 0, 90, 180, and 270 degrees.&quot;&quot;&quot;</span>
+</span><span id="line-123">        <span class="n">device</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span>
+</span><span id="line-124">        <span class="n">rotated_image_90</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+</span><span id="line-125">        <span class="n">rotated_image_180</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+</span><span id="line-126">        <span class="n">rotated_image_270</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="mi">270</span><span class="p">)</span>
+</span><span id="line-127">        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="line-128">        <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">inputs</span><span class="p">,</span> <span class="n">rotated_image_90</span><span class="p">,</span> <span class="n">rotated_image_180</span><span class="p">,</span> <span class="n">rotated_image_270</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="line-129">        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">batch_size</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">batch_size</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">batch_size</span> <span class="o">+</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">batch_size</span>
+</span><span id="line-130">        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="line-131">
+</span><span id="line-132">    <span class="k">def</span><span class="w"> </span><span class="nf">__build_angle_head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+</span><span id="line-133"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the angle head.&quot;&quot;&quot;</span>
+</span><span id="line-134">        <span class="n">device</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span>
+</span><span id="line-135">
+</span><span id="line-136">        <span class="c1"># See original implementation: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/utils/test_helpers.py#L33C10-L33C39</span>
+</span><span id="line-137">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="line-138">            <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+</span><span id="line-139">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">),</span>
+</span><span id="line-140">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="line-141">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span><span id="line-142">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="line-143">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span><span id="line-144">            <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="line-145">
+</span><span id="line-146">        <span class="c1"># See original implementation: https://github.com/yueatsprograms/ttt_cifar_release/blob/acac817fb7615850d19a8f8e79930240c9afe8b5/models/SSHead.py#L29</span>
+</span><span id="line-147">        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+</span><span id="line-148">            <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+</span><span id="line-149">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span><span id="line-150">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="line-151">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+</span><span id="line-152">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>  <span class="c1"># Global Average Pooling</span>
+</span><span id="line-153">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+</span><span id="line-154">            <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="line-155">
+</span><span id="line-156">        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># For 3D inputs (batch, channels, depth, height, width)</span>
+</span><span id="line-157">            <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+</span><span id="line-158">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+</span><span id="line-159">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="line-160">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+</span><span id="line-161">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool3d</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>  <span class="c1"># Global Average Pooling</span>
+</span><span id="line-162">                <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+</span><span id="line-163">            <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="line-164">
+</span><span id="line-165">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid input tensor shape.&quot;</span><span class="p">)</span>
+</span><span id="line-166">
+</span><span id="line-167">    <span class="nd">@contextmanager</span>
+</span><span id="line-168">    <span class="k">def</span><span class="w"> </span><span class="nf">__capture_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="line-169"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager to capture features via a forward hook.&quot;&quot;&quot;</span>
+</span><span id="line-170">
+</span><span id="line-171">        <span class="k">class</span><span class="w"> </span><span class="nc">OutputHook</span><span class="p">:</span>
+</span><span id="line-172">            <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="line-173">                <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="line-174">
+</span><span id="line-175">            <span class="k">def</span><span class="w"> </span><span class="nf">hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+</span><span id="line-176">                <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">output</span>
+</span><span id="line-177">
+</span><span id="line-178">        <span class="n">features_hook</span> <span class="o">=</span> <span class="n">OutputHook</span><span class="p">()</span>
+</span><span id="line-179">        <span class="n">hook_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_module</span><span class="o">.</span><span class="n">register_forward_hook</span><span class="p">(</span><span class="n">features_hook</span><span class="o">.</span><span class="n">hook</span><span class="p">)</span>
+</span><span id="line-180">
+</span><span id="line-181">        <span class="k">try</span><span class="p">:</span>
+</span><span id="line-182">            <span class="k">yield</span> <span class="n">features_hook</span>
+</span><span id="line-183">        <span class="k">finally</span><span class="p">:</span>
+</span><span id="line-184">            <span class="n">hook_handle</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span></div>
+
+</span></code></pre></div>
+    </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
+</div></div>
+          </main>
+        </div>
+      </div><footer class="py-6 border-t border-border md:py-0">
+    <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+      <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+        <p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, Nikita Durasov&nbsp;Built with <a class="font-medium underline underline-offset-4"
+    href="https://www.sphinx-doc.org"
+    rel="noreferrer">Sphinx 8.1.3</a></p>
+</div>
+</div>
+</footer>
+    </div>
+    
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer="defer" src="../../../_static/theme.js?v=e14a7d8a"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    
+</body>
+
+</html>

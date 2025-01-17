@@ -1,0 +1,93 @@
+/* .header-logo {
+    background-image: url("../images/torch-ttt.png");
+    background-size: 220px 40px;
+    height: 40px;
+    width: 220px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+} */
+
+
+img[alt="Logo"] {
+    width: 40px;  /* or whatever size you want */
+    height: auto;  /* to maintain aspect ratio */
+}
+
+.caption-text {
+    text-align: left; /* Align text to the left */
+    display: block;   /* Ensures the span behaves like a block element */
+    width: 100%;      /* Makes it occupy the full width */
+    margin: 0;        /* Removes any default margins */
+    padding: 0;       /* Removes any unwanted padding */
+}
+
+.wy-nav-top {
+    background-color: #FF8C38 !important;
+}
+.wy-side-nav-search {
+    background-color: #FF8C38 !important;
+}
+
+
+div[class^="highlight"] a {
+    background-color: #E6E6E6;
+}
+
+div[class^="highlight"] a:hover {
+    background-color: #ABECFC;
+}
+
+.rst-versions {
+    position: relative;
+}
+.rst-versions.shift-up {
+    overflow-y: visible;
+}
+
+a[class^="sphx-glr-backref-module-"] {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+a.sphx-glr-backref-module-sphinx_gallery {
+    text-decoration: underline;
+    background-color: #E6E6E6;
+}
+
+.anim-state label {
+    display: inline-block;
+}
+
+.sphx-glr-download-link-note, /* Download link note in header */
+.binder-badge,                /* Binder launch badge in footer */
+.lite-badge,                  /* Lite launch badge in footer */
+.sphx-glr-download-jupyter,   /* Download Jupyter notebook link in footer */
+.sphx-glr-download-python,    /* Download Python script link in footer */
+.sphx-glr-download-zip        /* Download zipped link in footer */
+{
+  display: none;
+}
+
+
+/* Make the citation label inline */
+.citation .label {
+    display: inline; /* Force label to stay inline */
+}
+
+/* Remove margin or padding around the <p> inside citation */
+.citation > p {
+    display: inline; /* Make paragraph inline to stay with the label */
+    margin: 0; /* Remove unnecessary margins */
+    padding: 0;
+}
+
+/* Ensure spacing between label and text */
+.citation .label::after {
+    content: " "; /* Add space after the label */
+}
+
+/* Add space between bibliography entries */
+.citation {
+    margin-top: 1em; /* Adjust the spacing as needed */
+}
