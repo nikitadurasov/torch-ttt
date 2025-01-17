@@ -69,6 +69,12 @@ Let's start with some global parameters that we will use later.
 
 
 
+
+
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 49-51
 
 We will employ a fairly shallow and simple model, consisting only of several convolutional and linear layers with LeakyReLU activations.
@@ -96,6 +102,12 @@ We will employ a fairly shallow and simple model, consisting only of several con
             x = self.activation(self.fc2(x))
             x = self.fc3(x)
             return F.log_softmax(x, dim=-1)
+
+
+
+
+
+
 
 
 
@@ -140,6 +152,53 @@ For training and testing data, we will use the standard train/test MNIST split, 
         shuffle=False,
     )
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+    Failed to download (trying next):
+    <urlopen error [Errno 110] Connection timed out>
+
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to ./MNIST/MNIST/raw/train-images-idx3-ubyte.gz
+      0%|          | 0.00/9.91M [00:00<?, ?B/s]    100%|██████████| 9.91M/9.91M [00:00<00:00, 121MB/s]
+    Extracting ./MNIST/MNIST/raw/train-images-idx3-ubyte.gz to ./MNIST/MNIST/raw
+
+    Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+    Failed to download (trying next):
+    <urlopen error [Errno 110] Connection timed out>
+
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw/train-labels-idx1-ubyte.gz
+      0%|          | 0.00/28.9k [00:00<?, ?B/s]    100%|██████████| 28.9k/28.9k [00:00<00:00, 4.79MB/s]
+    Extracting ./MNIST/MNIST/raw/train-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw
+
+    Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+    Failed to download (trying next):
+    <urlopen error [Errno 110] Connection timed out>
+
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to ./MNIST/MNIST/raw/t10k-images-idx3-ubyte.gz
+      0%|          | 0.00/1.65M [00:00<?, ?B/s]    100%|██████████| 1.65M/1.65M [00:00<00:00, 44.1MB/s]
+    Extracting ./MNIST/MNIST/raw/t10k-images-idx3-ubyte.gz to ./MNIST/MNIST/raw
+
+    Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+    Failed to download (trying next):
+    <urlopen error [Errno 110] Connection timed out>
+
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz
+    Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw/t10k-labels-idx1-ubyte.gz
+      0%|          | 0.00/4.54k [00:00<?, ?B/s]    100%|██████████| 4.54k/4.54k [00:00<00:00, 7.03MB/s]
+    Extracting ./MNIST/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw
+
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 106-108
 
 First, let's visualize 10 random images from the clean MNIST test set. As we can see, the digits are clearly visible and distinctive.
@@ -156,6 +215,17 @@ First, let's visualize 10 random images from the clean MNIST test set. As we can
         ax.axis("off")
     plt.tight_layout()
     plt.show()
+
+
+
+.. image-sg:: /auto_examples/images/sphx_glr_01_mnist_TTT_001.png
+   :alt: 01 mnist TTT
+   :srcset: /auto_examples/images/sphx_glr_01_mnist_TTT_001.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 .. GENERATED FROM PYTHON SOURCE LINES 116-121
 
@@ -209,6 +279,12 @@ Following a rather simple training pipeline, we train our model for one epoch an
 
 
 
+
+
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 161-163
 
 As we can see below, our model achieves roughly 95% accuracy on both the train and test sets.
@@ -221,6 +297,19 @@ As we can see below, our model achieves roughly 95% accuracy on both the train a
     for _ in range(n_epochs):
         train()
     test()
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Train:   0%|          | 0/938 [00:00<?, ?it/s]    Train:  16%|█▌        | 150/938 [00:02<00:13, 59.65it/s]    Train:  32%|███▏      | 300/938 [00:05<00:10, 59.93it/s]    Train:  48%|████▊     | 450/938 [00:07<00:08, 59.86it/s]    Train:  64%|██████▍   | 600/938 [00:10<00:05, 60.07it/s]    Train:  80%|███████▉  | 750/938 [00:12<00:03, 60.19it/s]    Train:  96%|█████████▌| 900/938 [00:14<00:00, 60.09it/s]    Train:  96%|█████████▌| 900/938 [00:15<00:00, 60.09it/s, acc=0.946]    Train:  96%|█████████▌| 900/938 [00:15<00:00, 57.62it/s, acc=0.946]
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:00<00:01, 168.13it/s]    Test:  64%|██████▍   | 200/313 [00:01<00:00, 168.32it/s]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 168.24it/s]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 168.24it/s, acc=95.6]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 161.42it/s, acc=95.6]
+
+
+
 
 .. GENERATED FROM PYTHON SOURCE LINES 167-172
 
@@ -242,6 +331,17 @@ Now, let's add a significant amount of Gaussian noise to our input images, which
         ax.axis("off")
     plt.tight_layout()
     plt.show()
+
+
+
+.. image-sg:: /auto_examples/images/sphx_glr_01_mnist_TTT_002.png
+   :alt: 01 mnist TTT
+   :srcset: /auto_examples/images/sphx_glr_01_mnist_TTT_002.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 .. GENERATED FROM PYTHON SOURCE LINES 181-183
 
@@ -267,6 +367,18 @@ Since the model was not exposed to this type of corruption during training, thes
             accuracy = 100.0 * correct / len(test_loader.dataset)
             pbar.set_postfix(acc=accuracy)
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:00<00:01, 160.11it/s]    Test:  64%|██████▍   | 200/313 [00:01<00:00, 149.55it/s]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 153.32it/s]    Test:  96%|█████████▌| 300/313 [00:02<00:00, 153.32it/s, acc=54.4]    Test:  96%|█████████▌| 300/313 [00:02<00:00, 147.34it/s, acc=54.4]
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 198-202
 
 Optimized Model (with TTT)
@@ -279,6 +391,12 @@ Now, let's employ the original `TTT <http://proceedings.mlr.press/v119/sun20b/su
 .. code-block:: Python
 
     from torch_ttt.engine.ttt_engine import TTTEngine  # noqa: E402
+
+
+
+
+
+
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 205-218
@@ -328,6 +446,12 @@ We need to add only a couple of new lines to our original training and testing f
 
 
 
+
+
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 246-247
 
 As shown below, the accuracy of the underlying model remains the same for both the original training and the TTT-based training.
@@ -339,6 +463,19 @@ As shown below, the accuracy of the underlying model remains the same for both t
     for _ in range(n_epochs):
         train()
     test()  # evaluation of the underlying model, without TTT
+
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Train:   0%|          | 0/938 [00:00<?, ?it/s]    Train:  16%|█▌        | 150/938 [00:06<00:34, 23.04it/s]    Train:  32%|███▏      | 300/938 [00:13<00:27, 23.08it/s]    Train:  48%|████▊     | 450/938 [00:19<00:21, 23.09it/s]    Train:  64%|██████▍   | 600/938 [00:26<00:14, 23.01it/s]    Train:  80%|███████▉  | 750/938 [00:32<00:08, 23.01it/s]    Train:  96%|█████████▌| 900/938 [00:39<00:01, 23.03it/s]    Train:  96%|█████████▌| 900/938 [00:40<00:01, 23.03it/s, acc=0.946]    Train:  96%|█████████▌| 900/938 [00:40<00:01, 22.12it/s, acc=0.946]
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:00<00:01, 168.56it/s]    Test:  64%|██████▍   | 200/313 [00:01<00:00, 168.59it/s]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 168.48it/s]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 168.48it/s, acc=94.6]    Test:  96%|█████████▌| 300/313 [00:01<00:00, 161.64it/s, acc=94.6]
+
 
 
 
@@ -370,6 +507,12 @@ Now, let's return to the evaluation of the model on inputs when a significant am
 
 
 
+
+
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 274-275
 
 The engine's *optimization_parameters* dictionary stores the parameters used for optimization. Below, we modify the number of optimization steps to demonstrate how accuracy improves as the number of steps increases. As shown, the TTT engine with 3 optimization iterations improves the accuracy from ~54% for the original model by almost 15%, and further improvements can be achieved with more optimization steps.
@@ -383,6 +526,19 @@ The engine's *optimization_parameters* dictionary stores the parameters used for
     ttt_test()
 
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    ### No optimization ###
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:00<00:01, 136.08it/s]    Test:  64%|██████▍   | 200/313 [00:01<00:00, 136.07it/s]    Test:  96%|█████████▌| 300/313 [00:02<00:00, 136.05it/s]    Test:  96%|█████████▌| 300/313 [00:02<00:00, 136.05it/s, acc=54.6]    Test:  96%|█████████▌| 300/313 [00:02<00:00, 130.52it/s, acc=54.6]
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 280-284
 
 .. code-block:: Python
@@ -390,6 +546,19 @@ The engine's *optimization_parameters* dictionary stores the parameters used for
     print("### Number of optimization steps: 1 ###")
     engine.optimization_parameters["num_steps"] = 1
     ttt_test()
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    ### Number of optimization steps: 1 ###
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:02<00:05, 39.62it/s]    Test:  64%|██████▍   | 200/313 [00:05<00:02, 39.68it/s]    Test:  96%|█████████▌| 300/313 [00:07<00:00, 39.72it/s]    Test:  96%|█████████▌| 300/313 [00:07<00:00, 39.72it/s, acc=60.1]    Test:  96%|█████████▌| 300/313 [00:07<00:00, 38.10it/s, acc=60.1]
+
+
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 285-289
@@ -401,6 +570,19 @@ The engine's *optimization_parameters* dictionary stores the parameters used for
     ttt_test()
 
 
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    ### Number of optimization steps: 2 ###
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:04<00:09, 23.33it/s]    Test:  64%|██████▍   | 200/313 [00:08<00:04, 23.18it/s]    Test:  96%|█████████▌| 300/313 [00:12<00:00, 23.24it/s]    Test:  96%|█████████▌| 300/313 [00:13<00:00, 23.24it/s, acc=64]    Test:  96%|█████████▌| 300/313 [00:13<00:00, 22.30it/s, acc=64]
+
+
+
+
 .. GENERATED FROM PYTHON SOURCE LINES 290-293
 
 .. code-block:: Python
@@ -408,6 +590,24 @@ The engine's *optimization_parameters* dictionary stores the parameters used for
     print("### Number of optimization steps: 3 ###")
     engine.optimization_parameters["num_steps"] = 3
     ttt_test()
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    ### Number of optimization steps: 3 ###
+    Test:   0%|          | 0/313 [00:00<?, ?it/s]    Test:  32%|███▏      | 100/313 [00:06<00:12, 16.63it/s]    Test:  64%|██████▍   | 200/313 [00:12<00:06, 16.62it/s]    Test:  96%|█████████▌| 300/313 [00:18<00:00, 16.57it/s]    Test:  96%|█████████▌| 300/313 [00:18<00:00, 16.57it/s, acc=67]    Test:  96%|█████████▌| 300/313 [00:18<00:00, 15.92it/s, acc=67]
+
+
+
+
+
+.. rst-class:: sphx-glr-timing
+
+   **Total running time of the script:** (10 minutes 43.115 seconds)
 
 
 .. _sphx_glr_download_auto_examples_01_mnist_TTT.py:
