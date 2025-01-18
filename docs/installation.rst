@@ -1,30 +1,18 @@
 Installation
 ============
 
-.. role:: bash(code)
-    :language: bash
+**torch-ttt** requires Python 3.10 or greater. Install the desired PyTorch version in your environment.
 
-Now, you can install the project from source; PyPI support will be added soon.
+Latest version
+""""""""""""""
 
-From source
------------
+For the latest development version, you can run:
 
-Assuming PyTorch is already installed, clone the repository:
+.. code-block:: console
 
-.. parsed-literal::
+    pip install git+https://github.com/nikitadurasov/torch-ttt.git
 
-    git clone https://github.com/nikitadurasov/torch-ttt.git
-    cd torch-ttt
+From PyPI
+"""""""""
 
-Create a new conda environment and activate it:
-
-.. parsed-literal::
-
-    conda create -n torch_ttt python=3.10
-    conda activate torch_ttt
-
-Install the package using pip in editable mode:
-
-.. parsed-literal::
-
-    pip install .e
+While we do not support PyPI yet, support is expected very soon!

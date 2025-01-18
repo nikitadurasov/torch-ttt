@@ -2,6 +2,17 @@
   <img src="docs/source/_static/images/torch-ttt.png" alt="TorchTTT" width="500">
 </div>
 
+<div style="display: flex; gap: 0px; flex-wrap: wrap; align-items: center;">
+    <a href="https://github.com/nikitadurasov/torch-ttt/stargazers" style="margin: 2px;">
+        <img src="https://img.shields.io/github/stars/nikitadurasov/torch-ttt.svg?style=social" alt="GitHub stars" style="display: inline-block; margin: 0;">
+    </a>
+    <a href="https://github.com/nikitadurasov/torch-ttt/network" style="margin: 2px;">
+        <img src="https://img.shields.io/github/forks/nikitadurasov/torch-ttt.svg?color=blue" alt="GitHub forks" style="display: inline-block; margin: 0;">
+    </a>
+    <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml" style="margin: 2px;">
+        <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml/badge.svg" alt="Documentation" style="display: inline-block; margin: 0;">
+    </a>
+</div>
 
 # torch-ttt
 

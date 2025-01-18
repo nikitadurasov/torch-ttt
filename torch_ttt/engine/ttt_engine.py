@@ -56,7 +56,7 @@ class TTTEngine(BaseEngine):
 
         "Test-Time Training with Self-Supervision for Generalization under Distribution Shifts", Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt
 
-        Paper link: http://proceedings.mlr.press/v119/sun20b/sun20b.pdf
+        Paper link: `PDF <http://proceedings.mlr.press/v119/sun20b/sun20b.pdf>`_
     """
 
     def __init__(

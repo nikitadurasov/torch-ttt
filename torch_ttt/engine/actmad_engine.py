@@ -50,8 +50,7 @@ class ActMADEngine(BaseEngine):
 
         "ActMAD: Activation Matching to Align Distributions for Test-Time Training", M. Jehanzeb Mirza, Pol Jane Soneira, Wei Lin, Mateusz Kozinski, Horst Possegger, Horst Bischof
 
-        Paper link: https://openaccess.thecvf.com/content/CVPR2023/papers/Mirza_ActMAD_Activation_Matching_To_Align_Distributions_for_Test-Time-Training_CVPR_2023_paper.pdf
-
+        Paper link: `PDF <https://proceedings.neurips.cc/paper/2021/hash/b618c3210e934362ac261db280128c22-Abstract.html>`_
     """
 
     def __init__(
