@@ -199,51 +199,6 @@ to download the full example code.</p>
 </span><span id="line-31"><span class="p">)</span>
 </span></code></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
-</span><span id="line-2">Failed to download (trying next):
-</span><span id="line-3">&lt;urlopen error [Errno 110] Connection timed out&gt;
-</span><span id="line-4">
-</span><span id="line-5">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz
-</span><span id="line-6">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to ./MNIST/MNIST/raw/train-images-idx3-ubyte.gz
-</span><span id="line-7">
-</span><span id="line-8">  0%|          | 0.00/9.91M [00:00&lt;?, ?B/s]
-</span><span id="line-9">100%|██████████| 9.91M/9.91M [00:00&lt;00:00, 121MB/s]
-</span><span id="line-10">Extracting ./MNIST/MNIST/raw/train-images-idx3-ubyte.gz to ./MNIST/MNIST/raw
-</span><span id="line-11">
-</span><span id="line-12">Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
-</span><span id="line-13">Failed to download (trying next):
-</span><span id="line-14">&lt;urlopen error [Errno 110] Connection timed out&gt;
-</span><span id="line-15">
-</span><span id="line-16">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz
-</span><span id="line-17">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw/train-labels-idx1-ubyte.gz
-</span><span id="line-18">
-</span><span id="line-19">  0%|          | 0.00/28.9k [00:00&lt;?, ?B/s]
-</span><span id="line-20">100%|██████████| 28.9k/28.9k [00:00&lt;00:00, 4.79MB/s]
-</span><span id="line-21">Extracting ./MNIST/MNIST/raw/train-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw
-</span><span id="line-22">
-</span><span id="line-23">Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
-</span><span id="line-24">Failed to download (trying next):
-</span><span id="line-25">&lt;urlopen error [Errno 110] Connection timed out&gt;
-</span><span id="line-26">
-</span><span id="line-27">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz
-</span><span id="line-28">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to ./MNIST/MNIST/raw/t10k-images-idx3-ubyte.gz
-</span><span id="line-29">
-</span><span id="line-30">  0%|          | 0.00/1.65M [00:00&lt;?, ?B/s]
-</span><span id="line-31">100%|██████████| 1.65M/1.65M [00:00&lt;00:00, 44.1MB/s]
-</span><span id="line-32">Extracting ./MNIST/MNIST/raw/t10k-images-idx3-ubyte.gz to ./MNIST/MNIST/raw
-</span><span id="line-33">
-</span><span id="line-34">Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
-</span><span id="line-35">Failed to download (trying next):
-</span><span id="line-36">&lt;urlopen error [Errno 110] Connection timed out&gt;
-</span><span id="line-37">
-</span><span id="line-38">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz
-</span><span id="line-39">Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw/t10k-labels-idx1-ubyte.gz
-</span><span id="line-40">
-</span><span id="line-41">  0%|          | 0.00/4.54k [00:00&lt;?, ?B/s]
-</span><span id="line-42">100%|██████████| 4.54k/4.54k [00:00&lt;00:00, 7.03MB/s]
-</span><span id="line-43">Extracting ./MNIST/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./MNIST/MNIST/raw
-</span></code></pre></div>
-</div>
 <p>First, let’s visualize 10 random images from the clean MNIST test set. As we can see, the digits are clearly visible and distinctive.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">images</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">test_loader</span><span class="p">))</span>
 </span><span id="line-2"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -254,7 +209,7 @@ to download the full example code.</p>
 </span><span id="line-7"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
-<img alt="01 mnist TTT" class="sphx-glr-single-img" src="../_images/sphx_glr_01_mnist_TTT_001.png" srcset="../_images/sphx_glr_01_mnist_TTT_001.png"/></section>
+</section>
 <section id="training-and-testing">
 <h3>Training and Testing<a @click.prevent="window.navigator.clipboard.writeText($el.href); $el.setAttribute('data-tooltip', 'Copied!'); setTimeout(() =&gt; $el.setAttribute('data-tooltip', 'Copy link to this element'), 2000)" aria-label="Copy link to this element" class="headerlink" data-tooltip="Copy link to this element" href="#training-and-testing" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#training-and-testing'"><span>#</span></a></h3>
 <p>Following a rather simple training pipeline, we train our model for one epoch and then evaluate it on the test set.</p>
@@ -303,24 +258,6 @@ to download the full example code.</p>
 </span><span id="line-3"><span class="n">test</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Train:   0%|          | 0/938 [00:00&lt;?, ?it/s]
-</span><span id="line-2">Train:  16%|█▌        | 150/938 [00:02&lt;00:13, 59.65it/s]
-</span><span id="line-3">Train:  32%|███▏      | 300/938 [00:05&lt;00:10, 59.93it/s]
-</span><span id="line-4">Train:  48%|████▊     | 450/938 [00:07&lt;00:08, 59.86it/s]
-</span><span id="line-5">Train:  64%|██████▍   | 600/938 [00:10&lt;00:05, 60.07it/s]
-</span><span id="line-6">Train:  80%|███████▉  | 750/938 [00:12&lt;00:03, 60.19it/s]
-</span><span id="line-7">Train:  96%|█████████▌| 900/938 [00:14&lt;00:00, 60.09it/s]
-</span><span id="line-8">Train:  96%|█████████▌| 900/938 [00:15&lt;00:00, 60.09it/s, acc=0.946]
-</span><span id="line-9">Train:  96%|█████████▌| 900/938 [00:15&lt;00:00, 57.62it/s, acc=0.946]
-</span><span id="line-10">
-</span><span id="line-11">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-12">Test:  32%|███▏      | 100/313 [00:00&lt;00:01, 168.13it/s]
-</span><span id="line-13">Test:  64%|██████▍   | 200/313 [00:01&lt;00:00, 168.32it/s]
-</span><span id="line-14">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 168.24it/s]
-</span><span id="line-15">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 168.24it/s, acc=95.6]
-</span><span id="line-16">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 161.42it/s, acc=95.6]
-</span></code></pre></div>
-</div>
 </section>
 <section id="evaluating-on-noisy-test">
 <h3>Evaluating on noisy test<a @click.prevent="window.navigator.clipboard.writeText($el.href); $el.setAttribute('data-tooltip', 'Copied!'); setTimeout(() =&gt; $el.setAttribute('data-tooltip', 'Copy link to this element'), 2000)" aria-label="Copy link to this element" class="headerlink" data-tooltip="Copy link to this element" href="#evaluating-on-noisy-test" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#evaluating-on-noisy-test'"><span>#</span></a></h3>
@@ -335,7 +272,7 @@ to download the full example code.</p>
 </span><span id="line-8"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
-<img alt="01 mnist TTT" class="sphx-glr-single-img" src="../_images/sphx_glr_01_mnist_TTT_002.png" srcset="../_images/sphx_glr_01_mnist_TTT_002.png"/><p>Since the model was not exposed to this type of corruption during training, these new corrupted inputs can be considered out-of-distribution. As a result, the model shows significantly lower accuracy on these inputs. As we can see below, the accuracy drops from roughly 95% to below 60%.</p>
+<p>Since the model was not exposed to this type of corruption during training, these new corrupted inputs can be considered out-of-distribution. As a result, the model shows significantly lower accuracy on these inputs. As we can see below, the accuracy drops from roughly 95% to below 60%.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">network</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 </span><span id="line-2"><span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
 </span><span id="line-3"><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
@@ -350,14 +287,6 @@ to download the full example code.</p>
 </span><span id="line-12">
 </span><span id="line-13">        <span class="n">accuracy</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
 </span><span id="line-14">        <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">acc</span><span class="o">=</span><span class="n">accuracy</span><span class="p">)</span>
-</span></code></pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-2">Test:  32%|███▏      | 100/313 [00:00&lt;00:01, 160.11it/s]
-</span><span id="line-3">Test:  64%|██████▍   | 200/313 [00:01&lt;00:00, 149.55it/s]
-</span><span id="line-4">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 153.32it/s]
-</span><span id="line-5">Test:  96%|█████████▌| 300/313 [00:02&lt;00:00, 153.32it/s, acc=54.4]
-</span><span id="line-6">Test:  96%|█████████▌| 300/313 [00:02&lt;00:00, 147.34it/s, acc=54.4]
 </span></code></pre></div>
 </div>
 </section>
@@ -411,24 +340,6 @@ to download the full example code.</p>
 </span><span id="line-3"><span class="n">test</span><span class="p">()</span>  <span class="c1"># evaluation of the underlying model, without TTT</span>
 </span></code></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Train:   0%|          | 0/938 [00:00&lt;?, ?it/s]
-</span><span id="line-2">Train:  16%|█▌        | 150/938 [00:06&lt;00:34, 23.04it/s]
-</span><span id="line-3">Train:  32%|███▏      | 300/938 [00:13&lt;00:27, 23.08it/s]
-</span><span id="line-4">Train:  48%|████▊     | 450/938 [00:19&lt;00:21, 23.09it/s]
-</span><span id="line-5">Train:  64%|██████▍   | 600/938 [00:26&lt;00:14, 23.01it/s]
-</span><span id="line-6">Train:  80%|███████▉  | 750/938 [00:32&lt;00:08, 23.01it/s]
-</span><span id="line-7">Train:  96%|█████████▌| 900/938 [00:39&lt;00:01, 23.03it/s]
-</span><span id="line-8">Train:  96%|█████████▌| 900/938 [00:40&lt;00:01, 23.03it/s, acc=0.946]
-</span><span id="line-9">Train:  96%|█████████▌| 900/938 [00:40&lt;00:01, 22.12it/s, acc=0.946]
-</span><span id="line-10">
-</span><span id="line-11">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-12">Test:  32%|███▏      | 100/313 [00:00&lt;00:01, 168.56it/s]
-</span><span id="line-13">Test:  64%|██████▍   | 200/313 [00:01&lt;00:00, 168.59it/s]
-</span><span id="line-14">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 168.48it/s]
-</span><span id="line-15">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 168.48it/s, acc=94.6]
-</span><span id="line-16">Test:  96%|█████████▌| 300/313 [00:01&lt;00:00, 161.64it/s, acc=94.6]
-</span></code></pre></div>
-</div>
 </section>
 <section id="id3">
 <h3>Evaluating on noisy test<a @click.prevent="window.navigator.clipboard.writeText($el.href); $el.setAttribute('data-tooltip', 'Copied!'); setTimeout(() =&gt; $el.setAttribute('data-tooltip', 'Copy link to this element'), 2000)" aria-label="Copy link to this element" class="headerlink" data-tooltip="Copy link to this element" href="#id3" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#id3'"><span>#</span></a></h3>
@@ -455,29 +366,9 @@ to download the full example code.</p>
 </span><span id="line-3"><span class="n">ttt_test</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">### No optimization ###
-</span><span id="line-2">
-</span><span id="line-3">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-4">Test:  32%|███▏      | 100/313 [00:00&lt;00:01, 136.08it/s]
-</span><span id="line-5">Test:  64%|██████▍   | 200/313 [00:01&lt;00:00, 136.07it/s]
-</span><span id="line-6">Test:  96%|█████████▌| 300/313 [00:02&lt;00:00, 136.05it/s]
-</span><span id="line-7">Test:  96%|█████████▌| 300/313 [00:02&lt;00:00, 136.05it/s, acc=54.6]
-</span><span id="line-8">Test:  96%|█████████▌| 300/313 [00:02&lt;00:00, 130.52it/s, acc=54.6]
-</span></code></pre></div>
-</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">print</span><span class="p">(</span><span class="s2">"### Number of optimization steps: 1 ###"</span><span class="p">)</span>
 </span><span id="line-2"><span class="n">engine</span><span class="o">.</span><span class="n">optimization_parameters</span><span class="p">[</span><span class="s2">"num_steps"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </span><span id="line-3"><span class="n">ttt_test</span><span class="p">()</span>
-</span></code></pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">### Number of optimization steps: 1 ###
-</span><span id="line-2">
-</span><span id="line-3">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-4">Test:  32%|███▏      | 100/313 [00:02&lt;00:05, 39.62it/s]
-</span><span id="line-5">Test:  64%|██████▍   | 200/313 [00:05&lt;00:02, 39.68it/s]
-</span><span id="line-6">Test:  96%|█████████▌| 300/313 [00:07&lt;00:00, 39.72it/s]
-</span><span id="line-7">Test:  96%|█████████▌| 300/313 [00:07&lt;00:00, 39.72it/s, acc=60.1]
-</span><span id="line-8">Test:  96%|█████████▌| 300/313 [00:07&lt;00:00, 38.10it/s, acc=60.1]
 </span></code></pre></div>
 </div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">print</span><span class="p">(</span><span class="s2">"### Number of optimization steps: 2 ###"</span><span class="p">)</span>
@@ -485,32 +376,11 @@ to download the full example code.</p>
 </span><span id="line-3"><span class="n">ttt_test</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">### Number of optimization steps: 2 ###
-</span><span id="line-2">
-</span><span id="line-3">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-4">Test:  32%|███▏      | 100/313 [00:04&lt;00:09, 23.33it/s]
-</span><span id="line-5">Test:  64%|██████▍   | 200/313 [00:08&lt;00:04, 23.18it/s]
-</span><span id="line-6">Test:  96%|█████████▌| 300/313 [00:12&lt;00:00, 23.24it/s]
-</span><span id="line-7">Test:  96%|█████████▌| 300/313 [00:13&lt;00:00, 23.24it/s, acc=64]
-</span><span id="line-8">Test:  96%|█████████▌| 300/313 [00:13&lt;00:00, 22.30it/s, acc=64]
-</span></code></pre></div>
-</div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">print</span><span class="p">(</span><span class="s2">"### Number of optimization steps: 3 ###"</span><span class="p">)</span>
 </span><span id="line-2"><span class="n">engine</span><span class="o">.</span><span class="n">optimization_parameters</span><span class="p">[</span><span class="s2">"num_steps"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
 </span><span id="line-3"><span class="n">ttt_test</span><span class="p">()</span>
 </span></code></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">### Number of optimization steps: 3 ###
-</span><span id="line-2">
-</span><span id="line-3">Test:   0%|          | 0/313 [00:00&lt;?, ?it/s]
-</span><span id="line-4">Test:  32%|███▏      | 100/313 [00:06&lt;00:12, 16.63it/s]
-</span><span id="line-5">Test:  64%|██████▍   | 200/313 [00:12&lt;00:06, 16.62it/s]
-</span><span id="line-6">Test:  96%|█████████▌| 300/313 [00:18&lt;00:00, 16.57it/s]
-</span><span id="line-7">Test:  96%|█████████▌| 300/313 [00:18&lt;00:00, 16.57it/s, acc=67]
-</span><span id="line-8">Test:  96%|█████████▌| 300/313 [00:18&lt;00:00, 15.92it/s, acc=67]
-</span></code></pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (10 minutes 43.115 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-01-mnist-ttt-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/2e57cf94dbaeadab2146bc20ed9e286c/01_mnist_TTT.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">01_mnist_TTT.ipynb</span></code></a></p>
