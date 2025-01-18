@@ -10,7 +10,7 @@ Welcome to |torch-ttt|'s documentation!
 
 .. raw:: html
 
-   <div style="display: flex; gap: 0px; flex-wrap: wrap; align-items: center;">
+   <div style="gap: 0px; flex-wrap: wrap; align-items: center;">
        <a href="https://github.com/nikitadurasov/torch-ttt/stargazers" style="margin: 2px;">
            <img src="https://img.shields.io/github/stars/nikitadurasov/torch-ttt.svg?style=social" alt="GitHub stars" style="display: inline-block; margin: 0;">
        </a>
