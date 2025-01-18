@@ -2,7 +2,7 @@
   <img src="docs/source/_static/images/torch-ttt.png" alt="TorchTTT" width="500">
 </div>
 
-<div style="display: flex; gap: 0px; flex-wrap: wrap; align-items: center;">
+<!-- <div style="display: flex; gap: 0px; flex-wrap: wrap; align-items: center;">
     <a href="https://github.com/nikitadurasov/torch-ttt/stargazers" style="margin: 2px;">
         <img src="https://img.shields.io/github/stars/nikitadurasov/torch-ttt.svg?style=social" alt="GitHub stars" style="display: inline-block; margin: 0;">
     </a>
@@ -12,7 +12,7 @@
     <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml" style="margin: 2px;">
         <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml/badge.svg" alt="Documentation" style="display: inline-block; margin: 0;">
     </a>
-</div>
+</div> -->
 
 # torch-ttt
 
@@ -33,7 +33,7 @@ This package provides a streamlined API for a variety of TTT methods through *En
 - **Highly modular and standardized** – Each Engine follows the same interface, allowing methods to be used interchangeably, making it easy to find the best fit for your application.  
 - **Minimal changes required** – Enabling a TTT method for your model requires only a few additional lines of code.  
 
-Check out the [Quick Start]() guide or the [API reference]() for a more detailed explanation of how Engines work and their core concepts.
+Check out the [Quick Start](https://torch-ttt.github.io/quickstart.html) guide or the [API reference](https://torch-ttt.github.io/api.html) for a more detailed explanation of how Engines work and their core concepts.
 
 # Installation
 
@@ -49,7 +49,7 @@ While we do not support PyPI yet, support is expected very soon!
 
 # Quickstart
 
-We provide a **Quick Start** guide to help you get started smoothly. Take a look here: [Quick Start]() and see how to integrate TTT methods into your project.
+We provide a **Quick Start** guide to help you get started smoothly. Take a look here: [Quick Start](https://torch-ttt.github.io/quickstart.html) and see how to integrate TTT methods into your project.
 
 <!-- # Implemented TTTs
 
@@ -67,7 +67,7 @@ We provide a **Quick Start** guide to help you get started smoothly. Take a look
 
 # Tutorials
 
-We offer a variety of tutorials to help users gain a deeper understanding of the implemented methods and see how they can be applied to different tasks. Visit the [Tutorials](https://torch-ttt.github.io) page to explore them.
+We offer a variety of tutorials to help users gain a deeper understanding of the implemented methods and see how they can be applied to different tasks. Visit the [Tutorials](https://torch-ttt.github.io/auto_examples/index.html) page to explore them.
 
 # Documentation
 
