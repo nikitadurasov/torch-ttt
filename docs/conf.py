@@ -43,11 +43,14 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx_gallery.gen_gallery",
     "sphinxcontrib.bibtex",
+    "sphinxcontrib.googleanalytics"
     # 'autoapi.extension'
     # "extend_parent",
     # "sphinx_design",
     # "myst_nb",
 ]
+
+googleanalytics_id = "G-NRNXK42JKJ"
 
 autosummary_generate = True
 autosummary_generate_overwrite = True
@@ -62,6 +65,7 @@ sphinx_gallery_conf = {
     "image_scrapers": ("matplotlib",),
     "run_stale_examples": True,
     "filename_pattern": ".*",
+    "copyfile_regex": r"../examples/images/.*\.png",
 }
 
 templates_path = ["_templates"]
