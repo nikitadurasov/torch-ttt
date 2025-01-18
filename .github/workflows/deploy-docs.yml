@@ -30,7 +30,9 @@ jobs:
           cd docs && make clean && make html SPHINXOPTS="-D sphinx_gallery_conf.plot_gallery=False"
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: docs/_build/html
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}  # SSH deploy key for authentication
+          external_repository: torch-ttt/torch-ttt.github.io
+          publish_branch: main  # GitHub Pages repository should serve from main
+          publish_dir: docs/_build/html
