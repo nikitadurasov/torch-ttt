@@ -91,3 +91,12 @@ a.sphx-glr-backref-module-sphinx_gallery {
 .citation {
     margin-top: 1em; /* Adjust the spacing as needed */
 }
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: light) {
+    figure img {
+        background-color: #000000fd !important;  /* Dark gray background */
+        padding: 10px;  /* Optional: Adds spacing around the image */
+        border-radius: 15px;  /* Optional: Adds rounded corners */
+    }
+}
