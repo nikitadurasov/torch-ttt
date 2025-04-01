@@ -30,8 +30,9 @@ class BaseEngine(nn.Module, ABC):
 
         running_engine = deepcopy(self) if copy_model else self
 
+        parameters = filter(lambda p: p.requires_grad, running_engine.model.parameters())
         if optimizer_name == "adam":
-            optimizer = torch.optim.Adam(running_engine.model.parameters(), lr=lr)
+            optimizer = torch.optim.Adam(parameters, lr=lr)
 
         loss = 0 # default value
         for _ in range(num_steps):
