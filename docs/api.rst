@@ -17,3 +17,4 @@ The following classes are part of the `torch_ttt.engine` module:
    ttt_pp_engine.TTTPPEngine
    masked_ttt_engine.MaskedTTTEngine
    actmad_engine.ActMADEngine
+   tent_engine.TentEngine
