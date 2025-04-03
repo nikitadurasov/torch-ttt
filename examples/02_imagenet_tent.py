@@ -13,8 +13,11 @@ print("Uncomment the line below to install torch-ttt if you're running this in C
 # !pip install git+https://github.com/nikitadurasov/torch-ttt.git
 
 # %%
+# Helper Functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 # Data Preparation
-# ----------------
+# ^^^^^^^^^^^^^^^^^^^^
 # We will work with the ImageNet dataset, using both the clean validation set and the corrupted validation set from `ImageNet-C <https://github.com/hendrycks/robustness>`_. The corrupted version includes various types of distortions, such as noise, blur, and weather effects. For this tutorial, we'll focus on a single corruption type: pixelation.
 #
 # Let's start by downloading both the clean and corrupted versions of the ImageNet validation set.
@@ -42,13 +45,17 @@ import json
 import urllib.request
 import matplotlib.pyplot as plt
 from torchvision import models
+from torchvision.models import resnet50, ResNet50_Weights
+
+os.environ['TORCH_HOME'] = './weights'
+os.makedirs(os.environ['TORCH_HOME'], exist_ok=True)
 
 # sphinx_gallery_thumbnail_path = '_static/images/examples/imagenet_corrupted.png'
 
 
 # %%
 # Utility Classes
-# ---------------
+# ^^^^^^^^^^^^^^^^^^^^
 # Later in the tutorial, we will use the following helper classes and functions to track and visualize the progress of our model evaluation on both the clean and corrupted versions of ImageNet, allowing us to observe the differences in performance.
 
 class AverageMeter(object):
@@ -100,8 +107,9 @@ synset_to_name = json.load(urllib.request.urlopen(
 ))
 human_readable_labels = synset_to_name
 
+
 def visualize_samples(dataset):
-    """Vizualize a few samples from the dataset."""
+    """Visualize a few samples from the dataset and return the plot."""
     mean = torch.tensor([0.485, 0.456, 0.406]).view(3,1,1)
     std = torch.tensor([0.229, 0.224, 0.225]).view(3,1,1)
 
@@ -114,11 +122,11 @@ def visualize_samples(dataset):
         ax.set_title(human_readable_labels[label], fontsize=8)
         ax.axis('off')
     plt.tight_layout()
-    plt.show()
+    return fig
 
 # %%
 # Accuracy and Validation Function
-# --------------------------------
+# ^^^^^^^^^^^^^^^^^^^^
 
 def accuracy(output, target, topk=(1,)):
     maxk = max(topk)
@@ -166,8 +174,11 @@ def validate(val_loader, model, criterion, device, ttt=False):
     return float(top1.avg.item())
 
 # %%
+# Clean Data Evaluation
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 # Clean ImageNet Validation Set
-# ---------------
+# ^^^^^^^^^^^^^^^^^^^^
 # First, let's take a look at the clean validation set. We'll visualize a few sample images. As you can see, the images are clear, and it's relatively easy to recognize the objects they depict.
  
 
@@ -186,20 +197,23 @@ visualize_samples(val_dataset)
 
 # %%
 # Pretrained Model Evaluation on Clean Data
-# --------------------------
+# ^^^^^^^^^^^^^^^^^^^^
 # Now, let's load a pretrained ResNet-50 model and evaluate its performance on the clean validation set. We'll use the `torchvision` library to load the model. The resulting accuracy, around 77%, aligns with the official accuracy reported by torchvision.
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 criterion = nn.CrossEntropyLoss().to(device)
-model = models.resnet50(pretrained=True).to(device)
+model = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1).to(device)
 model.eval()
 
 acc_clean = validate(val_loader, model, criterion, device)
 print(f"Clean Accuracy: {acc_clean:.2f}%")
 
 # %%
+# Corrupted Data Evaluation
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 # Corrupted ImageNet Validation Set
-# --------------------------
+# ^^^^^^^^^^^^^^^^^^^^
 # Now, let's take a look at the corrupted validation set. We'll visualize a few sample images as well. As you can see, the images are distorted, making it more difficult to recognize the objects they contain. In this example, we use pixelated images as the corruption type, which, as we'll see, has a significant impact on the model's performance.
 
 corrupted_dataset = datasets.ImageFolder("./imagenet_corrupted", transform=transform)
@@ -209,15 +223,18 @@ visualize_samples(corrupted_dataset)
 
 # %%
 # Pretrained Model Evaluation on Corrupted Data
-# --------------------------
+# ^^^^^^^^^^^^^^^^^^^^
 # Let's evaluate the pretrained model on the corrupted validation set. As expected, the accuracy drops significantly—from 77% to around 20%—indicating that the model struggles to recognize objects in distorted images.
 
 acc_corrupted = validate(corrupted_loader, model, criterion, device)
 print(f"Corrupted Accuracy: {acc_corrupted:.2f}%")
 
 # %%
+# Optimized Inference with torch-ttt
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
 # Test-Time Adaptation with Tent
-# ------------------------------
+# ^^^^^^^^^^^^^^^^^^^^
 # As we've seen, image corruptions can significantly degrade model performance. To tackle this issue, we can use test-time adaptation techniques. In this example, we'll demonstrate how to apply **TENT** (Test-time Entropy Minimization), which adapts the model to the input data during inference.
 #
 # TENT works by minimizing the entropy of the model's predictions, encouraging more confident outputs. During inference, the model produces a probability distribution over the classes. TENT computes the entropy of this distribution, then calculates gradients with respect to the parameters of the normalization layers (e.g., BatchNorm) and updates their affine parameters accordingly. This adaptation is performed for a set number of steps, allowing the model to better align with the current input distribution.
