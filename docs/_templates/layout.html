@@ -1,0 +1,131 @@
+{%- set lang_attr = "en" if language == None else (language|replace('_','-')) -%}
+
+{%- if not embedded and docstitle -%}
+{%- if title == docstitle -%}
+{%- set titlesuffix = "" -%}
+{%- else -%}
+{%- set titlesuffix = " | "|safe + docstitle|e -%}
+{%- endif -%}
+{%- else -%}
+{%- set titlesuffix = "" -%}
+{%- endif -%}
+
+<!DOCTYPE html>
+<html lang="{{ lang_attr }}" data-content_root="{{ content_root|default('', true) }}" x-data="{activeSection: ''}">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#030711" />
+  {{ metatags }}
+
+  {%- block htmltitle %}
+  <title>{{ title|striptags|e if title else docstitle }} | torch-ttt</title>
+  <meta property="og:title" content="{{ title|striptags|e if title else docstitle }}{{ titlesuffix }}" />
+  <meta name="twitter:title" content="{{ title|striptags|e if title else docstitle }}{{ titlesuffix }}" />
+  {%- endblock htmltitle %}
+
+  {#- CSS files #}
+  {%- for css in css_files %}
+  {%- if css|attr("filename") %}
+  {{ css_tag(css) }}
+  {%- else -%}
+  <link rel="stylesheet" href="{{ pathto(css, 1)|e }}" />
+  {%- endif %}
+  {%- endfor %}
+
+  {%- if docsearch %}
+  <link rel="preconnect" href="https://{{ docsearch_app_id }}-dsn.algolia.net" crossorigin="anonymous" />
+  {% endif %}
+
+  {%- if pageurl %}
+  <link rel="canonical" href="{{ pageurl|e }}" />
+  {%- endif %}
+
+  {%- if favicon_url %}
+  <link rel="icon" href="{{ favicon_url|e }}" />
+  {%- endif %}
+
+  {%- block linktags %}
+  {%- if hasdoc('search') and not docsearch %}
+  <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+  {%- endif %}
+
+  {%- if hasdoc('genindex') %}
+  <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+  {%- endif %}
+  {%- if next %}
+  <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+  {%- endif %}
+  {%- if prev %}
+  <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+  {%- endif %}
+  {%- endblock linktags %}
+  {%- block extrahead %}{%- endblock extrahead %}
+</head>
+
+<body x-data="{ showSidebar: false, showScrollTop: false }"
+  class="min-h-screen font-sans antialiased bg-background text-foreground" :class="{ 'overflow-hidden': showSidebar }"
+  {%- if theme_show_scrolltop|tobool -%}@scroll.window="showScrollTop = pageYOffset > 100" {%- endif -%}>
+
+  {#- A blurry background screen for the mobile sidebar -#}
+  {%- if sidebars|length > 0 %}
+  <div x-cloak x-show="showSidebar"
+    class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden"
+    @click.self="showSidebar = false"></div>
+  {%- endif %}
+
+  {#- The main page wrapper -#}
+  <div id="page" class="relative flex flex-col min-h-screen">
+
+    {#- Skip to content link -#}
+    <a href="#content"
+      class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100">
+      Skip to content
+    </a>
+
+    {%- block header %}
+    {%- include "header.html" %}
+    {%- endblock header %}
+
+    <div class="flex-1">
+
+      {%- set only_main_nav = sidebars == ["sidebar_main_nav_links.html"] %}
+
+      {%- if not only_main_nav and sidebars|length > 0 -%}
+      <div
+        class="container md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+        {%- else -%}
+        <div class="container">
+          {%- endif -%}
+
+          {%- block sidebar %}
+          {%- if sidebars|length > 0 %}
+          {%- include "sidebar.html" %}
+          {%- endif %}
+          {%- endblock sidebar %}
+
+          {%- block main %}
+          <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+            {%- block body %}{%- endblock %}
+          </main>
+          {%- endblock main %}
+        </div>
+      </div>
+
+      {%- block footer %}
+      {%- include "footer.html" %}
+      {%- endblock footer %}
+    </div>
+    {%- if theme_show_scrolltop|tobool %}
+    {%- include "scrolltop.html" %}
+    {%- endif %}
+    {% block scripts %}
+    {%- for js in script_files %}
+    {{ js_tag(js) }}
+    {%- endfor %}
+    {% endblock scripts %}
+</body>
+
+</html>
