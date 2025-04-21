@@ -10,7 +10,7 @@ __all__ = ["MemoEngine"]
 
 @EngineRegistry.register("memo")
 class MemoEngine(BaseEngine):
-    """**MEMO**: Test-Time Robustness via Adaptation and Augmentation.
+    """**MEMO**: Test-Time Robustness via Augmentation.
 
     Applies multiple augmentations per test sample and adapts the model
     by minimizing the entropy of the average prediction across augmentations.
