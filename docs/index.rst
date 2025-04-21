@@ -27,33 +27,27 @@ About |torch-ttt|
 
 Welcome to |torch-ttt|, a comprehensive and easy-to-use Python library for applying *test-time training* methods to your PyTorch models. Whether you're tackling small projects or managing large datasets, |torch-ttt| provides a diverse set of algorithms to accommodate different needs. Our intuitive API seamlessly integrates into existing training / inference pipelines, ensuring smooth and efficient deployment without disrupting your workflow.
 
-|torch-ttt| includes implementations of various TTT methods, from classical TTT :cite:`sun19ttt`, to more recent methods like TTT++ :cite:`liu2021ttt++` and ActMAD :cite:`mirza2023actmad`. The full list of the implemented methods can be found in a table below.
+|torch-ttt| includes implementations of various TTT methods, from classical TTT :cite:`sun19ttt`, to more recent methods like DeYO :cite:`lee2024entropy` and ActMAD :cite:`mirza2023actmad`. The full list of the implemented methods can be found in a table below.
 
-+-----------+-----------------------------------------------+------+--------------------------+
-| Method    | Engine Class                                  | Year | Reference                |
-+===========+===============================================+======+==========================+
-| TTT       | :class:`TTTEngine`                            | 2018 | :cite:`sun19ttt`         |
-+-----------+-----------------------------------------------+------+--------------------------+
-| TTT++     | :class:`TTTPPEngine`                          | 2021 | :cite:`liu2021ttt++`     |
-+-----------+-----------------------------------------------+------+--------------------------+
-| TENT      | :class:`TentEngine`                           | 2021 | :cite:`wang2021tent`     |
-+-----------+-----------------------------------------------+------+--------------------------+
-| ActMAD    | :class:`ActMADEngine`                         | 2023 | :cite:`mirza2023actmad`  |
-+-----------+-----------------------------------------------+------+--------------------------+
-
-.. +-----------+---------------------------------------------------------------------+------+--------------------------+
-.. | Method    | Engine Class                                                        | Year | Reference                |
-.. +===========+=====================================================================+======+==========================+
-.. | TTT       | :class:`torch_ttt.engine.ttt_engine.TTTEngine`                      | 2018 | :cite:`sun19ttt`         |
-.. +-----------+---------------------------------------------------------------------+------+--------------------------+
-.. | TTT++     | :class:`torch_ttt.engine.ttt_pp_engine.TTTPPEngine`                 | 2021 | :cite:`liu2021ttt++`     |
-.. +-----------+---------------------------------------------------------------------+------+--------------------------+
-.. | TENT      | :class:`torch_ttt.engine.tent_engine.TentEngine`                    | 2021 | :cite:`wang2021tent`     |
-.. +-----------+---------------------------------------------------------------------+------+--------------------------+
-.. | ActMAD    | :class:`torch_ttt.engine.actmad_engine.ActMADEngine`                | 2023 | :cite:`mirza2023actmad`  |
-.. +-----------+---------------------------------------------------------------------+------+--------------------------+
-
-
++-----------+-----------------------------------------------+------+---------------------------+
+| Method    | Engine Class                                  | Year | Reference                 |
++===========+===============================================+======+===========================+
+| TTT       | :class:`TTTEngine`                            | 2018 | :cite:`sun19ttt`          |
++-----------+-----------------------------------------------+------+---------------------------+
+| TTT++     | :class:`TTTPPEngine`                          | 2021 | :cite:`liu2021ttt++`      |
++-----------+-----------------------------------------------+------+---------------------------+
+| TENT      | :class:`TentEngine`                           | 2021 | :cite:`wang2021tent`      |
++-----------+-----------------------------------------------+------+---------------------------+
+| EATA      | :class:`EataEngine`                           | 2022 | :cite:`niu2022efficient`  |
++-----------+-----------------------------------------------+------+---------------------------+
+| MEMO      | :class:`MemoEngine`                           | 2022 | :cite:`zhang2022memo`     |
++-----------+-----------------------------------------------+------+---------------------------+
+| Masked TTT| :class:`MaskedTTTEngine`                      | 2022 | :cite:`gandelsman2022test`|
++-----------+-----------------------------------------------+------+---------------------------+
+| ActMAD    | :class:`ActMADEngine`                         | 2023 | :cite:`mirza2023actmad`   |
++-----------+-----------------------------------------------+------+---------------------------+
+| DeYO      | :class:`DeYOEngine`                           | 2024 | :cite:`lee2024entropy`    |
++-----------+-----------------------------------------------+------+---------------------------+
 
 |torch-ttt| stands out for:
 

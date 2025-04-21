@@ -10,7 +10,7 @@ __all__ = ["MaskedTTTEngine"]
 
 @EngineRegistry.register("masked_ttt")
 class MaskedTTTEngine(BaseEngine):
-    r"""Masked token prediction-based **test-time training** (TTT) engine for language models.
+    r"""Masked token prediction-based **test-time training** engine.
 
     This engine performs masked language modeling (MLM) as a self-supervised auxiliary task during inference.
     It randomly masks input tokens (except those in `skip_tokens`) and trains the model to predict them using intermediate features.
