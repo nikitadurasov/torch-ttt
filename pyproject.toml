@@ -5,6 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "torch-ttt"
 version = "0.0.1"
+description = "Test-Time Training / Adaptation engine collection for PyTorch."
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Nikita Durasov", email = "yassnda@gmail.com"}]
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 
@@ -22,7 +27,14 @@ docs = [
 ]
 
 all = [
-    "torch_ttt[dev, docs]"
+    "pytest-cov",
+    "sphinxawesome-theme==6.0.0b1",
+    "sphinx-gallery==0.18.0",
+    "sphinxcontrib-bibtex",
+    "sphinxcontrib-googleanalytics",
+    "matplotlib",
+    "tqdm",
+    "einops"
 ]
 
 [tool.ruff]
