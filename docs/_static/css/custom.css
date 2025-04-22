@@ -46,9 +46,12 @@ div[class^="highlight"] a:hover {
     overflow-y: visible;
 }
 
+
 a[class^="sphx-glr-backref-module-"] {
     text-decoration: none;
-    background-color: rgba(0, 0, 0, 0) !important;
+    /* background-color: rgba(0, 0, 0, 0) !important; */
+    background-color: #0b2fa7e3 !important; */
+    
 }
 a.sphx-glr-backref-module-sphinx_gallery {
     text-decoration: underline;
@@ -59,10 +62,10 @@ a.sphx-glr-backref-module-sphinx_gallery {
     display: inline-block;
 }
 
-.sphx-glr-download-link-note, /* Download link note in header */
+.sphx-glr-download-link-note, Download link note in header
 .binder-badge,                /* Binder launch badge in footer */
 .lite-badge,                  /* Lite launch badge in footer */
-.sphx-glr-download-jupyter,   /* Download Jupyter notebook link in footer */
+/* .sphx-glr-download-jupyter,   Download Jupyter notebook link in footer */
 .sphx-glr-download-python,    /* Download Python script link in footer */
 .sphx-glr-download-zip        /* Download zipped link in footer */
 {
@@ -100,3 +103,29 @@ a.sphx-glr-backref-module-sphinx_gallery {
         border-radius: 15px;  /* Optional: Adds rounded corners */
     }
 }
+
+/* Wrap long signatures */
+.sig {
+    white-space: pre-wrap !important;
+    word-break: break-word;
+}
+
+/* Make class/function names pop */
+.sig-name {
+    word-break: break-all;
+    color: #ff79c6; /* Pink from Dracula theme, looks cool on dark */
+    font-weight: bold;
+}
+
+/* Optional: adjust parameter type coloring */
+.sig-param, .sig-return-type {
+    color: #8be9fd;  /* Light blue for types */
+}
+
+
+/* Optional: Drop deafault "Download" button in Jupyter example */
+div.sphx-glr-footer {
+    height: 0px;
+    visibility: hidden;
+  }
+  
