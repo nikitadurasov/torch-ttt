@@ -113,19 +113,14 @@ a.sphx-glr-backref-module-sphinx_gallery {
 /* Make class/function names pop */
 .sig-name {
     word-break: break-all;
-    color: #ff79c6; /* Pink from Dracula theme, looks cool on dark */
     font-weight: bold;
+    background: linear-gradient(90deg, #9156fe, #ff9e65);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
-/* Optional: adjust parameter type coloring */
-.sig-param, .sig-return-type {
-    color: #8be9fd;  /* Light blue for types */
-}
-
 
 /* Optional: Drop deafault "Download" button in Jupyter example */
 div.sphx-glr-footer {
     height: 0px;
     visibility: hidden;
   }
-  
