@@ -1,4 +1,86 @@
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .controls {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+</style>
+
+<!-- Chart Section -->
+<div style="width: 100%; max-width: 900px; margin: auto; padding: 0; padding-top: 20px;">
+  <canvas id="citationsChart"></canvas>
+  <div style="text-align: justify; font-size: 14px; color: gray; margin-top: 10px;">
+    <em><b>Figure 1</b>: This plot shows the trend of citations per year for Test-Time Training and Test-Time Adaptation papers listed below. The dashed red line represents the projected citation count for the current year based on the citation trajectory so far. Overall, the visualization illustrates the increasing academic attention and influence of these methods over time.</em>
+  </div>
+</div>
+
+<script>
+const ctx = document.getElementById('citationsChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+        datasets: [
+          {
+            label: 'Citations per Year',
+            data: [32, 154, 382, 966, 1657, 566],
+            borderWidth: 2,
+            fill: true,
+            tension: 0.3,
+          },
+          {
+            label: 'Projected Citations',
+            data: [32, 154, 382, 966, 1657, 1959],
+            borderDash: [5,5],
+            borderWidth: 2,
+            fill: false,
+            tension: 0.3,
+          }
+        ]
+    },
+    options: {
+        responsive: true,
+        layout: {
+            padding: 0
+        },
+        plugins: {
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                    label: function(context) {
+                        return `${context.dataset.label}: ${context.parsed.y}`;
+                    }
+                }
+            },
+            legend: {
+                display: true
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    precision: 0
+                }
+            }
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        }
+    }
+});
+</script>
+
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -70,8 +152,19 @@
     height: 70px;
   }
 
-  .paper-venue, .paper-links, .paper-citations {
+  .paper-venue {
     font-size: 14px;
+    font-weight: bold;
+    color: #9156fe;
+  }
+  
+  .paper-links {
+    font-size: 14px;
+  }
+  
+  .paper-citations {
+    font-size: 14px;
+    color: #ff9e65;
   }
 
   .paper-links {
@@ -138,7 +231,7 @@
   }
 </style>
 
-<div class="controls" style="padding: 30px;">
+<div class="controls" style="padding: 10px; padding-top: 50px">
   <label for="sortSelect">Sort by:</label>
   <select id="sortSelect" class="sort-select" onchange="sortPapers()">
     <option value="citations">Citations (high to low)</option>
@@ -151,11 +244,28 @@
 <div class="papers-container" id="papersContainer">
 
     <div class="paper-card" 
+         data-title="TENT: Fully Test-time Adaptation by Entropy Minimization" 
+         data-authors="Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell" 
+         data-conference="ICLR" 
+         data-year="2021" 
+         data-citations="1327">
+      <div class="paper-top">
+        <div class="paper-title">TENT: Fully Test-time Adaptation by Entropy Minimization</div>
+        <div class="paper-authors">Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICLR (2021)</div>
+        <div class="paper-links"><a href="https://openreview.net/pdf?id=uXl3bZLkr3c" target="_blank">paper</a> | <a href="https://github.com/DequanWang/tent" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 1327</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
          data-title="Test-Time Training with Self-Supervision for Generalization under Distribution Shifts" 
          data-authors="Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt" 
          data-conference="ICML" 
          data-year="2020" 
-         data-citations="907">
+         data-citations="984">
       <div class="paper-top">
         <div class="paper-title">Test-Time Training with Self-Supervision for Generalization under Distribution Shifts</div>
         <div class="paper-authors">Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt</div>
@@ -163,7 +273,7 @@
       <div class="paper-bottom">
         <div class="paper-venue">ICML (2020)</div>
         <div class="paper-links"><a href="https://proceedings.mlr.press/v119/sun20b/sun20b.pdf" target="_blank">paper</a> | <a href="https://github.com/yueatsprograms/ttt_cifar_release" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 907</div>
+        <div class="paper-citations">Citations: 984</div>
       </div>
     </div>
     
@@ -185,6 +295,40 @@
     </div>
     
     <div class="paper-card" 
+         data-title="MEMO: Test Time Robustness via Adaptation and Augmentation" 
+         data-authors="Marvin Zhang, Sergey Levine, Chelsea Finn" 
+         data-conference="NeurIPS" 
+         data-year="2022" 
+         data-citations="359">
+      <div class="paper-top">
+        <div class="paper-title">MEMO: Test Time Robustness via Adaptation and Augmentation</div>
+        <div class="paper-authors">Marvin Zhang, Sergey Levine, Chelsea Finn</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">NeurIPS (2022)</div>
+        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/fc28053a08f59fccb48b11f2e31e81c7-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/zhangmarvin/memo" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 359</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?" 
+         data-authors="Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi" 
+         data-conference="NeurIPS" 
+         data-year="2021" 
+         data-citations="330">
+      <div class="paper-top">
+        <div class="paper-title">TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?</div>
+        <div class="paper-authors">Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">NeurIPS (2021)</div>
+        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/b618c3210e934362ac261db280128c22-Paper.pdf" target="_blank">paper</a> | <a href="https://github.com/vita-epfl/ttt-plus-plus" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 330</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
          data-title="Test-Time Training with Masked Autoencoders" 
          data-authors="Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros" 
          data-conference="NeurIPS" 
@@ -198,6 +342,23 @@
         <div class="paper-venue">NeurIPS (2022)</div>
         <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
         <div class="paper-citations">Citations: 191</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Learning to (Learn at Test Time): RNNs with Expressive Hidden States" 
+         data-authors="Yu Sun, Xinhao Li, Karan Dalal, Jiarui Xu, Arjun Vikram, Genghan Zhang, Yann Dubois, Xinlei Chen, Xiaolong Wang, Sanmi Koyejo, Tatsunori Hashimoto, Carlos Guestrin" 
+         data-conference="ICLR" 
+         data-year="2025" 
+         data-citations="89">
+      <div class="paper-top">
+        <div class="paper-title">Learning to (Learn at Test Time): RNNs with Expressive Hidden States</div>
+        <div class="paper-authors">Yu Sun, Xinhao Li, Karan Dalal, Jiarui Xu, Arjun Vikram, Genghan Zhang, Yann Dubois, Xinlei Chen, Xiaolong Wang, Sanmi Koyejo, Tatsunori Hashimoto, Carlos Guestrin</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICLR (2025)</div>
+        <div class="paper-links"><a href="https://openreview.net/pdf?id=eifW0W0xgt" target="_blank">paper</a> | <a href="https://github.com/test-time-training/ttt-lm-pytorch" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 89</div>
       </div>
     </div>
     
@@ -257,7 +418,7 @@
          data-authors="Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang" 
          data-conference="JMLR" 
          data-year="2023" 
-         data-citations="17">
+         data-citations="15">
       <div class="paper-top">
         <div class="paper-title">Test-Time Training on Video Streams</div>
         <div class="paper-authors">Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang</div>
@@ -265,7 +426,7 @@
       <div class="paper-bottom">
         <div class="paper-venue">JMLR (2023)</div>
         <div class="paper-links"><a href="https://www.jmlr.org/papers/volume26/24-0439/24-0439.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 17</div>
+        <div class="paper-citations">Citations: 15</div>
       </div>
     </div>
     
