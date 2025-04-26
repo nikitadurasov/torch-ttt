@@ -1,0 +1,44 @@
+- title: Test-Time Training with Self-Supervision for Generalization under Distribution Shifts
+  authors: Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt
+  paper: https://proceedings.mlr.press/v119/sun20b/sun20b.pdf
+  code: https://github.com/yueatsprograms/ttt_cifar_release
+  venue: ICML 2020
+
+- title: Efficient Test-Time Model Adaptation without Forgetting
+  authors: Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Yaofo Chen, Shijian Zheng, Peilin Zhao, Mingkui Tan
+  paper: https://proceedings.mlr.press/v162/niu22a/niu22a.pdf
+  code: https://github.com/mr-eggplant/EATA
+  venue: ICLR 2023
+
+- title: "ActMAD: Activation Matching to Align Distributions for Test-Time-Training"
+  authors: Muhammad Jehanzeb Mirza, Pol Jané Soneira, Wei Lin, Mateusz Kozinski, Horst Possegger, Horst Bischof
+  paper: https://openaccess.thecvf.com/content/CVPR2023/papers/Mirza_ActMAD_Activation_Matching_To_Align_Distributions_for_Test-Time-Training_CVPR_2023_paper.pdf
+  code: https://github.com/jmiemirza/ActMAD
+  venue: CVPR 2023
+
+- title: "Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors"
+  authors: Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon 
+  paper: https://openreview.net/pdf?id=9w3iw8wDuE
+  code: https://github.com/Jhyun17/DeYO
+  venue: ICLR 2024
+
+- title: Test-Time Training with Masked Autoencoders
+  authors: Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros
+  paper: https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf
+  code: https://github.com/yossigandelsman/test_time_training_mae
+  venue: NeurIPS 2022
+
+- title: Test-Time Training on Video Streams 
+  authors: Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang
+  paper: https://www.jmlr.org/papers/volume26/24-0439/24-0439.pdf
+  code: https://github.com/yossigandelsman/test_time_training_mae
+  venue: JMLR 2023
+
+- title: Test-Time Training on Nearest Neighbors for Large Language Models
+  authors: Moritz Hardt, Yu Sun
+  paper: https://openreview.net/pdf?id=CNL2bku4ra
+  code: https://github.com/socialfoundations/tttlm
+  venue: ICLR 2024
+
+  
+  

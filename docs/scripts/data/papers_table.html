@@ -1,0 +1,295 @@
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .controls {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .sort-select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .papers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .paper-card {
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .paper-card:hover {
+    transform: translateY(-5px);
+    background-color: #e0f7fa;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  .paper-top {
+    flex: 1;
+  }
+
+  .paper-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .paper-authors {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .paper-bottom {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .paper-venue, .paper-links, .paper-citations {
+    font-size: 14px;
+  }
+
+  .paper-links {
+    display: flex;
+    gap: 10px;
+  }
+
+  .paper-links a {
+    color: #4285f4;
+  }
+  
+  .paper-links a:visited {
+    color: #4285f4;
+  }
+
+  /* DARK MODE */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+    }
+
+    .sort-select {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      border: 1px solid #444;
+    }
+
+    .paper-card {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    .paper-card:hover {
+      background-color: #263238;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+      cursor: pointer;
+    }
+
+    .paper-citations {
+      color: #66bb6a;
+    }
+
+    .paper-links a {
+      color: #82b1ff;
+      text-decoration: none;
+    }
+    .paper-links a:visited {
+      color: #82b1ff;
+      text-decoration: none;
+    }
+    .paper-links a:hover {
+      color: #82b1ff;
+      text-decoration: none;
+    }
+    .paper-links a:active {
+      color: #82b1ff;
+      text-decoration: none;
+    }
+    .paper-links a, .paper-links a * {
+      cursor: auto;
+    }
+  }
+</style>
+
+<div class="controls" style="padding: 30px;">
+  <label for="sortSelect">Sort by:</label>
+  <select id="sortSelect" class="sort-select" onchange="sortPapers()">
+    <option value="citations">Citations (high to low)</option>
+    <option value="year">Year (newest first)</option>
+    <option value="conference">Conference (A-Z)</option>
+    <option value="title">Title (A-Z)</option>
+  </select>
+</div>
+
+<div class="papers-container" id="papersContainer">
+
+    <div class="paper-card" 
+         data-title="Test-Time Training with Self-Supervision for Generalization under Distribution Shifts" 
+         data-authors="Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt" 
+         data-conference="ICML" 
+         data-year="2020" 
+         data-citations="907">
+      <div class="paper-top">
+        <div class="paper-title">Test-Time Training with Self-Supervision for Generalization under Distribution Shifts</div>
+        <div class="paper-authors">Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICML (2020)</div>
+        <div class="paper-links"><a href="https://proceedings.mlr.press/v119/sun20b/sun20b.pdf" target="_blank">paper</a> | <a href="https://github.com/yueatsprograms/ttt_cifar_release" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 907</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Efficient Test-Time Model Adaptation without Forgetting" 
+         data-authors="Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Yaofo Chen, Shijian Zheng, Peilin Zhao, Mingkui Tan" 
+         data-conference="ICLR" 
+         data-year="2023" 
+         data-citations="377">
+      <div class="paper-top">
+        <div class="paper-title">Efficient Test-Time Model Adaptation without Forgetting</div>
+        <div class="paper-authors">Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Yaofo Chen, Shijian Zheng, Peilin Zhao, Mingkui Tan</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICLR (2023)</div>
+        <div class="paper-links"><a href="https://proceedings.mlr.press/v162/niu22a/niu22a.pdf" target="_blank">paper</a> | <a href="https://github.com/mr-eggplant/EATA" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 377</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Test-Time Training with Masked Autoencoders" 
+         data-authors="Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros" 
+         data-conference="NeurIPS" 
+         data-year="2022" 
+         data-citations="191">
+      <div class="paper-top">
+        <div class="paper-title">Test-Time Training with Masked Autoencoders</div>
+        <div class="paper-authors">Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">NeurIPS (2022)</div>
+        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 191</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors" 
+         data-authors="Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon" 
+         data-conference="ICLR" 
+         data-year="2024" 
+         data-citations="35">
+      <div class="paper-top">
+        <div class="paper-title">Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors</div>
+        <div class="paper-authors">Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICLR (2024)</div>
+        <div class="paper-links"><a href="https://openreview.net/pdf?id=9w3iw8wDuE" target="_blank">paper</a> | <a href="https://github.com/Jhyun17/DeYO" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 35</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="ActMAD: Activation Matching to Align Distributions for Test-Time-Training" 
+         data-authors="Muhammad Jehanzeb Mirza, Pol Jané Soneira, Wei Lin, Mateusz Kozinski, Horst Possegger, Horst Bischof" 
+         data-conference="CVPR" 
+         data-year="2023" 
+         data-citations="29">
+      <div class="paper-top">
+        <div class="paper-title">ActMAD: Activation Matching to Align Distributions for Test-Time-Training</div>
+        <div class="paper-authors">Muhammad Jehanzeb Mirza, Pol Jané Soneira, Wei Lin, Mateusz Kozinski, Horst Possegger, Horst Bischof</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">CVPR (2023)</div>
+        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Mirza_ActMAD_Activation_Matching_To_Align_Distributions_for_Test-Time-Training_CVPR_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/jmiemirza/ActMAD" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 29</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Test-Time Training on Nearest Neighbors for Large Language Models" 
+         data-authors="Moritz Hardt, Yu Sun" 
+         data-conference="ICLR" 
+         data-year="2024" 
+         data-citations="21">
+      <div class="paper-top">
+        <div class="paper-title">Test-Time Training on Nearest Neighbors for Large Language Models</div>
+        <div class="paper-authors">Moritz Hardt, Yu Sun</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICLR (2024)</div>
+        <div class="paper-links"><a href="https://openreview.net/pdf?id=CNL2bku4ra" target="_blank">paper</a> | <a href="https://github.com/socialfoundations/tttlm" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 21</div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Test-Time Training on Video Streams" 
+         data-authors="Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang" 
+         data-conference="JMLR" 
+         data-year="2023" 
+         data-citations="17">
+      <div class="paper-top">
+        <div class="paper-title">Test-Time Training on Video Streams</div>
+        <div class="paper-authors">Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">JMLR (2023)</div>
+        <div class="paper-links"><a href="https://www.jmlr.org/papers/volume26/24-0439/24-0439.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 17</div>
+      </div>
+    </div>
+    
+</div>
+
+<script>
+function sortPapers() {
+  const container = document.getElementById('papersContainer');
+  const cards = Array.from(container.getElementsByClassName('paper-card'));
+  const sortValue = document.getElementById('sortSelect').value;
+
+  cards.sort((a, b) => {
+    if (sortValue === 'citations') {
+      return parseInt(b.dataset.citations) - parseInt(a.dataset.citations);
+    } else if (sortValue === 'year') {
+      return parseInt(b.dataset.year) - parseInt(a.dataset.year);
+    } else if (sortValue === 'conference') {
+      return a.dataset.conference.localeCompare(b.dataset.conference);
+    } else if (sortValue === 'title') {
+      return a.dataset.title.localeCompare(b.dataset.title);
+    }
+  });
+
+  container.innerHTML = '';
+  cards.forEach(card => container.appendChild(card));
+}
+</script>

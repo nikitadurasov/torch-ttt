@@ -87,6 +87,7 @@ Welcome to |torch-ttt|, a comprehensive and easy-to-use Python library for apply
    installation
    quickstart
    auto_examples/index
+   papers
 
 .. toctree::
    :maxdepth: 2
