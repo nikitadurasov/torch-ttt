@@ -20,6 +20,9 @@ Welcome to |torch-ttt|!
         <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml" style="margin: 2px;">
             <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml/badge.svg" alt="Documentation" style="display: inline-block; margin: 0;">
         </a>
+        <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/run-tests.yml" style="margin: 2px;">
+            <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/run-tests.yml/badge.svg" alt="Testing" style="display: inline-block; margin: 0;">
+        </a>
         <a href="https://pepy.tech/project/torch-ttt" style="margin: 2px;">
             <img src="https://pepy.tech/badge/torch-ttt" alt="Downloads" style="display: inline-block; margin: 0;">
         </a>
