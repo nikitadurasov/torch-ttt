@@ -239,6 +239,17 @@ with open("./data/papers_with_citations.yaml", "r", encoding="utf-8") as f:
 # --- Sort papers by citations descending ---
 papers = sorted(papers, key=lambda p: p.get("citations", 0), reverse=True)
 
+# --- Compute Trending metric (citations last year) ---
+for paper in papers:
+    trending_score = 0
+    citations_per_year = paper.get("citations_per_year", {})
+    if citations_per_year:
+        last_year = datetime.today().year - 1
+        trending_score = citations_per_year.get(last_year, 0)
+    paper["trending"] = trending_score
+
+trending_top_k = sorted(papers, key=lambda p: p.get("trending", 0), reverse=True)[5]["trending"]
+
 # --- Aggregate citations per year ---
 citations_per_year = defaultdict(int)
 for paper in papers:
@@ -257,20 +268,14 @@ today = datetime.today()
 current_year = today.year
 
 if str(current_year) in years:
-    # Find today's day of year (1 to 365/366)
     day_of_year = today.timetuple().tm_yday
     total_days_in_year = 366 if (current_year % 4 == 0 and (current_year % 100 != 0 or current_year % 400 == 0)) else 365
-
     current_citations = citations_per_year[current_year]
     projected_citations = int(1.1 * current_citations * total_days_in_year / day_of_year)
-
-    # We replace the current year citations with the *current* actual
-    # and add a second dataset with a dashed line for the projection
     projection_years = years.copy()
     projection_citations = citations.copy()
     projection_citations[-1] = projected_citations
 else:
-    # No current year data? Then projection is same as normal
     projection_years = years
     projection_citations = citations
 
@@ -428,7 +433,7 @@ html += """
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 70px;
+    height: 80px;
   }
 
   .paper-venue {
@@ -446,6 +451,11 @@ html += """
     color: #ff9e65;
   }
 
+  .paper-trending {
+    font-size: 14px;
+    color: #e53935;
+  }
+
   .paper-links {
     display: flex;
     gap: 10px;
@@ -459,53 +469,31 @@ html += """
     color: #4285f4;
   }
 
-  /* DARK MODE */
   @media (prefers-color-scheme: dark) {
     body {
       background-color: #0d0d0d;
       color: #e0e0e0;
     }
-
     .sort-select {
       background-color: #1e1e1e;
       color: #e0e0e0;
       border: 1px solid #444;
     }
-
     .paper-card {
       background-color: #1e1e1e;
       color: #e0e0e0;
       box-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-
     .paper-card:hover {
       background-color: #263238;
       box-shadow: 0 4px 12px rgba(0,0,0,0.8);
       cursor: pointer;
     }
-
     .paper-citations {
       color: #66bb6a;
     }
-
-    .paper-links a {
-      color: #82b1ff;
-      text-decoration: none;
-    }
-    .paper-links a:visited {
-      color: #82b1ff;
-      text-decoration: none;
-    }
-    .paper-links a:hover {
-      color: #82b1ff;
-      text-decoration: none;
-    }
-    .paper-links a:active {
-      color: #82b1ff;
-      text-decoration: none;
-    }
-    .paper-links a, .paper-links a * {
-      cursor: auto;
+    .paper-trending {
+      color: #ef5350;
     }
   }
 </style>
@@ -514,6 +502,7 @@ html += """
   <label for="sortSelect">Sort by:</label>
   <select id="sortSelect" class="sort-select" onchange="sortPapers()">
     <option value="citations">Citations (high to low)</option>
+    <option value="trending">Trending 🔥 (citations last year)</option>
     <option value="year">Year (newest first)</option>
     <option value="conference">Conference (A-Z)</option>
     <option value="title">Title (A-Z)</option>
@@ -541,13 +530,19 @@ for paper in papers:
         links.append(f'<a href="{paper["code"]}" target="_blank">code</a>')
     links_html = " | ".join(links)
 
+    # Build the citations line with red Trending
+    citations_line = ""
+    if paper['trending'] >= trending_top_k:
+        citations_line += ' <span style="color: red;"><b>(🔥 Top Trending)</b></span>'
+
     html += f"""
     <div class="paper-card" 
          data-title="{paper['title']}" 
          data-authors="{paper['authors']}" 
          data-conference="{conference}" 
          data-year="{year}" 
-         data-citations="{paper['citations']}">
+         data-citations="{paper['citations']}" 
+         data-trending="{paper['trending']}">
       <div class="paper-top">
         <div class="paper-title">{paper['title']}</div>
         <div class="paper-authors">{paper['authors']}</div>
@@ -555,7 +550,7 @@ for paper in papers:
       <div class="paper-bottom">
         <div class="paper-venue">{conference} ({year})</div>
         {'<div class="paper-links">' + links_html + '</div>' if links_html else ''}
-        <div class="paper-citations">Citations: {paper['citations']}</div>
+        <div class="paper-citations">Citations: {paper['citations']} {citations_line}</div>
       </div>
     </div>
     """
@@ -572,6 +567,8 @@ function sortPapers() {
   cards.sort((a, b) => {
     if (sortValue === 'citations') {
       return parseInt(b.dataset.citations) - parseInt(a.dataset.citations);
+    } else if (sortValue === 'trending') {
+      return parseInt(b.dataset.trending) - parseInt(a.dataset.trending);
     } else if (sortValue === 'year') {
       return parseInt(b.dataset.year) - parseInt(a.dataset.year);
     } else if (sortValue === 'conference') {
@@ -591,4 +588,4 @@ function sortPapers() {
 with open("./data/papers_table.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print("✅ Page with tight chart + projected citations saved to ./data/papers_table.html")
+print("✅ Page with chart + trending metric added saved to ./data/papers_table.html")
