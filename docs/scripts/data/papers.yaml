@@ -172,3 +172,17 @@
   code: https://github.com/mr-eggplant/SAR
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=gi30SZ0AAAAJ&citation_for_view=gi30SZ0AAAAJ:Se3iqnhoufwC
   venue: ICLR 2023
+
+- title: The Surprising Effectiveness of Test-Time Training for Few-Shot Learning
+  authors: Ekin Akyürek, Mehul Damani, Adam Zweiger, Linlu Qiu, Han Guo, Jyothish Pari, Yoon Kim, Jacob Andreas
+  paper: https://arxiv.org/pdf/2411.07279
+  code: https://github.com/ekinakyurek/marc
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=FQHeASwAAAAJ&sortby=pubdate&citation_for_view=FQHeASwAAAAJ:R3hNpaxXUhUC
+  venue: arXiv 2024
+
+- title: "Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs"
+  authors: Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause
+  paper: https://openreview.net/pdf?id=NS1G1Uhny3
+  code: https://github.com/jonhue/activeft
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=pxi_RkwAAAAJ&citation_for_view=pxi_RkwAAAAJ:0EnyYjriUFMC
+  venue: ICLR 2025

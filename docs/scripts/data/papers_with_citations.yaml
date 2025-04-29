@@ -6,14 +6,14 @@
   code: https://github.com/yueatsprograms/ttt_cifar_release
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=a7drwRMAAAAJ&citation_for_view=a7drwRMAAAAJ:mVmsd5A6BfQC
   venue: ICML 2020
-  citations: 984
+  citations: 991
   citations_per_year:
     2020: 28
     2021: 90
     2022: 153
     2023: 257
-    2024: 346
-    2025: 110
+    2024: 334
+    2025: 129
 - title: Efficient Test-Time Model Adaptation without Forgetting
   authors: Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Yaofo Chen, Shijian Zheng, Peilin
     Zhao, Mingkui Tan
@@ -21,13 +21,13 @@
   code: https://github.com/mr-eggplant/EATA
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=gi30SZ0AAAAJ&citation_for_view=gi30SZ0AAAAJ:eQOLeE2rZwMC
   venue: ICLR 2023
-  citations: 377
+  citations: 381
   citations_per_year:
     2021: 1
     2022: 8
     2023: 89
-    2024: 209
-    2025: 70
+    2024: 205
+    2025: 78
 - title: 'ActMAD: Activation Matching to Align Distributions for Test-Time-Training'
   authors: Muhammad Jehanzeb Mirza, Pol Jané Soneira, Wei Lin, Mateusz Kozinski, Horst
     Possegger, Horst Bischof
@@ -35,11 +35,11 @@
   code: https://github.com/jmiemirza/ActMAD
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=cES2rkAAAAAJ&citation_for_view=cES2rkAAAAAJ:UeHWp8X0CEIC
   venue: CVPR 2023
-  citations: 29
+  citations: 30
   citations_per_year:
     2023: 6
-    2024: 19
-    2025: 4
+    2024: 18
+    2025: 6
 - title: 'Entropy is not Enough for Test-Time Adaptation: From the Perspective of
     Disentangled Factors'
   authors: Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon
@@ -48,10 +48,10 @@
   code: https://github.com/Jhyun17/DeYO
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=GPi5hw4AAAAJ&citation_for_view=GPi5hw4AAAAJ:UeHWp8X0CEIC
   venue: ICLR 2024
-  citations: 35
+  citations: 37
   citations_per_year:
     2024: 22
-    2025: 13
+    2025: 15
 - title: Test-Time Training with Masked Autoencoders
   authors: Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros
   paper: https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf
@@ -62,8 +62,8 @@
   citations_per_year:
     2022: 6
     2023: 48
-    2024: 106
-    2025: 31
+    2024: 101
+    2025: 36
 - title: Test-Time Training on Video Streams
   authors: Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei
     A. Efros, Xiaolong Wang
@@ -94,10 +94,10 @@
   code: https://github.com/test-time-training/ttt-lm-pytorch
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=a7drwRMAAAAJ&citation_for_view=a7drwRMAAAAJ:mB3voiENLucC
   venue: ICLR 2025
-  citations: 89
+  citations: 90
   citations_per_year:
     2024: 45
-    2025: 44
+    2025: 45
 - title: 'TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?'
   authors: Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet,
     Taylor Mordan, Alexandre Alahi
@@ -105,40 +105,40 @@
   code: https://github.com/vita-epfl/ttt-plus-plus
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Xi-B5WIAAAAJ&citation_for_view=Xi-B5WIAAAAJ:4DMP91E08xMC
   venue: NeurIPS 2021
-  citations: 330
+  citations: 331
   citations_per_year:
     2021: 2
     2022: 30
     2023: 96
-    2024: 157
-    2025: 45
+    2024: 148
+    2025: 55
 - title: 'TENT: Fully Test-time Adaptation by Entropy Minimization'
   authors: Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell
   paper: https://openreview.net/pdf?id=uXl3bZLkr3c
   code: https://github.com/DequanWang/tent
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=OZ7PjVoAAAAJ&citation_for_view=OZ7PjVoAAAAJ:d1gkVwhDpl0C
   venue: ICLR 2021
-  citations: 1327
+  citations: 1333
   citations_per_year:
     2020: 4
     2021: 58
     2022: 160
     2023: 369
-    2024: 556
-    2025: 180
+    2024: 543
+    2025: 199
 - title: 'MEMO: Test Time Robustness via Adaptation and Augmentation'
   authors: Marvin Zhang, Sergey Levine, Chelsea Finn
   paper: https://proceedings.neurips.cc/paper_files/paper/2022/file/fc28053a08f59fccb48b11f2e31e81c7-Paper-Conference.pdf
   code: https://github.com/zhangmarvin/memo
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=7ShMBcwAAAAJ&citation_for_view=7ShMBcwAAAAJ:0EnyYjriUFMC
   venue: NeurIPS 2022
-  citations: 359
+  citations: 362
   citations_per_year:
     2021: 3
     2022: 25
     2023: 99
-    2024: 178
-    2025: 54
+    2024: 174
+    2025: 61
 - title: 'MonoTTA: Fully Test-Time Adaptation for Monocular 3D Object Detection'
   authors: Hongbin Lin, Yifan Zhang, Shuaicheng Niu, Shuguang Cui, Zhen Li
   paper: https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06035.pdf
@@ -178,12 +178,12 @@
   code: https://github.com/fiveai/LAME
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=JYgR7EdDghkC&citation_for_view=JYgR7EdDghkC:WF5omc3nYNoC
   venue: CVPR 2022
-  citations: 185
+  citations: 187
   citations_per_year:
     2022: 4
     2023: 55
-    2024: 94
-    2025: 32
+    2024: 93
+    2025: 35
 - title: Depth-aware Test-Time Training for Zero-shot Video Object Segmentation
   authors: Weihuang Liu, Xi Shen, Haolun Li, Xiuli Bi, Bo Liu, Chi-Man Pun, Xiaodong
     Cun
@@ -193,8 +193,8 @@
   venue: CVPR 2024
   citations: 24
   citations_per_year:
-    2024: 15
-    2025: 9
+    2024: 13
+    2025: 11
 - title: 'ClusT3: Information Invariant Test-Time Training'
   authors: Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani,
     Ismail Ben Ayed, Christian Desrosiers
@@ -204,8 +204,8 @@
   venue: ICCV 2023
   citations: 16
   citations_per_year:
-    2024: 12
-    2025: 4
+    2024: 10
+    2025: 6
 - title: 'TTTFlow: Unsupervised Test-Time Training With Normalizing Flow'
   authors: David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani,
     Ismail Ben Ayed, Christian Desrosiers
@@ -216,8 +216,8 @@
   citations: 32
   citations_per_year:
     2023: 7
-    2024: 19
-    2025: 6
+    2024: 16
+    2025: 9
 - title: 'NC-TTT: A Noise Constrastive Approach for Test-Time Training'
   authors: David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani,
     Ali Bahri, Moslem Yazdanpanah, Ismail Ben Ayed, Christian Desrosiers
@@ -227,8 +227,8 @@
   venue: CVPR 2024
   citations: 13
   citations_per_year:
-    2024: 9
-    2025: 4
+    2024: 8
+    2025: 5
 - title: 'MT3: Meta Test-Time Training for Self-Supervised Test-Time Adaption'
   authors: Alexander Bartler, Andre Bühler, Felix Wiewel, Mario Döbler, Bin Yang
   paper: https://proceedings.mlr.press/v151/bartler22a/bartler22a.pdf
@@ -240,19 +240,19 @@
     2021: 4
     2022: 13
     2023: 23
-    2024: 32
-    2025: 13
+    2024: 31
+    2025: 14
 - title: A Comprehensive Survey on Test-Time Adaptation under Distribution Shifts
   authors: Jian Liang, Ran He, Tieniu Tan
   paper: https://link.springer.com/article/10.1007/s11263-024-02181-w
   code: null
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=eY8i-mQAAAAJ&citation_for_view=eY8i-mQAAAAJ:LO7wyVUgiFcC
   venue: IJCV 2024
-  citations: 246
+  citations: 249
   citations_per_year:
     2023: 38
-    2024: 131
-    2025: 77
+    2024: 127
+    2025: 84
 - title: Test-Time Classifier Adjustment Module for Model-Agnostic Domain Generalization
   authors: Yusuke Iwasawa, Yutaka Matsuo
   paper: https://proceedings.neurips.cc/paper_files/paper/2021/file/1415fe9fea0fa1e45dddcff5682239a0-Paper.pdf
@@ -264,8 +264,8 @@
     2021: 3
     2022: 33
     2023: 105
-    2024: 138
-    2025: 40
+    2024: 131
+    2025: 47
 - title: Evaluation of Test-Time Adaptation Under Computational Time Constraints
   authors: Motasem Alfarra, Hani Itani, Alejandro Pardo, Shyma Alhuwaider, Merey Ramazanova,
     Juan C. Pérez, Zhipeng Cai, Matthias Müller, Bernard Ghanem
@@ -277,19 +277,19 @@
   citations_per_year:
     2022: 1
     2023: 3
-    2024: 8
-    2025: 3
+    2024: 7
+    2025: 4
 - title: 'TEA: Test-time Energy Adaptation'
   authors: Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng
   paper: https://openaccess.thecvf.com/content/CVPR2024/papers/Yuan_TEA_Test-time_Energy_Adaptation_CVPR_2024_paper.pdf
   code: https://github.com/yuanyige/tea
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=lf6GtCIAAAAJ&citation_for_view=lf6GtCIAAAAJ:zYLM7Y9cAGgC
   venue: CVPR 2024
-  citations: 9
+  citations: 12
   citations_per_year:
     2023: 1
     2024: 6
-    2025: 2
+    2025: 5
 - title: Towards Stable Test-Time Adaptation in Dynamic Wild World
   authors: Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Zhiquan Wen, Yaofo Chen, Peilin
     Zhao, Mingkui Tan
@@ -297,8 +297,30 @@
   code: https://github.com/mr-eggplant/SAR
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=gi30SZ0AAAAJ&citation_for_view=gi30SZ0AAAAJ:Se3iqnhoufwC
   venue: ICLR 2023
-  citations: 304
+  citations: 305
   citations_per_year:
     2023: 62
-    2024: 185
-    2025: 57
+    2024: 181
+    2025: 62
+- title: The Surprising Effectiveness of Test-Time Training for Few-Shot Learning
+  authors: Ekin Akyürek, Mehul Damani, Adam Zweiger, Linlu Qiu, Han Guo, Jyothish
+    Pari, Yoon Kim, Jacob Andreas
+  paper: https://arxiv.org/pdf/2411.07279
+  code: https://github.com/ekinakyurek/marc
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=FQHeASwAAAAJ&sortby=pubdate&citation_for_view=FQHeASwAAAAJ:R3hNpaxXUhUC
+  venue: arXiv 2024
+  citations: 18
+  citations_per_year:
+    2023: 1
+    2024: 6
+    2025: 11
+- title: 'Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs'
+  authors: Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause
+  paper: https://openreview.net/pdf?id=NS1G1Uhny3
+  code: https://github.com/jonhue/activeft
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=pxi_RkwAAAAJ&citation_for_view=pxi_RkwAAAAJ:0EnyYjriUFMC
+  venue: ICLR 2025
+  citations: 6
+  citations_per_year:
+    2024: 2
+    2025: 4
