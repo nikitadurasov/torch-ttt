@@ -1,18 +1,19 @@
 """
-Test-Time Training for Corrupted WILDS Dataset
+Test-Time Training with BERT
 ==============================================
 
-Explore how Test-Time Training (TTT) can improve model performance under data corruption,
-using the BERT model fine-tuned with a MaskedTTT engine on the Amazon Reviews dataset.
+Discover how Masked Test-Time Training can improve model performance under data corruption.
+
+In this tutorial, we use a pretrained BERT model fine-tuned on the Amazon Reviews dataset. During inference, we show how simple text corruptions can significantly degrade the model's performance and how the `MaskedTTT <https://torch-ttt.github.io/_autosummary/torch_ttt.engine.masked_ttt_engine.MaskedTTTEngine.html>`_ engine can natively enhance performance for BERT-based models.
 """
 
 # %%
 print("Uncomment the line below to install torch-ttt if you're running this in Colab")
-# !pip install git+https://github.com/nikitadurasov/torch-ttt.git
-
+# !pip install torch-ttt
 # %%
-# Helper Functions
+# Model Fine-Tuning
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# In this first part, we will use a widely adopted pretrained BERT model and fine-tune it on a Amazon Reviews classification task. Below, we walk through data loading and preparation, loading the pretrained BERT model, and its fine-tuning.
 #
 # Data Preparation
 # ^^^^^^^^^^^^^^^^^^^^
@@ -20,7 +21,7 @@ print("Uncomment the line below to install torch-ttt if you're running this in C
 # To simulate distribution shift, we will use both a clean version of the dataset and a corrupted version that includes noise in the form of typos and text perturbations.
 # For this tutorial, we'll focus on a single corruption type: character-level typos.
 #
-# Let's start by downloading both the clean and corrupted versions of the Amazon Reviews dataset.
+# Let's start by downloading the training and validation splits of our Amazon Reviews dataset.
 
 
 # %%
@@ -40,11 +41,14 @@ from transformers.modeling_outputs import SequenceClassifierOutput
 from tqdm import tqdm
 from copy import deepcopy
 
+# sphinx_gallery_thumbnail_path = '_static/images/examples/bert_horizonal.png'
+
+
 
 # %%%
-# Loading WILDS dataset
-# ~~~~~~~~~~~~~~~~~~~~~
-
+# Loading Amazon Reviews
+# ^^^^^^^^^^^^^^^^^^^^
+# Each review consists of the review text and a score (from 0 to 4), ranging from most negative to most positive. As we will see below, we treat this as a text classification task, where each review is classified into one of these five classes.
 
 # %%
 import torch
@@ -76,10 +80,29 @@ class AmazonReviewDataset(Dataset):
 train_data = AmazonReviewDataset("train_amazon_review_electronics.pt")
 val_data = AmazonReviewDataset("test_amazon_review_electronics.pt")
 
+# Review Examples
+review_sample = train_data[0]
+print("*"*20 + " Review #1 " + "*"*20)
+print(f"Review text: {review_sample[0]}")
+print(f"Review score: {review_sample[1]} (from 0 to 4)\n")
+
+review_sample = train_data[10]
+print("*"*20 + " Review #2 " + "*"*20)
+print(f"Review text: {review_sample[0]}")
+print(f"Review score: {review_sample[1]}\n")
+
+review_sample = train_data[100]
+print("*"*20 + " Review #3 " + "*"*20)
+print(f"Review text: {review_sample[0]}")
+print(f"Review score: {review_sample[1]}\n")
+
 # %%%
 # Loading Pretrained BERT
-# ~~~~~~~~~~~~~~~~~~~~~~~
-
+# ^^^^^^^^^^^^^^^^^^^^^^^
+# In this subsection, we load a pretrained BERT model with a Masked Language Modeling (MLM) head. 
+# We demonstrate how BERT predicts missing words by masking a token in a sentence and retrieving 
+# the top predictions using the MLM head. This showcases the model's ability to understand context 
+# and semantics in text, which we will later leverage in our Test-Time Training approach.
 
 # %%
 import torch
@@ -97,7 +120,12 @@ mlm_model = BertForMaskedLM.from_pretrained("bert-base-uncased")
 bert = mlm_model.bert
 mlm_head = mlm_model.cls
 
-# Input sentence with a masked token
+
+# %%%
+# In the example below, we mask one of the words in a sentence and use the MLM head to predict 
+# the missing token. The model returns the most likely candidates to fill in the blank, illustrating 
+# its contextual understanding of language.
+
 text = "The Milky Way is a spiral [MASK]."
 inputs = tokenizer(text, return_tensors="pt")
 input_ids = inputs["input_ids"]
@@ -120,6 +148,7 @@ mask_logits = logits[0, mask_token_index, :]  # shape: (1, vocab_size)
 top_3_tokens = torch.topk(mask_logits, k=5, dim=1).indices[0].tolist()
 
 # Print predictions
+print("\n\n" + "*"*20 + " BERT-based Token Reconstruction " + "*"*20)
 print("Original:", text)
 for i, token_id in enumerate(top_3_tokens):
     predicted_token = tokenizer.decode([token_id])
@@ -128,9 +157,11 @@ for i, token_id in enumerate(top_3_tokens):
 
 
 # %%%
-# Finetuning BERT
-# ~~~~~~~~~~~~~~~
-
+# Fine-tuning BERT
+# ^^^^^^^^^^^^^^^^^^^^
+# We now fine-tune the pretrained BERT encoder for a multi-class sentiment classification task using the Amazon Reviews dataset. To address class imbalance, we compute class frequencies and apply a *WeightedRandomSampler* to ensure balanced training.
+#
+# We define a custom classification head on top of BERT, consisting of several fully connected layers, and use the [CLS] token representation for prediction. The model is trained using cross-entropy loss with class weights, and a learning rate scheduler is set up for stable optimization.
 
 # %%
 import torch
@@ -147,18 +178,22 @@ device = "cuda"
 
 # %%
 from collections import Counter
+
+# Class frequencies (heavily imbalanced)
 labels = [train_data[i][1].item() for i in range(len(train_data))]
 sorted_freq = sorted(Counter([int(x) for x in labels]).items(), key=lambda x: x[0])
-print(sorted_freq)
+for f in sorted_freq:
+  print(f"Class {f[0]}: {f[1]} samples")
 
 # %%
 from torch.utils.data import WeightedRandomSampler
 
-# Count samples per class
+# Compute weights per class
 class_counts = np.bincount(labels)
 class_weights = 1. / class_counts
 sample_weights = class_weights[labels]
 
+# Create weighted sampler for Dataloader
 sampler = WeightedRandomSampler(
     weights=sample_weights,
     num_samples=len(sample_weights),
@@ -219,7 +254,8 @@ classifier = BertForClassification(bert, mlm_head, num_classes=5).to(device)
 classifier = classifier.train()
 
 # %%
-# Use HuggingFace tokenizer
+# **Training parameters**: We use the standard BERT tokenizer from HuggingFace. All training parameters—such as the number of epochs, batch size, and learning rate—are listed below.
+
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
 def tokenize_batch(batch):
@@ -245,7 +281,8 @@ lr_scheduler = get_scheduler("linear", optimizer=optimizer, num_warmup_steps=100
                              num_training_steps=len(train_loader)*epochs_num)
 
 # %%
-# Training loop
+# **Training loop**: Here we fine-tune the BERT classifier using weighted cross-entropy and the AdamW optimizer with a learning rate scheduler. After each epoch, we evaluate accuracy on the validation set to track performance.
+
 for epoch in range(epochs_num):
     classifier.train()
     for i, batch in enumerate(train_loader):
@@ -273,11 +310,11 @@ for epoch in range(epochs_num):
     print(f"Validation Accuracy after epoch {epoch+1}: {acc:.4f}")
 
 # %%
-# Validation
+# **Validation Evaluation**: After fine-tuning, our BERT model achieves approximately 60% accuracy on the Amazon Reviews test set.
 classifier = classifier.eval()
 all_preds, all_labels = [], []
 with torch.no_grad():
-    for i, batch in enumerate(tqdm(val_loader, total=len(val_loader))):
+    for i, batch in enumerate(val_loader):
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = classifier(**batch)
         preds = outputs.logits.argmax(dim=-1).cpu().numpy()
@@ -286,18 +323,29 @@ with torch.no_grad():
         all_labels.extend(labels)
 
 acc = accuracy_score(all_labels, all_preds)
-print(f"Validation Accuracy after epoch: {acc:.4f}")
+print(f"Validation Accuracy (FINAL): {acc:.4f}")
 
 
 # %%%
-# Evalating BERT on Corrupted Data
+# Original BERT Evaluation
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# In this section, we simulate real-world noise by applying text corruptions—such as character swaps, deletions, and word shuffling—to the validation set. We define a *CorruptedDataset* wrapper that dynamically applies these perturbations during data loading.
+#
+# We then evaluate the fine-tuned BERT classifier from the previous sections on this corrupted data to measure its robustness. As expected, even minor textual noise can lead to a noticeable drop in performance, highlighting the need for techniques like Test-Time Training.
 
+# %%%
+# Evaluating BERT on Corrupted Data
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# We start by defining simple text corruption functions that simulate real-world noise, such as typos and word scrambling.
+# These include character-level operations (e.g., dropping, swapping, or repeating characters) and word-level perturbations 
+# (e.g., deleting or shuffling words). We combine these operations to create corrupted versions of clean input text,
+# which will later be used to assess how well the fine-tuned BERT model performs on noisy inputs.
 
 # %%
 import random
 
 def corrupt_characters(text, prob=0.1):
+    """Randomly drop, swap, and repeat characters."""
     corrupted = []
     for word in text.split():
         chars = list(word)
@@ -314,6 +362,7 @@ def corrupt_characters(text, prob=0.1):
     return ' '.join(corrupted)
 
 def corrupt_words(text, prob=0.2):
+    """Randomly drop and shuffle words."""
     words = text.split()
     new_words = []
 
@@ -332,6 +381,21 @@ def corrupt_words(text, prob=0.2):
 def corrupt_text(text, char_prob=0.1, word_prob=0.2):
     return corrupt_characters(corrupt_words(text, word_prob), char_prob)
 
+# %%
+# **Text corruption example**: Below we show how a clean sentence is transformed by our corruption functions,
+# simulating real-world noise such as typos, deletions, and character swaps.
+
+text = "This is an example of a clean sentence"
+
+print(f"Original text: {text}")
+
+corrupted_text = corrupt_text(text, 0.1, 0.1)
+print(f"Corrupted text: {corrupted_text}")
+
+# %%
+# Lets define a dataset wrapper that applies text corruptions on-the-fly during data loading. 
+# This allows us to evaluate the model's robustness without modifying the original dataset.
+
 class CorruptedDataset(Dataset):
 
     def __init__(self, dataset, char_prob=0.1, word_prob=0.1):
@@ -348,19 +412,15 @@ class CorruptedDataset(Dataset):
     def __len__(self):
         return len(self.dataset)
 
-text = "This is an example of a corrupted sentence using Python"
-print(corrupt_text(text, 0.1, 0.1))
-
 # %%
 corrupted_val_data = CorruptedDataset(val_data, char_prob=0.1, word_prob=0.1)
 corrupted_val_loader = DataLoader(corrupted_val_data, batch_size=num_workers, num_workers=num_workers, shuffle=True, collate_fn=collate_fn)
 
 # %%
-# Corrupted Validation
-classifier = classifier.eval()
+# **Model Evaluation on Corrupted Data**: We now evaluate our fine-tuned BERT model on the corrupted validation set. As shown below, the presence of perturbations significantly degrades classification performance, with a drop of around 20%.
 all_preds, all_labels = [], []
 with torch.no_grad():
-    for i, batch in enumerate(tqdm(corrupted_val_loader, total=len(corrupted_val_loader))):
+    for i, batch in enumerate(corrupted_val_loader):
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = classifier(**batch)
         preds = outputs.logits.argmax(dim=-1).cpu().numpy()
@@ -373,8 +433,16 @@ print(f"Validation Accuracy after epoch: {acc:.4f}")
 
 
 # %%%
-# Masked Test-Time Training for Generalization
+# TTT-Optimized BERT Evaluation
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# We evaluate the BERT model enhanced with Masked Test-Time Training (MaskedTTT) on the corrupted validation set.
+# The TTT engine performs an adaptation step during inference, using masked tokens and self-supervised
+# MLM loss to refine the model’s final prediction. As shown below, this approach recovers some performance lost
+# due to input corruptions and improves accuracy compared to the non-adapted model.
+
+# %%%
+# Evaluating Optimized BERT on Corrupted Data
+# ^^^^^^^^^^^^^^^^^^^^
 
 
 # %%
