@@ -186,3 +186,31 @@
   code: https://github.com/jonhue/activeft
   google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=pxi_RkwAAAAJ&citation_for_view=pxi_RkwAAAAJ:0EnyYjriUFMC
   venue: ICLR 2025
+
+- title: "IT³: Idempotent Test-Time Training"
+  authors: Nikita Durasov, Assaf Shocher, Doruk Oner, Gal Chechik, Alexei A. Efros, Pascal Fua
+  paper: https://arxiv.org/pdf/2410.04201
+  code: https://github.com/nikitadurasov/ittt
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=KMMvTfcAAAAJ&citation_for_view=KMMvTfcAAAAJ:ULOm3_A8WrAC
+  venue: ICML 2025
+
+- title: "Test-Time Adaptation for Depth Completion"
+  authors: Hyoungseob Park, Anjali Gupta, Alex Wong
+  paper: https://arxiv.org/abs/2402.03312
+  code: https://github.com/seobbro/TTA-depth-completion
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=A3c4pHkAAAAJ&sortby=pubdate&citation_for_view=A3c4pHkAAAAJ:5nxA0vEk-isC
+  venue: CVPR 2024
+
+- title: "On Pitfalls of Test-Time Adaptation"
+  authors: Hao Zhao, Yuejiang Liu, Alexandre Alahi, Tao Lin
+  paper: https://proceedings.mlr.press/v202/zhao23d/zhao23d.pdf
+  code: https://github.com/LINs-lab/ttab
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=vwWiKP8AAAAJ&citation_for_view=vwWiKP8AAAAJ:2osOgNQ5qMEC
+  venue: ICML 2023
+
+- title: "T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory"
+  authors: Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon
+  paper: https://openaccess.thecvf.com/content/CVPR2024/papers/Park_T4P_Test-Time_Training_of_Trajectory_Prediction_via_Masked_Autoencoder_and_CVPR_2024_paper.pdf
+  code: https://github.com/daeheepark/T4P
+  google_scholar_link: https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dGMozakAAAAJ&sortby=pubdate&citation_for_view=dGMozakAAAAJ:Y0pCki6q_DkC
+  venue: CVPR 2024
