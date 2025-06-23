@@ -9,10 +9,12 @@ from torch_ttt.engine_registry import EngineRegistry
 __all__ = ["ActMADEngine"]
 
 
-# TODO: add cuda support
 @EngineRegistry.register("actmad")
 class ActMADEngine(BaseEngine):
     """**ActMAD** approach: multi-level pixel-wise feature alignment.
+
+    ActMAD adapts models at test-time by aligning activation statistics (means and variances)
+    of the test inputs to those from clean training data, across multiple layers of the network. It requires no labels or auxiliary tasks, and is applicable to any architecture and task.
     
     Args:
         model (torch.nn.Module): Model to be trained with TTT.
@@ -89,7 +91,7 @@ class ActMADEngine(BaseEngine):
             inputs (torch.Tensor): Input tensor.
 
         Returns:
-            Returns the current model prediction and rotation loss value.
+            The current model prediction and the alignment loss based on activation statistics.
         """
         with self.__capture_hook() as features_hooks:
             outputs = self.model(inputs)

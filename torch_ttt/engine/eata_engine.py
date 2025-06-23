@@ -14,9 +14,50 @@ __all__ = ["EATAEngine"]
 class EataEngine(BaseEngine):
     """**EATA**: Efficient Test-Time Adaptation without Forgetting.
 
+    EATA improves test-time robustness by minimizing entropy on confident, diverse predictions, while preserving prior knowledge via Fisher regularization. Only BatchNorm affine parameters are updated.
+
+    Args:
+        model (torch.nn.Module): Model to be adapted at test-time.
+        optimization_parameters (dict, optional): Optimizer configuration.
+        e_margin (float): Entropy threshold to filter uncertain predictions.
+        d_margin (float): Cosine similarity threshold to filter redundant samples.
+        fisher_alpha (float): Weight for Fisher-based regularization.
+        fishers (dict, optional): Precomputed Fisher information for regularization.
+
+    :Example:
+
+    .. code-block:: python
+
+        from torch_ttt.engine.eata_engine import EataEngine
+
+        model = MyModel()
+        engine = EataEngine(model, {"lr": 1e-3})
+        optimizer = torch.optim.SGD(engine.parameters(), lr=1e-3)
+
+        # Training
+        engine.train()
+        for inputs, labels in train_loader:
+            optimizer.zero_grad()
+            outputs, loss_ttt = engine(inputs)
+            loss = criterion(outputs, labels) + alpha * loss_ttt
+            loss.backward()
+            optimizer.step()
+
+        # Compute diagonal Fisher Information
+        engine.compute_fishers(train_loader)
+
+        # Inference
+        engine.eval()
+        for inputs, labels in test_loader:
+            output, loss_ttt = engine(inputs)
+
     Reference:
-        "Efficient Test-Time Model Adaptation without Forgetting" (ICML 2022)
-        Zhang et al.
+
+        "Efficient Test-Time Model Adaptation without Forgetting",  
+        Yuting Zhang, Srikrishna Karanam, Terrance E. Boult, Terrence Chen, Nuno Vasconcelos  
+        ICML 2022
+
+        Paper link: `PDF <https://arxiv.org/pdf/2204.02610.pdf>`_
     """
 
     def __init__(
@@ -53,6 +94,14 @@ class EataEngine(BaseEngine):
                     param.requires_grad = False
 
     def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Forward pass and test-time loss computation.
+
+        Args:
+            inputs (torch.Tensor): Input batch.
+
+        Returns:
+            Returns the current prediction, and the filtered and regularized adaptation loss.
+        """
         outputs = self.model(inputs)
         loss, updated_probs = self.compute_loss(inputs, outputs)
         self.current_model_probs = updated_probs
@@ -161,7 +210,13 @@ class EataEngine(BaseEngine):
         del optimizer
 
     def collect_bn_params(self):
-        """Collect affine scale + shift parameters from BatchNorm2d layers."""
+        """Collects affine parameters (scale and shift) from all BatchNorm2d layers.
+
+        Returns:
+            Tuple[List[torch.nn.Parameter], List[str]]: 
+                - List of parameters (`weight` and `bias`) to adapt during test-time training.
+                - Corresponding parameter names for tracking or regularization.
+        """
         params = []
         names = []
         for nm, m in self.model.named_modules():

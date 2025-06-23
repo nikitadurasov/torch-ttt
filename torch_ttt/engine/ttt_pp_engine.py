@@ -17,6 +17,8 @@ __all__ = ["TTTPPEngine"]
 class TTTPPEngine(BaseEngine):
     """**TTT++** approach: feature alignment-based + SimCLR loss.
 
+    A test-time training method that builds on TTT by enforcing consistency across both standard and contrastive features. It adapts the model during inference through SimCLR-based contrastive loss and alignment of features to training-time statistics.
+
     Args:
         model (torch.nn.Module): Model to be trained with TTT.
         features_layer_name (str): The name of the layer from which the features are extracted.
@@ -28,6 +30,7 @@ class TTTPPEngine(BaseEngine):
         scale_c_cov (float): The scale factor for the contrastive covariance loss.
         scale_c_mu (float): The scale factor for the contrastive mean loss.
         optimization_parameters (dict): The optimization parameters for the engine.
+        
     Warning:
         The module with the name :attr:`features_layer_name` should be present in the model.
 

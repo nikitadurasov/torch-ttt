@@ -14,9 +14,48 @@ __all__ = ["DeYOEngine"]
 class DeYOEngine(BaseEngine):
     """**DeYO**: Destroy Your Object – Test-Time Adaptation with PLPD.
 
+    DeYO adapts models at test-time by combining entropy minimization with Patch Label Preservation Deviation (PLPD). It filters uncertain and unstable samples using entropy and patch perturbation sensitivity, updating normalization layers with confident ones.
+
+    Args:
+        model (torch.nn.Module): Model to be adapted at test-time.
+        optimization_parameters (dict, optional): Optimizer configuration.
+        e_margin (float): Entropy threshold for filtering uncertain samples.
+        plpd_thresh (float): PLPD threshold to filter unstable predictions.
+        ent_norm (float): Normalization constant for entropy weighting.
+        patch_len (int): Number of patches per spatial dimension for input shuffling.
+        reweight_ent (float): Scaling factor for entropy-based weighting.
+        reweight_plpd (float): Scaling factor for PLPD-based weighting.
+
+    :Example:
+
+    .. code-block:: python
+
+        from torch_ttt.engine.deyo_engine import DeYOEngine
+
+        model = MyModel()
+        engine = DeYOEngine(model, {"lr": 1e-3})
+        optimizer = torch.optim.Adam(engine.parameters(), lr=1e-3)
+
+        # Training
+        engine.train()
+        for inputs, labels in train_loader:
+            optimizer.zero_grad()
+            outputs, loss_ttt = engine(inputs)
+            loss = criterion(outputs, labels) + alpha * loss_ttt
+            loss.backward()
+            optimizer.step()
+
+        # Inference
+        engine.eval()
+        for inputs, labels in test_loader:
+            output, loss_ttt = engine(inputs)
+
     Reference:
-        "Entropy is Not Enough for Test-Time Adaptation" (ICLR 2024)
-        Lee et al.
+
+        "Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors",  
+        Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon
+
+        Paper link: `PDF <https://openreview.net/pdf?id=9w3iw8wDuE>`_
     """
 
     def __init__(
@@ -57,6 +96,17 @@ class DeYOEngine(BaseEngine):
                     p.requires_grad = False
 
     def ttt_forward(self, inputs: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Forward pass and loss computation for test-time adaptation.
+
+        Selects confident and stable samples using entropy and PLPD filtering.
+        Computes a weighted entropy loss over reliable inputs for adaptation.
+
+        Args:
+            inputs (torch.Tensor): Input tensor.
+
+        Returns:
+            The current model prediction and PLPD-based loss.
+        """
         outputs = self.model(inputs)
         entropy = self._softmax_entropy(outputs)
 
@@ -105,6 +155,16 @@ class DeYOEngine(BaseEngine):
         return -(probs * log_probs).sum(dim=1)
 
     def _patch_shuffle(self, x: torch.Tensor) -> torch.Tensor:
+        """Applies patch-level spatial shuffling to each image in the batch.
+
+        Used to test prediction stability under local perturbations (PLPD).
+
+        Args:
+            x (torch.Tensor): Input tensor of shape (B, C, H, W).
+
+        Returns:
+            torch.Tensor: Patch-shuffled version of the input.
+        """
         B, C, H, W = x.shape
         patch_len = self.patch_len
         h_p, w_p = H // patch_len, W // patch_len

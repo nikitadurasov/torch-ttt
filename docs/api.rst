@@ -21,3 +21,4 @@ The following classes are part of the `torch_ttt.engine` module:
    eata_engine.EataEngine
    memo_engine.MemoEngine
    deyo_engine.DeYOEngine
+   it3_engine.IT3Engine

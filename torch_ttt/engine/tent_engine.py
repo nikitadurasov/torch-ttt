@@ -9,13 +9,42 @@ __all__ = ["TentEngine"]
 class TentEngine(BaseEngine):
     """**TENT**: Fully test-time adaptation by entropy minimization.
 
+    TENT adapts models at inference by minimizing prediction entropy, encouraging confident outputs on unlabeled data. It updates only BatchNorm affine parameters and requires no labels or training supervision.
+
     Args:
-        model (torch.nn.Module): The model to adapt.
-        optimization_parameters (dict): Hyperparameters for adaptation.
+        model (torch.nn.Module): Model to be adapted at test-time.
+        optimization_parameters (dict): Optimizer configuration for adaptation (e.g. learning rate).
+
+    :Example:
+
+    .. code-block:: python
+
+        from torch_ttt.engine.tent_engine import TentEngine
+
+        model = MyModel()
+        engine = TentEngine(model, {"lr": 1e-3})
+        optimizer = torch.optim.Adam(engine.parameters(), lr=1e-3)
+
+        # Training
+        engine.train()
+        for inputs, labels in train_loader:
+            optimizer.zero_grad()
+            outputs, loss_ttt = engine(inputs)
+            loss = criterion(outputs, labels) + alpha * loss_ttt
+            loss.backward()
+            optimizer.step()
+
+        # Inference
+        engine.eval()
+        for inputs, labels in test_loader:
+            output, loss_ttt = engine(inputs)
 
     Reference:
-        "TENT: Fully Test-Time Adaptation by Entropy Minimization"
-        Dequan Wang, Evan Shelhamer, et al.
+
+        "Tent: Fully Test-Time Adaptation by Entropy Minimization",  
+        Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Vasconcelos, Trevor Darrell
+
+        Paper link: `PDF <https://arxiv.org/pdf/2006.10726.pdf>`_
     """
 
     def __init__(
@@ -41,7 +70,14 @@ class TentEngine(BaseEngine):
                     param.requires_grad = False
 
     def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Forward pass and entropy loss computation."""
+        """Forward pass of the model.
+
+        Args:
+            inputs (torch.Tensor): Input tensor.
+
+        Returns:
+            The current model prediction and the entropy loss value.
+        """
         outputs = self.model(inputs)
         probs = torch.nn.functional.softmax(outputs, dim=1)
         log_probs = torch.nn.functional.log_softmax(outputs, dim=1)

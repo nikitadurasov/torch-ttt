@@ -12,8 +12,8 @@ __all__ = ["MaskedTTTEngine"]
 class MaskedTTTEngine(BaseEngine):
     r"""Masked token prediction-based **test-time training** engine.
 
-    This engine performs masked language modeling (MLM) as a self-supervised auxiliary task during inference.
-    It randomly masks input tokens (except those in `skip_tokens`) and trains the model to predict them using intermediate features.
+    This engine performs self-supervised adaptation at inference by randomly masking input tokens 
+    (except those in `skip_tokens`) and training the model to reconstruct them using intermediate features.
 
     Args:
         model (torch.nn.Module): The model with a Transformer block to adapt at test time.
@@ -24,6 +24,9 @@ class MaskedTTTEngine(BaseEngine):
 
     Warning:
         The module with the name specified by :attr:`features_layer_name` must exist within the model.
+
+    Warning:
+        This method is designed for BERT-style transformer models that support masked token prediction.
 
     :Example:
 
@@ -36,7 +39,8 @@ class MaskedTTTEngine(BaseEngine):
 
         optimizer = torch.optim.Adam(engine.parameters(), lr=1e-4)
 
-        # Training with TTT (Important! MaskedTTTEngine can be applied to already pretrained models)
+        # Training with TTT 
+        # (Important! MaskedTTTEngine can be applied to already pretrained models)
         engine.train()
         for batch in test_loader:
             optimizer.zero_grad()
@@ -50,7 +54,10 @@ class MaskedTTTEngine(BaseEngine):
             outputs, loss_ttt = engine.ttt_forward(batch)
 
     Reference:
-        This approach is inspired by masked language modeling and related TTT methods, e.g., MAE and self-supervised transformers.
+
+        "Test-Time Training with Masked Autoencoders", Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros
+
+        Paper link: `PDF <https://papers.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf>`_
     """
 
 
@@ -86,13 +93,15 @@ class MaskedTTTEngine(BaseEngine):
 
     def _mask_tokens(self, input_ids):
         """
+        Randomly masks tokens in the input tensor for masked token prediction.
+
         Args:
-            input_ids: (batch_size, seq_len)
+            input_ids (torch.Tensor): Input token IDs of shape (batch_size, seq_len).
 
         Returns:
-            input_ids: (batch_size, seq_len)
-            labels: (batch_size, seq_len)
-            mask: (batch_size, seq_len)
+            Tuple[torch.Tensor, torch.Tensor]:
+                - masked_input_ids: Token IDs with some positions replaced by `mask_token_id`.
+                - mask: Boolean tensor indicating which positions were masked.
         """
         masksed_inputs_ids = input_ids.clone()
         device = masksed_inputs_ids.device
@@ -103,29 +112,44 @@ class MaskedTTTEngine(BaseEngine):
         return masksed_inputs_ids, mask
 
     def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
-      # TODO: don't make the copy
-      inputs_copy = deepcopy(inputs)
-      inputs_idx = inputs_copy["input_ids"]
-      masked_inputs_idx, mask = self._mask_tokens(inputs_idx)
-      inputs_copy["input_ids"] = masked_inputs_idx
+        """
+        Performs a masked token prediction forward pass for test-time training.
 
-      with self.__capture_hook() as features_hook:
-          outputs = self.model(**inputs_copy)
-          features = features_hook.output
+        Args:
+            inputs (dict): A dictionary containing model inputs (must include `input_ids`).
 
-      loss = self.loss(
-          features[mask],
-          inputs_idx[mask]
-      )
-        
-      if mask.sum() == 0:
-          loss = features.mean() * 0 # return differentiable non-informative 0 loss
-          
-      return outputs, loss
+        Returns:
+            Returns cross-entropy loss computed on masked tokens.
+        """
+
+        # TODO: don't make the copy
+        inputs_copy = deepcopy(inputs)
+        inputs_idx = inputs_copy["input_ids"]
+        masked_inputs_idx, mask = self._mask_tokens(inputs_idx)
+        inputs_copy["input_ids"] = masked_inputs_idx
+
+        with self.__capture_hook() as features_hook:
+            outputs = self.model(**inputs_copy)
+            features = features_hook.output
+
+        loss = self.loss(
+            features[mask],
+            inputs_idx[mask]
+        )
+
+        if mask.sum() == 0:
+            loss = features.mean() * 0 # return differentiable non-informative 0 loss
+            
+        return outputs, loss
 
     @contextmanager
     def __capture_hook(self):
-        """Context manager to capture features via a forward hook."""
+        """
+        Context manager to capture intermediate features via a forward hook.
+
+        Yields:
+            OutputHook: An object with `.output` attribute containing the captured tensor.
+        """
 
         class OutputHook:
             def __init__(self):

@@ -13,13 +13,13 @@ class BaseEngine(nn.Module, ABC):
         self.optimizer = None
 
     @abstractmethod
-    def ttt_forward(self, inputs) -> Tuple[torch.Tensor, torch.Tensor]:
+    def ttt_forward(self, inputs, **kwargs) -> Tuple[torch.Tensor, torch.Tensor]:
         pass
 
-    def forward(self, inputs):
+    def forward(self, inputs, **kwargs):
 
         if self.training:
-            return self.ttt_forward(inputs)
+            return self.ttt_forward(inputs, **kwargs)
 
         # TODO: optimization pipeline should be more flexible and
         # user-defined, need some special structure for that
@@ -41,7 +41,7 @@ class BaseEngine(nn.Module, ABC):
         loss = torch.Tensor([0.0]) # default value
         for i in range(num_steps):
             self.optimizer.zero_grad()
-            _, loss = running_engine.ttt_forward(inputs)
+            _, loss = running_engine.ttt_forward(inputs, **kwargs)
             loss.backward()
             self.optimizer.step()
 

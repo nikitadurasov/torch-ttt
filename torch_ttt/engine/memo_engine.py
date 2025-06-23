@@ -20,9 +20,36 @@ class MemoEngine(BaseEngine):
         optimization_parameters (dict): Hyperparameters for adaptation.
         n_augmentations (int): Number of augmented views per input sample.
 
+    :Example:
+
+    .. code-block:: python
+
+        from torch_ttt.engine.memo_engine import MemoEngine
+
+        model = MyModel()
+        engine = MemoEngine(model, {"lr": 1e-3}, n_augmentations=4)
+        optimizer = torch.optim.Adam(engine.parameters(), lr=1e-3)
+
+        # Training
+        engine.train()
+        for inputs, labels in train_loader:
+            optimizer.zero_grad()
+            outputs, loss_ttt = engine(inputs)
+            loss = criterion(outputs, labels) + alpha * loss_ttt
+            loss.backward()
+            optimizer.step()
+
+        # Inference
+        engine.eval()
+        for inputs, labels in test_loader:
+            output, loss_ttt = engine(inputs)
+
     Reference:
-        "Memo: Test-Time Robustness via Adaptation and Augmentation"
-        Bowen Zhang, Jingfeng Zhang, et al.
+
+        "Memo: Test-Time Robustness via Adaptation and Augmentation", 
+        Marvin Zhang, Sergey Levine, Chelsea Finn
+
+        Paper link: `PDF <https://proceedings.neurips.cc/paper_files/paper/2022/file/fc28053a08f59fccb48b11f2e31e81c7-Paper-Conference.pdf>`_
     """
 
     def __init__(

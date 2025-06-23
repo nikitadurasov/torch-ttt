@@ -12,6 +12,8 @@ __all__ = ["TTTEngine"]
 class TTTEngine(BaseEngine):
     r"""Original image rotation-based **test-time training** approach.
 
+    A test-time training method that improves model robustness by solving an auxiliary rotation prediction task during inference, encouraging better feature alignment under distribution shifts.
+
     Args:
         model (torch.nn.Module): Model to be trained with TTT.
         features_layer_name (str): The name of the layer from which the features are extracted.
