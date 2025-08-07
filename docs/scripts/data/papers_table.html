@@ -27,26 +27,18 @@ const ctx = document.getElementById('citationsChart').getContext('2d');
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [],
+        labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
         datasets: [
           {
             label: 'Citations per Year',
-<<<<<<< Updated upstream
-            data: [],
-=======
-            data: [32, 160, 431, 1303, 2429, 1388],
->>>>>>> Stashed changes
+            data: [32, 162, 438, 1314, 2434, 1919],
             borderWidth: 2,
             fill: true,
             tension: 0.3,
           },
           {
             label: 'Projected Citations',
-<<<<<<< Updated upstream
-            data: [],
-=======
-            data: [32, 160, 431, 1303, 2429, 3184],
->>>>>>> Stashed changes
+            data: [32, 162, 438, 1314, 2434, 3518],
             borderDash: [5,5],
             borderWidth: 2,
             fill: false,
@@ -236,14 +228,12 @@ new Chart(ctx, {
 <div class="papers-container" id="papersContainer">
 
     <div class="paper-card" 
-<<<<<<< Updated upstream
-=======
          data-title="TENT: Fully Test-time Adaptation by Entropy Minimization" 
          data-authors="Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell" 
          data-conference="ICLR" 
          data-year="2021" 
-         data-citations="1433" 
-         data-trending="554">
+         data-citations="1546" 
+         data-trending="556">
       <div class="paper-top">
         <div class="paper-title">TENT: Fully Test-time Adaptation by Entropy Minimization</div>
         <div class="paper-authors">Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell</div>
@@ -251,23 +241,17 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2021)</div>
         <div class="paper-links"><a href="https://openreview.net/pdf?id=uXl3bZLkr3c" target="_blank">paper</a> | <a href="https://github.com/DequanWang/tent" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 1433  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 1546  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
       </div>
     </div>
     
     <div class="paper-card" 
->>>>>>> Stashed changes
          data-title="Test-Time Training with Self-Supervision for Generalization under Distribution Shifts" 
          data-authors="Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt" 
          data-conference="ICML" 
          data-year="2020" 
-<<<<<<< Updated upstream
-         data-citations="Not found" 
-         data-trending="0">
-=======
-         data-citations="1043" 
-         data-trending="343">
->>>>>>> Stashed changes
+         data-citations="1125" 
+         data-trending="341">
       <div class="paper-top">
         <div class="paper-title">Test-Time Training with Self-Supervision for Generalization under Distribution Shifts</div>
         <div class="paper-authors">Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt</div>
@@ -275,11 +259,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICML (2020)</div>
         <div class="paper-links"><a href="https://proceedings.mlr.press/v119/sun20b/sun20b.pdf" target="_blank">paper</a> | <a href="https://github.com/yueatsprograms/ttt_cifar_release" target="_blank">code</a></div>
-<<<<<<< Updated upstream
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-=======
-        <div class="paper-citations">Citations: 1043  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
->>>>>>> Stashed changes
+        <div class="paper-citations">Citations: 1125  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
       </div>
     </div>
     
@@ -288,13 +268,8 @@ new Chart(ctx, {
          data-authors="Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Yaofo Chen, Shijian Zheng, Peilin Zhao, Mingkui Tan" 
          data-conference="ICLR" 
          data-year="2023" 
-<<<<<<< Updated upstream
-         data-citations="Not found" 
-         data-trending="0">
-=======
-         data-citations="428" 
-         data-trending="206">
->>>>>>> Stashed changes
+         data-citations="459" 
+         data-trending="211">
       <div class="paper-top">
         <div class="paper-title">Efficient Test-Time Model Adaptation without Forgetting</div>
         <div class="paper-authors">Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Yaofo Chen, Shijian Zheng, Peilin Zhao, Mingkui Tan</div>
@@ -302,10 +277,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2023)</div>
         <div class="paper-links"><a href="https://proceedings.mlr.press/v162/niu22a/niu22a.pdf" target="_blank">paper</a> | <a href="https://github.com/mr-eggplant/EATA" target="_blank">code</a></div>
-<<<<<<< Updated upstream
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-=======
-        <div class="paper-citations">Citations: 428  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 459  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
       </div>
     </div>
     
@@ -314,8 +286,8 @@ new Chart(ctx, {
          data-authors="Marvin Zhang, Sergey Levine, Chelsea Finn" 
          data-conference="NeurIPS" 
          data-year="2022" 
-         data-citations="395" 
-         data-trending="176">
+         data-citations="440" 
+         data-trending="184">
       <div class="paper-top">
         <div class="paper-title">MEMO: Test Time Robustness via Adaptation and Augmentation</div>
         <div class="paper-authors">Marvin Zhang, Sergey Levine, Chelsea Finn</div>
@@ -323,7 +295,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">NeurIPS (2022)</div>
         <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/fc28053a08f59fccb48b11f2e31e81c7-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/zhangmarvin/memo" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 395  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 440  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
       </div>
     </div>
     
@@ -332,8 +304,8 @@ new Chart(ctx, {
          data-authors="Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi" 
          data-conference="NeurIPS" 
          data-year="2021" 
-         data-citations="344" 
-         data-trending="157">
+         data-citations="378" 
+         data-trending="150">
       <div class="paper-top">
         <div class="paper-title">TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?</div>
         <div class="paper-authors">Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi</div>
@@ -341,7 +313,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">NeurIPS (2021)</div>
         <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/b618c3210e934362ac261db280128c22-Paper.pdf" target="_blank">paper</a> | <a href="https://github.com/vita-epfl/ttt-plus-plus" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 344  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 378  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
       </div>
     </div>
     
@@ -350,8 +322,8 @@ new Chart(ctx, {
          data-authors="Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Zhiquan Wen, Yaofo Chen, Peilin Zhao, Mingkui Tan" 
          data-conference="ICLR" 
          data-year="2023" 
-         data-citations="342" 
-         data-trending="186">
+         data-citations="376" 
+         data-trending="189">
       <div class="paper-top">
         <div class="paper-title">Towards Stable Test-Time Adaptation in Dynamic Wild World</div>
         <div class="paper-authors">Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Zhiquan Wen, Yaofo Chen, Peilin Zhao, Mingkui Tan</div>
@@ -359,7 +331,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2023)</div>
         <div class="paper-links"><a href="https://openreview.net/pdf?id=g2YraF75Tj" target="_blank">paper</a> | <a href="https://github.com/mr-eggplant/SAR" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 342  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 376  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
       </div>
     </div>
     
@@ -368,8 +340,8 @@ new Chart(ctx, {
          data-authors="Yusuke Iwasawa, Yutaka Matsuo" 
          data-conference="NeurIPS" 
          data-year="2021" 
-         data-citations="336" 
-         data-trending="139">
+         data-citations="359" 
+         data-trending="135">
       <div class="paper-top">
         <div class="paper-title">Test-Time Classifier Adjustment Module for Model-Agnostic Domain Generalization</div>
         <div class="paper-authors">Yusuke Iwasawa, Yutaka Matsuo</div>
@@ -377,7 +349,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">NeurIPS (2021)</div>
         <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/1415fe9fea0fa1e45dddcff5682239a0-Paper.pdf" target="_blank">paper</a> | <a href="https://github.com/matsuolab/T3A" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 336 </div>
+        <div class="paper-citations">Citations: 359 </div>
       </div>
     </div>
     
@@ -386,8 +358,8 @@ new Chart(ctx, {
          data-authors="Jian Liang, Ran He, Tieniu Tan" 
          data-conference="IJCV" 
          data-year="2024" 
-         data-citations="285" 
-         data-trending="131">
+         data-citations="321" 
+         data-trending="129">
       <div class="paper-top">
         <div class="paper-title">A Comprehensive Survey on Test-Time Adaptation under Distribution Shifts</div>
         <div class="paper-authors">Jian Liang, Ran He, Tieniu Tan</div>
@@ -395,7 +367,25 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">IJCV (2024)</div>
         <div class="paper-links"><a href="https://link.springer.com/article/10.1007/s11263-024-02181-w" target="_blank">paper</a></div>
-        <div class="paper-citations">Citations: 285 </div>
+        <div class="paper-citations">Citations: 321 </div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Test-Time Training with Masked Autoencoders" 
+         data-authors="Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros" 
+         data-conference="NeurIPS" 
+         data-year="2022" 
+         data-citations="218" 
+         data-trending="98">
+      <div class="paper-top">
+        <div class="paper-title">Test-Time Training with Masked Autoencoders</div>
+        <div class="paper-authors">Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">NeurIPS (2022)</div>
+        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 218 </div>
       </div>
     </div>
     
@@ -404,8 +394,8 @@ new Chart(ctx, {
          data-authors="Malik Boudiaf, Romain Mueller, Ismail Ben Ayed, Luca Bertinetto" 
          data-conference="CVPR" 
          data-year="2022" 
-         data-citations="204" 
-         data-trending="94">
+         data-citations="216" 
+         data-trending="93">
       <div class="paper-top">
         <div class="paper-title">Parameter-free Online Test-time Adaptation</div>
         <div class="paper-authors">Malik Boudiaf, Romain Mueller, Ismail Ben Ayed, Luca Bertinetto</div>
@@ -413,25 +403,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">CVPR (2022)</div>
         <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Boudiaf_Parameter-Free_Online_Test-Time_Adaptation_CVPR_2022_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/fiveai/LAME" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 204 </div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Test-Time Training with Masked Autoencoders" 
-         data-authors="Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros" 
-         data-conference="NeurIPS" 
-         data-year="2022" 
-         data-citations="200" 
-         data-trending="105">
-      <div class="paper-top">
-        <div class="paper-title">Test-Time Training with Masked Autoencoders</div>
-        <div class="paper-authors">Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">NeurIPS (2022)</div>
-        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 200 </div>
+        <div class="paper-citations">Citations: 216 </div>
       </div>
     </div>
     
@@ -440,8 +412,8 @@ new Chart(ctx, {
          data-authors="Yu Sun, Xinhao Li, Karan Dalal, Jiarui Xu, Arjun Vikram, Genghan Zhang, Yann Dubois, Xinlei Chen, Xiaolong Wang, Sanmi Koyejo, Tatsunori Hashimoto, Carlos Guestrin" 
          data-conference="ICLR" 
          data-year="2025" 
-         data-citations="115" 
-         data-trending="42">
+         data-citations="141" 
+         data-trending="47">
       <div class="paper-top">
         <div class="paper-title">Learning to (Learn at Test Time): RNNs with Expressive Hidden States</div>
         <div class="paper-authors">Yu Sun, Xinhao Li, Karan Dalal, Jiarui Xu, Arjun Vikram, Genghan Zhang, Yann Dubois, Xinlei Chen, Xiaolong Wang, Sanmi Koyejo, Tatsunori Hashimoto, Carlos Guestrin</div>
@@ -449,7 +421,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2025)</div>
         <div class="paper-links"><a href="https://openreview.net/pdf?id=eifW0W0xgt" target="_blank">paper</a> | <a href="https://github.com/test-time-training/ttt-lm-pytorch" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 115 </div>
+        <div class="paper-citations">Citations: 141 </div>
       </div>
     </div>
     
@@ -458,7 +430,7 @@ new Chart(ctx, {
          data-authors="Alexander Bartler, Andre Bühler, Felix Wiewel, Mario Döbler, Bin Yang" 
          data-conference="AISTATS" 
          data-year="2022" 
-         data-citations="92" 
+         data-citations="102" 
          data-trending="32">
       <div class="paper-top">
         <div class="paper-title">MT3: Meta Test-Time Training for Self-Supervised Test-Time Adaption</div>
@@ -467,7 +439,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">AISTATS (2022)</div>
         <div class="paper-links"><a href="https://proceedings.mlr.press/v151/bartler22a/bartler22a.pdf" target="_blank">paper</a> | <a href="https://github.com/AlexanderBartler/MT3" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 92 </div>
+        <div class="paper-citations">Citations: 102 </div>
       </div>
     </div>
     
@@ -476,8 +448,8 @@ new Chart(ctx, {
          data-authors="Bowen Zhao, Chen Chen, Shu-Tao Xia" 
          data-conference="ICLR" 
          data-year="2023" 
-         data-citations="85" 
-         data-trending="44">
+         data-citations="90" 
+         data-trending="43">
       <div class="paper-top">
         <div class="paper-title">DELTA: Degradation-Free Fully Test-Time Adaptation</div>
         <div class="paper-authors">Bowen Zhao, Chen Chen, Shu-Tao Xia</div>
@@ -485,7 +457,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2023)</div>
         <div class="paper-links"><a href="https://openreview.net/pdf?id=eGm22rqG93" target="_blank">paper</a></div>
-        <div class="paper-citations">Citations: 85 </div>
+        <div class="paper-citations">Citations: 90 </div>
       </div>
     </div>
     
@@ -494,8 +466,8 @@ new Chart(ctx, {
          data-authors="Hao Zhao, Yuejiang Liu, Alexandre Alahi, Tao Lin" 
          data-conference="ICML" 
          data-year="2023" 
-         data-citations="64" 
-         data-trending="41">
+         data-citations="67" 
+         data-trending="39">
       <div class="paper-top">
         <div class="paper-title">On Pitfalls of Test-Time Adaptation</div>
         <div class="paper-authors">Hao Zhao, Yuejiang Liu, Alexandre Alahi, Tao Lin</div>
@@ -503,7 +475,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICML (2023)</div>
         <div class="paper-links"><a href="https://proceedings.mlr.press/v202/zhao23d/zhao23d.pdf" target="_blank">paper</a> | <a href="https://github.com/LINs-lab/ttab" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 64 </div>
+        <div class="paper-citations">Citations: 67 </div>
       </div>
     </div>
     
@@ -512,8 +484,8 @@ new Chart(ctx, {
          data-authors="Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon" 
          data-conference="ICLR" 
          data-year="2024" 
-         data-citations="53" 
-         data-trending="21">
+         data-citations="66" 
+         data-trending="25">
       <div class="paper-top">
         <div class="paper-title">Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors</div>
         <div class="paper-authors">Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon</div>
@@ -521,7 +493,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2024)</div>
         <div class="paper-links"><a href="https://openreview.net/pdf?id=9w3iw8wDuE" target="_blank">paper</a> | <a href="https://github.com/Jhyun17/DeYO" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 53 </div>
+        <div class="paper-citations">Citations: 66 </div>
       </div>
     </div>
     
@@ -530,8 +502,8 @@ new Chart(ctx, {
          data-authors="Junyuan Hong, Lingjuan Lyu, Jiayu Zhou, Michael Spranger" 
          data-conference="ICLR" 
          data-year="2023" 
-         data-citations="49" 
-         data-trending="24">
+         data-citations="51" 
+         data-trending="23">
       <div class="paper-top">
         <div class="paper-title">MECTA: Memory-Economic Continual Test-Time Model Adaptation</div>
         <div class="paper-authors">Junyuan Hong, Lingjuan Lyu, Jiayu Zhou, Michael Spranger</div>
@@ -539,8 +511,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2023)</div>
         <div class="paper-links"><a href="https://openreview.net/pdf?id=N92hjSf5NNh" target="_blank">paper</a> | <a href="https://github.com/SonyAI/MECTA" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 49 </div>
->>>>>>> Stashed changes
+        <div class="paper-citations">Citations: 51 </div>
       </div>
     </div>
     
@@ -549,13 +520,8 @@ new Chart(ctx, {
          data-authors="Muhammad Jehanzeb Mirza, Pol Jané Soneira, Wei Lin, Mateusz Kozinski, Horst Possegger, Horst Bischof" 
          data-conference="CVPR" 
          data-year="2023" 
-<<<<<<< Updated upstream
-         data-citations="Not found" 
-         data-trending="0">
-=======
-         data-citations="32" 
+         data-citations="38" 
          data-trending="19">
->>>>>>> Stashed changes
       <div class="paper-top">
         <div class="paper-title">ActMAD: Activation Matching to Align Distributions for Test-Time-Training</div>
         <div class="paper-authors">Muhammad Jehanzeb Mirza, Pol Jané Soneira, Wei Lin, Mateusz Kozinski, Horst Possegger, Horst Bischof</div>
@@ -563,48 +529,35 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">CVPR (2023)</div>
         <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Mirza_ActMAD_Activation_Matching_To_Align_Distributions_for_Test-Time-Training_CVPR_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/jmiemirza/ActMAD" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 38 </div>
       </div>
     </div>
     
     <div class="paper-card" 
-<<<<<<< Updated upstream
-         data-title="Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors" 
-         data-authors="Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon" 
-=======
          data-title="Test-Time Training on Nearest Neighbors for Large Language Models" 
          data-authors="Moritz Hardt, Yu Sun" 
->>>>>>> Stashed changes
          data-conference="ICLR" 
          data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
+         data-citations="37" 
+         data-trending="13">
       <div class="paper-top">
-        <div class="paper-title">Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors</div>
-        <div class="paper-authors">Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon</div>
+        <div class="paper-title">Test-Time Training on Nearest Neighbors for Large Language Models</div>
+        <div class="paper-authors">Moritz Hardt, Yu Sun</div>
       </div>
       <div class="paper-bottom">
         <div class="paper-venue">ICLR (2024)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=9w3iw8wDuE" target="_blank">paper</a> | <a href="https://github.com/Jhyun17/DeYO" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-links"><a href="https://openreview.net/pdf?id=CNL2bku4ra" target="_blank">paper</a> | <a href="https://github.com/socialfoundations/tttlm" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 37 </div>
       </div>
     </div>
     
     <div class="paper-card" 
-<<<<<<< Updated upstream
-         data-title="Test-Time Training with Masked Autoencoders" 
-         data-authors="Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros" 
-         data-conference="NeurIPS" 
-         data-year="2022" 
-         data-citations="Not found" 
-         data-trending="0">
-=======
          data-title="TTTFlow: Unsupervised Test-Time Training With Normalizing Flow" 
          data-authors="David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers" 
          data-conference="WACV" 
          data-year="2023" 
-         data-citations="31" 
-         data-trending="18">
+         data-citations="37" 
+         data-trending="15">
       <div class="paper-top">
         <div class="paper-title">TTTFlow: Unsupervised Test-Time Training With Normalizing Flow</div>
         <div class="paper-authors">David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers</div>
@@ -612,7 +565,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">WACV (2023)</div>
         <div class="paper-links"><a href="https://openaccess.thecvf.com/content/WACV2023/papers/Osowiechi_TTTFlow_Unsupervised_Test-Time_Training_With_Normalizing_Flow_WACV_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/GustavoVargasHakim/TTTFlow" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 31 </div>
+        <div class="paper-citations">Citations: 37 </div>
       </div>
     </div>
     
@@ -621,58 +574,16 @@ new Chart(ctx, {
          data-authors="Weihuang Liu, Xi Shen, Haolun Li, Xiuli Bi, Bo Liu, Chi-Man Pun, Xiaodong Cun" 
          data-conference="CVPR" 
          data-year="2024" 
-         data-citations="28" 
+         data-citations="34" 
          data-trending="15">
->>>>>>> Stashed changes
       <div class="paper-top">
-        <div class="paper-title">Test-Time Training with Masked Autoencoders</div>
-        <div class="paper-authors">Yossi Gandelsman, Yu Sun, Xinlei Chen, Alexei A. Efros</div>
+        <div class="paper-title">Depth-aware Test-Time Training for Zero-shot Video Object Segmentation</div>
+        <div class="paper-authors">Weihuang Liu, Xi Shen, Haolun Li, Xiuli Bi, Bo Liu, Chi-Man Pun, Xiaodong Cun</div>
       </div>
       <div class="paper-bottom">
-<<<<<<< Updated upstream
-        <div class="paper-venue">NeurIPS (2022)</div>
-        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/bcdec1c2d60f94a93b6e36f937aa0530-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-=======
         <div class="paper-venue">CVPR (2024)</div>
         <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Liu_Depth-aware_Test-Time_Training_for_Zero-shot_Video_Object_Segmentation_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/NiFangBaAGe/DATTT" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 28 </div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Test-Time Adaptation for Depth Completion" 
-         data-authors="Hyoungseob Park, Anjali Gupta, Alex Wong" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="19" 
-         data-trending="11">
-      <div class="paper-top">
-        <div class="paper-title">Test-Time Adaptation for Depth Completion</div>
-        <div class="paper-authors">Hyoungseob Park, Anjali Gupta, Alex Wong</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://arxiv.org/abs/2402.03312" target="_blank">paper</a> | <a href="https://github.com/seobbro/TTA-depth-completion" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 19 </div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="TEA: Test-time Energy Adaptation" 
-         data-authors="Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="18" 
-         data-trending="6">
-      <div class="paper-top">
-        <div class="paper-title">TEA: Test-time Energy Adaptation</div>
-        <div class="paper-authors">Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Yuan_TEA_Test-time_Energy_Adaptation_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/yuanyige/tea" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 18 </div>
+        <div class="paper-citations">Citations: 34 </div>
       </div>
     </div>
     
@@ -681,8 +592,8 @@ new Chart(ctx, {
          data-authors="Ekin Akyürek, Mehul Damani, Adam Zweiger, Linlu Qiu, Han Guo, Jyothish Pari, Yoon Kim, Jacob Andreas" 
          data-conference="arXiv" 
          data-year="2024" 
-         data-citations="18" 
-         data-trending="5">
+         data-citations="26" 
+         data-trending="9">
       <div class="paper-top">
         <div class="paper-title">The Surprising Effectiveness of Test-Time Training for Few-Shot Learning</div>
         <div class="paper-authors">Ekin Akyürek, Mehul Damani, Adam Zweiger, Linlu Qiu, Han Guo, Jyothish Pari, Yoon Kim, Jacob Andreas</div>
@@ -690,8 +601,97 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">arXiv (2024)</div>
         <div class="paper-links"><a href="https://arxiv.org/pdf/2411.07279" target="_blank">paper</a> | <a href="https://github.com/ekinakyurek/marc" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 18 </div>
->>>>>>> Stashed changes
+        <div class="paper-citations">Citations: 26 </div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="TEA: Test-time Energy Adaptation" 
+         data-authors="Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng" 
+         data-conference="CVPR" 
+         data-year="2024" 
+         data-citations="24" 
+         data-trending="6">
+      <div class="paper-top">
+        <div class="paper-title">TEA: Test-time Energy Adaptation</div>
+        <div class="paper-authors">Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">CVPR (2024)</div>
+        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Yuan_TEA_Test-time_Energy_Adaptation_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/yuanyige/tea" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 24 </div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="NC-TTT: A Noise Constrastive Approach for Test-Time Training" 
+         data-authors="David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ali Bahri, Moslem Yazdanpanah, Ismail Ben Ayed, Christian Desrosiers" 
+         data-conference="CVPR" 
+         data-year="2024" 
+         data-citations="23" 
+         data-trending="9">
+      <div class="paper-top">
+        <div class="paper-title">NC-TTT: A Noise Constrastive Approach for Test-Time Training</div>
+        <div class="paper-authors">David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ali Bahri, Moslem Yazdanpanah, Ismail Ben Ayed, Christian Desrosiers</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">CVPR (2024)</div>
+        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Osowiechi_NC-TTT_A_Noise_Constrastive_Approach_for_Test-Time_Training_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/GustavoVargasHakim/NCTTT" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 23 </div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="ClusT3: Information Invariant Test-Time Training" 
+         data-authors="Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers" 
+         data-conference="ICCV" 
+         data-year="2023" 
+         data-citations="21" 
+         data-trending="9">
+      <div class="paper-top">
+        <div class="paper-title">ClusT3: Information Invariant Test-Time Training</div>
+        <div class="paper-authors">Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICCV (2023)</div>
+        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Hakim_ClusT3_Information_Invariant_Test-Time_Training_ICCV_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/dosowiechi/ClusT3" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 21 </div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs" 
+         data-authors="Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause" 
+         data-conference="ICLR" 
+         data-year="2025" 
+         data-citations="20" 
+         data-trending="4">
+      <div class="paper-top">
+        <div class="paper-title">Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs</div>
+        <div class="paper-authors">Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">ICLR (2025)</div>
+        <div class="paper-links"><a href="https://openreview.net/pdf?id=NS1G1Uhny3" target="_blank">paper</a> | <a href="https://github.com/jonhue/activeft" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 20 </div>
+      </div>
+    </div>
+    
+    <div class="paper-card" 
+         data-title="Test-Time Adaptation for Depth Completion" 
+         data-authors="Hyoungseob Park, Anjali Gupta, Alex Wong" 
+         data-conference="CVPR" 
+         data-year="2024" 
+         data-citations="20" 
+         data-trending="12">
+      <div class="paper-top">
+        <div class="paper-title">Test-Time Adaptation for Depth Completion</div>
+        <div class="paper-authors">Hyoungseob Park, Anjali Gupta, Alex Wong</div>
+      </div>
+      <div class="paper-bottom">
+        <div class="paper-venue">CVPR (2024)</div>
+        <div class="paper-links"><a href="https://arxiv.org/abs/2402.03312" target="_blank">paper</a> | <a href="https://github.com/seobbro/TTA-depth-completion" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 20 </div>
       </div>
     </div>
     
@@ -700,8 +700,8 @@ new Chart(ctx, {
          data-authors="Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang" 
          data-conference="JMLR" 
          data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
+         data-citations="19" 
+         data-trending="8">
       <div class="paper-top">
         <div class="paper-title">Test-Time Training on Video Streams</div>
         <div class="paper-authors">Renhao Wang, Yu Sun, Arnuv Tandon, Yossi Gandelsman, Xinlei Chen, Alexei A. Efros, Xiaolong Wang</div>
@@ -709,42 +709,29 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">JMLR (2023)</div>
         <div class="paper-links"><a href="https://www.jmlr.org/papers/volume26/24-0439/24-0439.pdf" target="_blank">paper</a> | <a href="https://github.com/yossigandelsman/test_time_training_mae" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 19 </div>
       </div>
     </div>
     
     <div class="paper-card" 
-<<<<<<< Updated upstream
-         data-title="Test-Time Training on Nearest Neighbors for Large Language Models" 
-         data-authors="Moritz Hardt, Yu Sun" 
-         data-conference="ICLR" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-=======
-         data-title="NC-TTT: A Noise Constrastive Approach for Test-Time Training" 
-         data-authors="David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ali Bahri, Moslem Yazdanpanah, Ismail Ben Ayed, Christian Desrosiers" 
+         data-title="T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory" 
+         data-authors="Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon" 
          data-conference="CVPR" 
          data-year="2024" 
-         data-citations="16" 
-         data-trending="9">
->>>>>>> Stashed changes
+         data-citations="19" 
+         data-trending="8">
       <div class="paper-top">
-        <div class="paper-title">Test-Time Training on Nearest Neighbors for Large Language Models</div>
-        <div class="paper-authors">Moritz Hardt, Yu Sun</div>
+        <div class="paper-title">T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory</div>
+        <div class="paper-authors">Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon</div>
       </div>
       <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2024)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=CNL2bku4ra" target="_blank">paper</a> | <a href="https://github.com/socialfoundations/tttlm" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-venue">CVPR (2024)</div>
+        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Park_T4P_Test-Time_Training_of_Trajectory_Prediction_via_Masked_Autoencoder_and_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/daeheepark/T4P" target="_blank">code</a></div>
+        <div class="paper-citations">Citations: 19 </div>
       </div>
     </div>
     
     <div class="paper-card" 
-<<<<<<< Updated upstream
-         data-title="Learning to (Learn at Test Time): RNNs with Expressive Hidden States" 
-         data-authors="Yu Sun, Xinhao Li, Karan Dalal, Jiarui Xu, Arjun Vikram, Genghan Zhang, Yann Dubois, Xinlei Chen, Xiaolong Wang, Sanmi Koyejo, Tatsunori Hashimoto, Carlos Guestrin" 
-=======
          data-title="Evaluation of Test-Time Adaptation Under Computational Time Constraints" 
          data-authors="Motasem Alfarra, Hani Itani, Alejandro Pardo, Shyma Alhuwaider, Merey Ramazanova, Juan C. Pérez, Zhipeng Cai, Matthias Müller, Bernard Ghanem" 
          data-conference="ICML" 
@@ -763,121 +750,12 @@ new Chart(ctx, {
     </div>
     
     <div class="paper-card" 
-         data-title="ClusT3: Information Invariant Test-Time Training" 
-         data-authors="Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers" 
-         data-conference="ICCV" 
-         data-year="2023" 
-         data-citations="15" 
-         data-trending="11">
-      <div class="paper-top">
-        <div class="paper-title">ClusT3: Information Invariant Test-Time Training</div>
-        <div class="paper-authors">Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICCV (2023)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Hakim_ClusT3_Information_Invariant_Test-Time_Training_ICCV_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/dosowiechi/ClusT3" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 15 </div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory" 
-         data-authors="Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="14" 
-         data-trending="6">
-      <div class="paper-top">
-        <div class="paper-title">T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory</div>
-        <div class="paper-authors">Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Park_T4P_Test-Time_Training_of_Trajectory_Prediction_via_Masked_Autoencoder_and_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/daeheepark/T4P" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: 14 </div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs" 
-         data-authors="Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause" 
->>>>>>> Stashed changes
-         data-conference="ICLR" 
-         data-year="2025" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Learning to (Learn at Test Time): RNNs with Expressive Hidden States</div>
-        <div class="paper-authors">Yu Sun, Xinhao Li, Karan Dalal, Jiarui Xu, Arjun Vikram, Genghan Zhang, Yann Dubois, Xinlei Chen, Xiaolong Wang, Sanmi Koyejo, Tatsunori Hashimoto, Carlos Guestrin</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2025)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=eifW0W0xgt" target="_blank">paper</a> | <a href="https://github.com/test-time-training/ttt-lm-pytorch" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?" 
-         data-authors="Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi" 
-         data-conference="NeurIPS" 
-         data-year="2021" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">TTT++: When Does Self-Supervised Test-Time Training Fail or Thrive?</div>
-        <div class="paper-authors">Yuejiang Liu, Parth Kothari, Bastien van Delft, Baptiste Bellot-Gurlet, Taylor Mordan, Alexandre Alahi</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">NeurIPS (2021)</div>
-        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/b618c3210e934362ac261db280128c22-Paper.pdf" target="_blank">paper</a> | <a href="https://github.com/vita-epfl/ttt-plus-plus" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="TENT: Fully Test-time Adaptation by Entropy Minimization" 
-         data-authors="Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell" 
-         data-conference="ICLR" 
-         data-year="2021" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">TENT: Fully Test-time Adaptation by Entropy Minimization</div>
-        <div class="paper-authors">Dequan Wang, Evan Shelhamer, Shaoteng Liu, Bruno Olshausen, Trevor Darrell</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2021)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=uXl3bZLkr3c" target="_blank">paper</a> | <a href="https://github.com/DequanWang/tent" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="MEMO: Test Time Robustness via Adaptation and Augmentation" 
-         data-authors="Marvin Zhang, Sergey Levine, Chelsea Finn" 
-         data-conference="NeurIPS" 
-         data-year="2022" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">MEMO: Test Time Robustness via Adaptation and Augmentation</div>
-        <div class="paper-authors">Marvin Zhang, Sergey Levine, Chelsea Finn</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">NeurIPS (2022)</div>
-        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/fc28053a08f59fccb48b11f2e31e81c7-Paper-Conference.pdf" target="_blank">paper</a> | <a href="https://github.com/zhangmarvin/memo" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
          data-title="MonoTTA: Fully Test-Time Adaptation for Monocular 3D Object Detection" 
          data-authors="Hongbin Lin, Yifan Zhang, Shuaicheng Niu, Shuguang Cui, Zhen Li" 
          data-conference="ECCV" 
          data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
+         data-citations="9" 
+         data-trending="4">
       <div class="paper-top">
         <div class="paper-title">MonoTTA: Fully Test-Time Adaptation for Monocular 3D Object Detection</div>
         <div class="paper-authors">Hongbin Lin, Yifan Zhang, Shuaicheng Niu, Shuguang Cui, Zhen Li</div>
@@ -885,277 +763,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ECCV (2024)</div>
         <div class="paper-links"><a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06035.pdf" target="_blank">paper</a> | <a href="https://github.com/Hongbin98/MonoTTA" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="DELTA: Degradation-Free Fully Test-Time Adaptation" 
-         data-authors="Bowen Zhao, Chen Chen, Shu-Tao Xia" 
-         data-conference="ICLR" 
-         data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">DELTA: Degradation-Free Fully Test-Time Adaptation</div>
-        <div class="paper-authors">Bowen Zhao, Chen Chen, Shu-Tao Xia</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2023)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=eGm22rqG93" target="_blank">paper</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="MECTA: Memory-Economic Continual Test-Time Model Adaptation" 
-         data-authors="Junyuan Hong, Lingjuan Lyu, Jiayu Zhou, Michael Spranger" 
-         data-conference="ICLR" 
-         data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">MECTA: Memory-Economic Continual Test-Time Model Adaptation</div>
-        <div class="paper-authors">Junyuan Hong, Lingjuan Lyu, Jiayu Zhou, Michael Spranger</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2023)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=N92hjSf5NNh" target="_blank">paper</a> | <a href="https://github.com/SonyAI/MECTA" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Parameter-free Online Test-time Adaptation" 
-         data-authors="Malik Boudiaf, Romain Mueller, Ismail Ben Ayed, Luca Bertinetto" 
-         data-conference="CVPR" 
-         data-year="2022" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Parameter-free Online Test-time Adaptation</div>
-        <div class="paper-authors">Malik Boudiaf, Romain Mueller, Ismail Ben Ayed, Luca Bertinetto</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2022)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Boudiaf_Parameter-Free_Online_Test-Time_Adaptation_CVPR_2022_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/fiveai/LAME" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Depth-aware Test-Time Training for Zero-shot Video Object Segmentation" 
-         data-authors="Weihuang Liu, Xi Shen, Haolun Li, Xiuli Bi, Bo Liu, Chi-Man Pun, Xiaodong Cun" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Depth-aware Test-Time Training for Zero-shot Video Object Segmentation</div>
-        <div class="paper-authors">Weihuang Liu, Xi Shen, Haolun Li, Xiuli Bi, Bo Liu, Chi-Man Pun, Xiaodong Cun</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Liu_Depth-aware_Test-Time_Training_for_Zero-shot_Video_Object_Segmentation_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/NiFangBaAGe/DATTT" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="ClusT3: Information Invariant Test-Time Training" 
-         data-authors="Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers" 
-         data-conference="ICCV" 
-         data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">ClusT3: Information Invariant Test-Time Training</div>
-        <div class="paper-authors">Gustavo A. Vargas Hakim, David Osowiechi, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICCV (2023)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Hakim_ClusT3_Information_Invariant_Test-Time_Training_ICCV_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/dosowiechi/ClusT3" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="TTTFlow: Unsupervised Test-Time Training With Normalizing Flow" 
-         data-authors="David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers" 
-         data-conference="WACV" 
-         data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">TTTFlow: Unsupervised Test-Time Training With Normalizing Flow</div>
-        <div class="paper-authors">David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ismail Ben Ayed, Christian Desrosiers</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">WACV (2023)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/WACV2023/papers/Osowiechi_TTTFlow_Unsupervised_Test-Time_Training_With_Normalizing_Flow_WACV_2023_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/GustavoVargasHakim/TTTFlow" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="NC-TTT: A Noise Constrastive Approach for Test-Time Training" 
-         data-authors="David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ali Bahri, Moslem Yazdanpanah, Ismail Ben Ayed, Christian Desrosiers" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">NC-TTT: A Noise Constrastive Approach for Test-Time Training</div>
-        <div class="paper-authors">David Osowiechi, Gustavo A. Vargas Hakim, Mehrdad Noori, Milad Cheraghalikhani, Ali Bahri, Moslem Yazdanpanah, Ismail Ben Ayed, Christian Desrosiers</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Osowiechi_NC-TTT_A_Noise_Constrastive_Approach_for_Test-Time_Training_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/GustavoVargasHakim/NCTTT" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="MT3: Meta Test-Time Training for Self-Supervised Test-Time Adaption" 
-         data-authors="Alexander Bartler, Andre Bühler, Felix Wiewel, Mario Döbler, Bin Yang" 
-         data-conference="AISTATS" 
-         data-year="2022" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">MT3: Meta Test-Time Training for Self-Supervised Test-Time Adaption</div>
-        <div class="paper-authors">Alexander Bartler, Andre Bühler, Felix Wiewel, Mario Döbler, Bin Yang</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">AISTATS (2022)</div>
-        <div class="paper-links"><a href="https://proceedings.mlr.press/v151/bartler22a/bartler22a.pdf" target="_blank">paper</a> | <a href="https://github.com/AlexanderBartler/MT3" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="A Comprehensive Survey on Test-Time Adaptation under Distribution Shifts" 
-         data-authors="Jian Liang, Ran He, Tieniu Tan" 
-         data-conference="IJCV" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">A Comprehensive Survey on Test-Time Adaptation under Distribution Shifts</div>
-        <div class="paper-authors">Jian Liang, Ran He, Tieniu Tan</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">IJCV (2024)</div>
-        <div class="paper-links"><a href="https://link.springer.com/article/10.1007/s11263-024-02181-w" target="_blank">paper</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Test-Time Classifier Adjustment Module for Model-Agnostic Domain Generalization" 
-         data-authors="Yusuke Iwasawa, Yutaka Matsuo" 
-         data-conference="NeurIPS" 
-         data-year="2021" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Test-Time Classifier Adjustment Module for Model-Agnostic Domain Generalization</div>
-        <div class="paper-authors">Yusuke Iwasawa, Yutaka Matsuo</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">NeurIPS (2021)</div>
-        <div class="paper-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/1415fe9fea0fa1e45dddcff5682239a0-Paper.pdf" target="_blank">paper</a> | <a href="https://github.com/matsuolab/T3A" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Evaluation of Test-Time Adaptation Under Computational Time Constraints" 
-         data-authors="Motasem Alfarra, Hani Itani, Alejandro Pardo, Shyma Alhuwaider, Merey Ramazanova, Juan C. Pérez, Zhipeng Cai, Matthias Müller, Bernard Ghanem" 
-         data-conference="ICML" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Evaluation of Test-Time Adaptation Under Computational Time Constraints</div>
-        <div class="paper-authors">Motasem Alfarra, Hani Itani, Alejandro Pardo, Shyma Alhuwaider, Merey Ramazanova, Juan C. Pérez, Zhipeng Cai, Matthias Müller, Bernard Ghanem</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICML (2024)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=6FtAXU4ean" target="_blank">paper</a> | <a href="https://github.com/MotasemAlfarra/Online_Test_Time_Adaptation" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="TEA: Test-time Energy Adaptation" 
-         data-authors="Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">TEA: Test-time Energy Adaptation</div>
-        <div class="paper-authors">Yige Yuan, Bingbing Xu, Liang Hou, Fei Sun, Huawei Shen, Xueqi Cheng</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Yuan_TEA_Test-time_Energy_Adaptation_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/yuanyige/tea" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Towards Stable Test-Time Adaptation in Dynamic Wild World" 
-         data-authors="Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Zhiquan Wen, Yaofo Chen, Peilin Zhao, Mingkui Tan" 
-         data-conference="ICLR" 
-         data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Towards Stable Test-Time Adaptation in Dynamic Wild World</div>
-        <div class="paper-authors">Shuaicheng Niu, Jiaxiang Wu, Yifan Zhang, Zhiquan Wen, Yaofo Chen, Peilin Zhao, Mingkui Tan</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2023)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=g2YraF75Tj" target="_blank">paper</a> | <a href="https://github.com/mr-eggplant/SAR" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="The Surprising Effectiveness of Test-Time Training for Few-Shot Learning" 
-         data-authors="Ekin Akyürek, Mehul Damani, Adam Zweiger, Linlu Qiu, Han Guo, Jyothish Pari, Yoon Kim, Jacob Andreas" 
-         data-conference="arXiv" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">The Surprising Effectiveness of Test-Time Training for Few-Shot Learning</div>
-        <div class="paper-authors">Ekin Akyürek, Mehul Damani, Adam Zweiger, Linlu Qiu, Han Guo, Jyothish Pari, Yoon Kim, Jacob Andreas</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">arXiv (2024)</div>
-        <div class="paper-links"><a href="https://arxiv.org/pdf/2411.07279" target="_blank">paper</a> | <a href="https://github.com/ekinakyurek/marc" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs" 
-         data-authors="Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause" 
-         data-conference="ICLR" 
-         data-year="2025" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Efficiently Learning at Test-Time: Active Fine-Tuning of LLMs</div>
-        <div class="paper-authors">Jonas Hübotter, Sascha Bongni, Ido Hakimi, Andreas Krause</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICLR (2025)</div>
-        <div class="paper-links"><a href="https://openreview.net/pdf?id=NS1G1Uhny3" target="_blank">paper</a> | <a href="https://github.com/jonhue/activeft" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 9 </div>
       </div>
     </div>
     
@@ -1164,7 +772,7 @@ new Chart(ctx, {
          data-authors="Nikita Durasov, Assaf Shocher, Doruk Oner, Gal Chechik, Alexei A. Efros, Pascal Fua" 
          data-conference="ICML" 
          data-year="2025" 
-         data-citations="Not found" 
+         data-citations="1" 
          data-trending="0">
       <div class="paper-top">
         <div class="paper-title">IT³: Idempotent Test-Time Training</div>
@@ -1173,61 +781,7 @@ new Chart(ctx, {
       <div class="paper-bottom">
         <div class="paper-venue">ICML (2025)</div>
         <div class="paper-links"><a href="https://arxiv.org/pdf/2410.04201" target="_blank">paper</a> | <a href="https://github.com/nikitadurasov/ittt" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="Test-Time Adaptation for Depth Completion" 
-         data-authors="Hyoungseob Park, Anjali Gupta, Alex Wong" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">Test-Time Adaptation for Depth Completion</div>
-        <div class="paper-authors">Hyoungseob Park, Anjali Gupta, Alex Wong</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://arxiv.org/abs/2402.03312" target="_blank">paper</a> | <a href="https://github.com/seobbro/TTA-depth-completion" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="On Pitfalls of Test-Time Adaptation" 
-         data-authors="Hao Zhao, Yuejiang Liu, Alexandre Alahi, Tao Lin" 
-         data-conference="ICML" 
-         data-year="2023" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">On Pitfalls of Test-Time Adaptation</div>
-        <div class="paper-authors">Hao Zhao, Yuejiang Liu, Alexandre Alahi, Tao Lin</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">ICML (2023)</div>
-        <div class="paper-links"><a href="https://proceedings.mlr.press/v202/zhao23d/zhao23d.pdf" target="_blank">paper</a> | <a href="https://github.com/LINs-lab/ttab" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
-      </div>
-    </div>
-    
-    <div class="paper-card" 
-         data-title="T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory" 
-         data-authors="Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon" 
-         data-conference="CVPR" 
-         data-year="2024" 
-         data-citations="Not found" 
-         data-trending="0">
-      <div class="paper-top">
-        <div class="paper-title">T4P: Test-Time Training of Trajectory Prediction via Masked Autoencoder and Actor-specific Token Memory</div>
-        <div class="paper-authors">Daehee Park, Jaeseok Jeong, Sung-Hoon Yoon, Jaewoo Jeong, Kuk-Jin Yoon</div>
-      </div>
-      <div class="paper-bottom">
-        <div class="paper-venue">CVPR (2024)</div>
-        <div class="paper-links"><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Park_T4P_Test-Time_Training_of_Trajectory_Prediction_via_Masked_Autoencoder_and_CVPR_2024_paper.pdf" target="_blank">paper</a> | <a href="https://github.com/daeheepark/T4P" target="_blank">code</a></div>
-        <div class="paper-citations">Citations: Not found  <span style="color: red;"><b>(🔥 Top Trending)</b></span></div>
+        <div class="paper-citations">Citations: 1 </div>
       </div>
     </div>
     
