@@ -1,0 +1,11 @@
+- title: Test-time training with self-supervision for generalization under distribution
+    shifts
+  authors: Sun et al.
+  venue: ICML 2020
+  citations: 905
+  scholar_link: https://scholar.google.com/scholar?cluster=None
+- title: Efficient test-time model adaptation without forgetting
+  authors: Wang et al.
+  venue: ICLR 2023
+  citations: 377
+  scholar_link: https://scholar.google.com/scholar?cluster=None
