@@ -32,10 +32,14 @@ jobs:
         run: python generate_papers_table.py
         working-directory: docs/scripts
 
-      - name: Commit and push changes
+      - name: Push changes
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
           git add docs/scripts/data/papers_with_citations.yaml docs/scripts/data/papers_table.html
           git commit -m "Update papers citation data [auto]" || echo "No changes to commit"
           git push
+
