@@ -2,17 +2,37 @@
   <img src="docs/source/_static/images/torch-ttt.png" alt="TorchTTT" width="500">
 </div>
 
-<!-- <div style="display: flex; gap: 0px; flex-wrap: wrap; align-items: center;">
-    <a href="https://github.com/nikitadurasov/torch-ttt/stargazers" style="margin: 2px;">
-        <img src="https://img.shields.io/github/stars/nikitadurasov/torch-ttt.svg?style=social" alt="GitHub stars" style="display: inline-block; margin: 0;">
-    </a>
-    <a href="https://github.com/nikitadurasov/torch-ttt/network" style="margin: 2px;">
-        <img src="https://img.shields.io/github/forks/nikitadurasov/torch-ttt.svg?color=blue" alt="GitHub forks" style="display: inline-block; margin: 0;">
-    </a>
-    <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml" style="margin: 2px;">
-        <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml/badge.svg" alt="Documentation" style="display: inline-block; margin: 0;">
-    </a>
-</div> -->
+   <div style="gap: 0px; flex-wrap: wrap; align-items: center;">
+    <p align="center">
+       <a href="https://pypi.org/project/masksembles/">
+           <img alt="PyPI" src="https://img.shields.io/pypi/v/torch-ttt.svg">
+       </a>
+       <a href="https://github.com/nikitadurasov/torch-ttt/stargazers" style="margin: 2px;">
+           <img src="https://img.shields.io/github/stars/nikitadurasov/torch-ttt.svg?style=social" alt="GitHub stars" style="display: inline-block; margin: 0;">
+       </a>
+        <a href="https://github.com/nikitadurasov/torch-ttt/network" style="margin: 2px;">
+            <img src="https://img.shields.io/github/forks/nikitadurasov/torch-ttt.svg?color=blue" alt="GitHub forks" style="display: inline-block; margin: 0;">
+        </a>
+        <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml" style="margin: 2px;">
+            <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/deploy-docs.yml/badge.svg" alt="Documentation" style="display: inline-block; margin: 0;">
+        </a>
+        <a href="https://github.com/nikitadurasov/torch-ttt/actions/workflows/run-tests.yml" style="margin: 2px;">
+            <img src="https://github.com/nikitadurasov/torch-ttt/actions/workflows/run-tests.yml/badge.svg" alt="Testing" style="display: inline-block; margin: 0;">
+        </a>
+        <br>
+        <a href="https://pepy.tech/project/torch-ttt" style="margin: 2px;">
+            <img src="https://pepy.tech/badge/torch-ttt" alt="Downloads" style="display: inline-block; margin: 0;">
+        </a>
+        <a href="https://pepy.tech/project/torch-ttt">
+            <img alt="Monthly Downloads" src="https://static.pepy.tech/badge/torch-ttt/month">
+        </a>
+        <a href="https://github.com/nikitadurasov/torch-ttt/issues">
+            <img alt="Issues" src="https://img.shields.io/github/issues/nikitadurasov/torch-ttt">
+        </a>
+        <a href="https://github.com/nikitadurasov/masksembles/blob/main/LICENSE">
+            <img alt="License" src="https://img.shields.io/github/license/nikitadurasov/masksembles">
+        </a>
+        </p>
 
 # torch-ttt
 
@@ -39,13 +59,17 @@ Check out the [Quick Start](https://torch-ttt.github.io/quickstart.html) guide o
 
 **torch-ttt** requires Python 3.10 or greater. Install the desired PyTorch version in your environment. 
 
-For the latest development version you can run,
+To install the latest stable release from PyPI, run:
+
+```console
+pip install torch-ttt
+```
+
+To install the latest development version directly from GitHub, run:
 
 ```console
 pip install git+https://github.com/nikitadurasov/torch-ttt.git
 ```
-
-While we do not support PyPI yet, support is expected very soon!
 
 # Quickstart
 
