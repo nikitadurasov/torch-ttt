@@ -2,6 +2,8 @@
   <img src="docs/source/_static/images/torch-ttt.png" alt="TorchTTT" width="500">
 </div>
 
+<br>
+
    <div style="gap: 0px; flex-wrap: wrap; align-items: center;">
     <p align="center">
        <a href="https://pypi.org/project/masksembles/">
