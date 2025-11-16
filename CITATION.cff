@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use torch-ttt in your research, please cite it using the metadata below."
+title: "torch-ttt"
+abstract: >
+  torch-ttt is a PyTorch library for Test-Time Training (TTT) and Test-Time
+  Adaptation (TTA), providing modular engines and standardized APIs for
+  robustness under distribution shift.
+authors:
+  - family-names: Durasov
+    given-names: Nikita
+repository-code: "https://github.com/nikitadurasov/torch-ttt"
+url: "https://torch-ttt.github.io"
+license: "MIT"
+version: "v0.0.2"
+date-released: 2025-11-16
+
+doi: 10.5281/zenodo.17620711
+
+preferred-citation:
+  type: software
+  title: "torch-ttt: A Unified PyTorch Library for Test-Time Training"
+  year: 2024
+  authors:
+    - family-names: Durasov
+      given-names: Nikita
+  identifiers:
+    - type: doi
+      value: 10.5281/zenodo.17620711
+  url: "https://github.com/nikitadurasov/torch-ttt"
+  version: "v0.0.2"

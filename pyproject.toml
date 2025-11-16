@@ -1,31 +1,45 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "torch-ttt"
-version = "0.0.1"
+version = "0.0.2"
 description = "Test-Time Training / Adaptation engine collection for PyTorch."
 readme = "README.md"
-license = {file = "LICENSE"}
-authors = [{name = "Nikita Durasov", email = "yassnda@gmail.com"}]
+license = { file = "LICENSE" }
+authors = [{ name = "Nikita Durasov", email = "yassnda@gmail.com" }]
 requires-python = ">=3.10"
-
-[project.optional-dependencies]
-
-dev = [
-    "pytest-cov",
+keywords = ["test-time training", "test-time adaptation", "domain adaptation", "pytorch", "deep learning", "machine learning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
+[project.urls]
+Homepage = "https://torch-ttt.github.io"
+Documentation = "https://torch-ttt.github.io"
+Repository = "https://github.com/nikitadurasov/torch-ttt"
+Issues = "https://github.com/nikitadurasov/torch-ttt/issues"
+
+[project.optional-dependencies]
+dev = ["pytest-cov"]
 docs = [
     "sphinxawesome-theme==6.0.0b1",
     "sphinx-gallery==0.18.0",
     "sphinxcontrib-bibtex",
     "sphinxcontrib-googleanalytics",
     "matplotlib",
-    "tqdm"
+    "tqdm",
 ]
-
 all = [
     "pytest-cov",
     "sphinxawesome-theme==6.0.0b1",
@@ -34,23 +48,17 @@ all = [
     "sphinxcontrib-googleanalytics",
     "matplotlib",
     "tqdm",
-    "einops"
-]
-
-[tool.ruff]
-line-length = 100
-target-version = "py310"
-
-exclude = [
-    "build",         # Ignore the 'build' directory
-    "dist",          # Ignore the 'dist' directory
-    "__pycache__",   # Ignore Python's cache directories
-    "notebooks"
+    "einops",
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["torch_ttt*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = ["build", "dist", "__pycache__", "notebooks"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
