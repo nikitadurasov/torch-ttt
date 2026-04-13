@@ -112,7 +112,6 @@ class ActMADEngine(BaseEngine):
 
         loss = 0
         for i in range(len(self.target_modules)):
-            print(features_means[i].device, self.reference_mean[i].device)
             loss += l1_loss(features_means[i], self.reference_mean[i])
             loss += l1_loss(features_vars[i], self.reference_var[i])
 
